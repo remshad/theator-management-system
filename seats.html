@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+        
+#holder{    
+height:200px;    
+width:550px;
+background-color:#F5F5F5;
+border:1px solid #A4A4A4;
+margin-left:10px;   
+}
+#place {
+position:relative;
+margin:7px;
+}
+#place a{
+font-size:0.6em;
+}
+#place li
+{
+ list-style: none outside none;
+ position: absolute;   
+}    
+#place li:hover
+{
+background-color:yellow;      
+} 
+#place .seat{
+background:url("images/available_seat_img.gif") no-repeat scroll 0 0 transparent;
+height:33px;
+width:33px;
+display:block;   
+}
+#place .selectedSeat
+{ 
+background-image:url("images/booked_seat_img.gif");          
+}
+#place .selectingSeat
+{ 
+background-image:url("images/selected_seat_img.gif");        
+}
+#place .row-3, #place .row-4{
+margin-top:10px;
+}
+#seatDescription li{
+verticle-align:middle;    
+list-style: none outside none;
+padding-left:35px;
+height:35px;
+float:left;
+}
+    </style>
+    <script>
+        
+var settings = {
+               rows: 5,
+               cols: 15,
+               rowCssPrefix: 'row-',
+               colCssPrefix: 'col-',
+               seatWidth: 35,
+               seatHeight: 35,
+               seatCss: 'seat',
+               selectedSeatCss: 'selectedSeat',
+               selectingSeatCss: 'selectingSeat'
+           };
+        
+$('.' + settings.seatCss).click(function () {
+if ($(this).hasClass(settings.selectedSeatCss)){
+    alert('This seat is already reserved');
+}
+else{
+    $(this).toggleClass(settings.selectingSeatCss);
+    }
+});
+ 
+$('#btnShow').click(function () {
+    var str = [];
+    $.each($('#place li.' + settings.selectedSeatCss + ' a, #place li.'+ settings.selectingSeatCss + ' a'), function (index, value) {
+        str.push($(this).attr('title'));
+    });
+    alert(str.join(','));
+})
+ 
+$('#btnShowNew').click(function () {
+    var str = [], item;
+    $.each($('#place li.' + settings.selectingSeatCss + ' a'), function (index, value) {
+        item = $(this).attr('title');                   
+        str.push(item);                   
+    });
+    alert(str.join(','));
+})
+        </script>
+</head>
+<h2> Choose seats by clicking the corresponding seat in the layout below:</h2>
+    <div id="holder"> 
+        <ul  id="place">
+        </ul>    
+    </div>
+    <div style="float:left;"> 
+    <ul id="seatDescription">
+        <li style="background:url('images/a10.jpg') no-repeat scroll 0 0 transparent;">Available Seat</li>
+        <li style="background:url('images/a12.jpg') no-repeat scroll 0 0 transparent;">Booked Seat</li>
+        <li style="background:url('images/a2.jpg') no-repeat scroll 0 0 transparent;">Selected Seat</li>
+    </ul>
+    </div>
+        <div style="clear:both;width:100%">
+        <input type="button" id="btnShowNew" value="Show Selected Seats" />
+        <input type="button" id="btnShow" value="Show All" />           
+        </div>
