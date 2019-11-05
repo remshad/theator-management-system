@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 04, 2019 at 10:22 AM
+-- Generation Time: Nov 05, 2019 at 04:52 PM
 -- Server version: 10.4.8-MariaDB
 -- PHP Version: 7.3.10
 
@@ -25,16 +25,13 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `screen_details`
+-- Table structure for table `movie_category`
 --
 
-CREATE TABLE `screen_details` (
+CREATE TABLE `movie_category` (
   `id` int(11) NOT NULL,
-  `theatre_id` int(11) NOT NULL,
-  `screen_no` int(11) NOT NULL,
-  `class_name` varchar(50) COLLATE utf16_unicode_ci NOT NULL,
-  `price` float NOT NULL,
-  `seat_avail` int(11) NOT NULL
+  `movie_id` int(11) NOT NULL,
+  `cat_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_unicode_ci;
 
 --
@@ -42,9 +39,9 @@ CREATE TABLE `screen_details` (
 --
 
 --
--- Indexes for table `screen_details`
+-- Indexes for table `movie_category`
 --
-ALTER TABLE `screen_details`
+ALTER TABLE `movie_category`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -52,9 +49,9 @@ ALTER TABLE `screen_details`
 --
 
 --
--- AUTO_INCREMENT for table `screen_details`
+-- AUTO_INCREMENT for table `movie_category`
 --
-ALTER TABLE `screen_details`
+ALTER TABLE `movie_category`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 

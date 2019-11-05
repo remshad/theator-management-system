@@ -1,0 +1,9 @@
+.mrag{
+margin-left: 10px;
+    margin-bottom: 10px;
+}
+.box{
+    border: 2px dashed red;
+    border-radius: 56px;
+    padding: 25px;
+}
