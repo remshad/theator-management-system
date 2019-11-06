@@ -25,7 +25,7 @@ if(isset($_COOKIE['share_user']) && isset($_COOKIE['share_pass']))
 
 if(isset($logged_user) && strstr($_SERVER['PHP_SELF'],"login1.php"))
 {
-   $kku=mysqli_query("select * from `user` where `Name`='{$logged_user}' and password='{$logged_pass}'") ;
+   $kku=mysqli_query("select * from `user` where `Name`='{$logged_user}' and password='{$logged_pass}' and type='1' ") ;
    if(mysqli_num_rows($kku)>0)
    {
         $bot=  mysqli_fetch_assoc($kku)  ;                               
