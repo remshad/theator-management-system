@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+<?php require_once('db.php');  ?>
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />

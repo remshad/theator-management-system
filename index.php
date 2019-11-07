@@ -719,4 +719,11 @@ require_once('menu.php');
     <script async defer src="https://ia.media-imdb.com/images/G/01/imdb/plugins/rating/js/rating.js"></script>
 </body>
 
+<?php
+
+require_once('model.php');
+ ?>
+
 </html>
+
+
