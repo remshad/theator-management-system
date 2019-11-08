@@ -10,25 +10,32 @@
         </div>
         <div class="modal-body">
 
-          <form name="model_frm" id="model_frm">
-<select name="state" onChange="selectState(this);" id="state" >
+<table>
+          <form name="model_frm" id="model_frm" action='#' method='post'>
+<tr><td>Select State: </td><td><select name="state" onChange="selectState(this);" id="state" >
 <option>Select State</option>
 <?php
 $sql="SELECT * FROM `state`";
 $result=mysqli_query($link,$sql);
-while($row=mysqli_fetch_assoc($result)
-{
 
-echo "<option value='{$row['id']}' >{$row['name']}</option>";  
+if(mysqli_error($link))
+{
+  die(mysqli_error($link));
+}
+
+while($row=mysqli_fetch_assoc($result))
+{
+echo "<option value='{$row['id']}' >{$row['s_name']}</option>";
 }
 
 
 ?>
 </select>
-
+</td></tr>
 
 
           </form>
+         </table>
           <p>Some text in the modal.</p>
         </div>
         <div class="modal-footer">
