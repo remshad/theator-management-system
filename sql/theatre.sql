@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 08, 2019 at 06:51 PM
+-- Generation Time: Nov 08, 2019 at 07:15 PM
 -- Server version: 10.4.8-MariaDB
 -- PHP Version: 7.3.10
 
@@ -32,11 +32,12 @@ CREATE TABLE `booking` (
   `id` int(10) NOT NULL,
   `now_time` int(10) NOT NULL,
   `booked_seats` int(11) NOT NULL,
-  `showtime_id` int(11) NOT NULL,
+  `movie_show_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `visit_date` int(11) NOT NULL,
   `status` int(11) NOT NULL,
-  `conv_charge` int(11) NOT NULL
+  `conv_charge` int(11) NOT NULL,
+  `screen_class` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -725,7 +726,7 @@ CREATE TABLE `movie_show` (
   `movie_id` int(11) NOT NULL,
   `start_date` int(11) NOT NULL,
   `end_date` int(11) NOT NULL,
-  `screen_id` int(11) NOT NULL
+  `showtime_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_unicode_ci;
 
 -- --------------------------------------------------------
@@ -891,8 +892,9 @@ INSERT INTO `user` (`id`, `e-mail`, `name`, `age`, `phoneno`, `password`, `join_
 --
 ALTER TABLE `booking`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `show_id` (`showtime_id`),
-  ADD KEY `user_id` (`user_id`);
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `booking_ibfk_1` (`movie_show_id`),
+  ADD KEY `screen_class` (`screen_class`);
 
 --
 -- Indexes for table `category`
@@ -934,7 +936,7 @@ ALTER TABLE `movie_category`
 ALTER TABLE `movie_show`
   ADD PRIMARY KEY (`id`),
   ADD KEY `movie_id` (`movie_id`),
-  ADD KEY `movie_show_ibfk_2` (`screen_id`);
+  ADD KEY `screen_id` (`showtime_id`);
 
 --
 -- Indexes for table `rating`
@@ -1094,8 +1096,9 @@ ALTER TABLE `user`
 -- Constraints for table `booking`
 --
 ALTER TABLE `booking`
-  ADD CONSTRAINT `booking_ibfk_1` FOREIGN KEY (`showtime_id`) REFERENCES `show_time` (`id`),
-  ADD CONSTRAINT `booking_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
+  ADD CONSTRAINT `booking_ibfk_1` FOREIGN KEY (`movie_show_id`) REFERENCES `movie_show` (`id`),
+  ADD CONSTRAINT `booking_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
+  ADD CONSTRAINT `booking_ibfk_3` FOREIGN KEY (`screen_class`) REFERENCES `screen_details` (`id`);
 
 --
 -- Constraints for table `district`
@@ -1121,7 +1124,7 @@ ALTER TABLE `movie_category`
 --
 ALTER TABLE `movie_show`
   ADD CONSTRAINT `movie_show_ibfk_1` FOREIGN KEY (`movie_id`) REFERENCES `movie` (`id`),
-  ADD CONSTRAINT `movie_show_ibfk_2` FOREIGN KEY (`screen_id`) REFERENCES `screen` (`id`);
+  ADD CONSTRAINT `movie_show_ibfk_2` FOREIGN KEY (`showtime_id`) REFERENCES `show_time` (`id`);
 
 --
 -- Constraints for table `rating`
