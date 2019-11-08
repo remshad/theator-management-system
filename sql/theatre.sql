@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 08, 2019 at 06:02 PM
+-- Generation Time: Nov 08, 2019 at 06:51 PM
 -- Server version: 10.4.8-MariaDB
 -- PHP Version: 7.3.10
 
@@ -934,7 +934,7 @@ ALTER TABLE `movie_category`
 ALTER TABLE `movie_show`
   ADD PRIMARY KEY (`id`),
   ADD KEY `movie_id` (`movie_id`),
-  ADD KEY `screen_no` (`screen_id`);
+  ADD KEY `movie_show_ibfk_2` (`screen_id`);
 
 --
 -- Indexes for table `rating`
@@ -1121,7 +1121,7 @@ ALTER TABLE `movie_category`
 --
 ALTER TABLE `movie_show`
   ADD CONSTRAINT `movie_show_ibfk_1` FOREIGN KEY (`movie_id`) REFERENCES `movie` (`id`),
-  ADD CONSTRAINT `movie_show_ibfk_2` FOREIGN KEY (`screen_id`) REFERENCES `screen_details` (`id`);
+  ADD CONSTRAINT `movie_show_ibfk_2` FOREIGN KEY (`screen_id`) REFERENCES `screen` (`id`);
 
 --
 -- Constraints for table `rating`
