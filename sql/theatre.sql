@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.4.1deb2ubuntu2.1
--- http://www.phpmyadmin.net
+-- version 4.9.1
+-- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Nov 08, 2019 at 12:18 PM
--- Server version: 5.7.27-0ubuntu0.16.04.1
--- PHP Version: 7.0.33-0ubuntu0.16.04.6
+-- Host: 127.0.0.1
+-- Generation Time: Nov 08, 2019 at 06:02 PM
+-- Server version: 10.4.8-MariaDB
+-- PHP Version: 7.3.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -19,6 +21,46 @@ SET time_zone = "+00:00";
 --
 -- Database: `theatre`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `booking`
+--
+
+CREATE TABLE `booking` (
+  `id` int(10) NOT NULL,
+  `now_time` int(10) NOT NULL,
+  `booked_seats` int(11) NOT NULL,
+  `showtime_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `visit_date` int(11) NOT NULL,
+  `status` int(11) NOT NULL,
+  `conv_charge` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `category`
+--
+
+CREATE TABLE `category` (
+  `id` int(11) NOT NULL,
+  `name` varchar(250) COLLATE utf16_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `district`
+--
+
+CREATE TABLE `district` (
+  `id` int(11) NOT NULL,
+  `d_name` varchar(50) COLLATE utf16_unicode_ci NOT NULL,
+  `state_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_unicode_ci;
 
 --
 -- Dumping data for table `district`
@@ -120,22 +162,22 @@ INSERT INTO `district` (`id`, `d_name`, `state_id`) VALUES
 (93, 'Siwan', 4),
 (94, 'Vaishali', 4),
 (95, 'Pashchim Champaran', 4),
-(96, 'Bastar', 36),
-(97, 'Bilaspur', 36),
-(98, 'Dantewada', 36),
-(99, 'Dhamtari', 36),
-(100, 'Durg', 36),
-(101, 'Jashpur', 36),
-(102, 'Janjgir-Champa', 36),
-(103, 'Korba', 36),
-(104, 'Koriya', 36),
-(105, 'Kanker', 36),
-(106, 'Kawardha', 36),
-(107, 'Mahasamund', 36),
-(108, 'Raigarh', 36),
-(109, 'Rajnandgaon', 36),
-(110, 'Raipur', 36),
-(111, 'Surguja', 36),
+(96, 'Bastar', 35),
+(97, 'Bilaspur', 35),
+(98, 'Dantewada', 35),
+(99, 'Dhamtari', 35),
+(100, 'Durg', 35),
+(101, 'Jashpur', 35),
+(102, 'Janjgir-Champa', 35),
+(103, 'Korba', 35),
+(104, 'Koriya', 35),
+(105, 'Kanker', 35),
+(106, 'Kawardha', 35),
+(107, 'Mahasamund', 35),
+(108, 'Raigarh', 35),
+(109, 'Rajnandgaon', 35),
+(110, 'Raipur', 35),
+(111, 'Surguja', 35),
 (112, 'Diu', 29),
 (113, 'Daman', 29),
 (114, 'Central Delhi', 25),
@@ -628,6 +670,492 @@ INSERT INTO `district` (`id`, `d_name`, `state_id`) VALUES
 (601, 'South 24 Parganas', 24),
 (602, 'Purulia', 24),
 (603, 'Uttar Dinajpur', 24);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `language`
+--
+
+CREATE TABLE `language` (
+  `id` int(11) NOT NULL,
+  `language` varchar(250) COLLATE utf16_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `movie`
+--
+
+CREATE TABLE `movie` (
+  `id` int(11) NOT NULL,
+  `name` varchar(250) NOT NULL,
+  `language_id` int(50) DEFAULT NULL,
+  `image_path` varchar(50) DEFAULT NULL,
+  `duration_min` int(11) NOT NULL,
+  `description` text NOT NULL,
+  `youtube_link` varchar(250) NOT NULL,
+  `released` int(11) NOT NULL,
+  `directed` varchar(250) NOT NULL,
+  `starring` text NOT NULL,
+  `production` varchar(250) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `movie_category`
+--
+
+CREATE TABLE `movie_category` (
+  `id` int(11) NOT NULL,
+  `movie_id` int(11) NOT NULL,
+  `cat_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `movie_show`
+--
+
+CREATE TABLE `movie_show` (
+  `id` int(11) NOT NULL,
+  `movie_id` int(11) NOT NULL,
+  `start_date` int(11) NOT NULL,
+  `end_date` int(11) NOT NULL,
+  `screen_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `rating`
+--
+
+CREATE TABLE `rating` (
+  `id` int(10) NOT NULL,
+  `movie_id` int(100) DEFAULT NULL,
+  `rating` int(10) DEFAULT NULL,
+  `user_id` int(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `screen`
+--
+
+CREATE TABLE `screen` (
+  `id` int(11) NOT NULL,
+  `theatre_id` int(11) NOT NULL,
+  `name` int(11) NOT NULL,
+  `added_date` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `screen_details`
+--
+
+CREATE TABLE `screen_details` (
+  `id` int(11) NOT NULL,
+  `screen_id` int(11) NOT NULL,
+  `class_name` varchar(50) COLLATE utf16_unicode_ci NOT NULL,
+  `price` float NOT NULL,
+  `seat_avail` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `show_time`
+--
+
+CREATE TABLE `show_time` (
+  `id` int(11) NOT NULL,
+  `screen_id` int(11) NOT NULL,
+  `time_slot_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `state`
+--
+
+CREATE TABLE `state` (
+  `id` int(11) NOT NULL,
+  `s_name` varchar(50) COLLATE utf16_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_unicode_ci;
+
+--
+-- Dumping data for table `state`
+--
+
+INSERT INTO `state` (`id`, `s_name`) VALUES
+(1, 'ANDHRA PRADESH'),
+(2, 'ASSAM'),
+(3, 'ARUNACHAL PRADESH'),
+(4, 'BIHAR'),
+(5, 'GUJRAT'),
+(6, 'HARYANA'),
+(7, 'HIMACHAL PRADESH'),
+(8, 'JAMMU & KASHMIR'),
+(9, 'KARNATAKA'),
+(10, 'KERALA'),
+(11, 'MADHYA PRADESH'),
+(12, 'MAHARASHTRA'),
+(13, 'MANIPUR'),
+(14, 'MEGHALAYA'),
+(15, 'MIZORAM'),
+(16, 'NAGALAND'),
+(17, 'ORISSA'),
+(18, 'PUNJAB'),
+(19, 'RAJASTHAN'),
+(20, 'SIKKIM'),
+(21, 'TAMIL NADU'),
+(22, 'TRIPURA'),
+(23, 'UTTAR PRADESH'),
+(24, 'WEST BENGAL'),
+(25, 'DELHI'),
+(26, 'GOA'),
+(27, 'PONDICHERY'),
+(28, 'LAKSHDWEEP'),
+(29, 'DAMAN & DIU'),
+(30, 'DADRA & NAGAR'),
+(31, 'CHANDIGARH'),
+(32, 'ANDAMAN & NICOBAR'),
+(33, 'UTTARANCHAL'),
+(34, 'JHARKHAND'),
+(35, 'CHHATTISGARH');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `theatre`
+--
+
+CREATE TABLE `theatre` (
+  `id` int(10) NOT NULL,
+  `theatrename` varchar(100) DEFAULT NULL,
+  `district_id` int(11) NOT NULL,
+  `mgr_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `time_slots`
+--
+
+CREATE TABLE `time_slots` (
+  `id` int(11) NOT NULL,
+  `showtime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user`
+--
+
+CREATE TABLE `user` (
+  `id` int(11) NOT NULL,
+  `e-mail` varchar(50) DEFAULT NULL,
+  `name` varchar(50) DEFAULT NULL,
+  `age` varchar(20) DEFAULT NULL,
+  `phoneno` varchar(50) DEFAULT NULL,
+  `password` varchar(250) DEFAULT NULL,
+  `join_date` int(10) NOT NULL,
+  `type` int(11) NOT NULL,
+  `status` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`id`, `e-mail`, `name`, `age`, `phoneno`, `password`, `join_date`, `type`, `status`) VALUES
+(1, 'remshadm@gmail.com', 'remshad', '25', '9447796296', 'e10adc3949ba59abbe56e057f20f883e', 0, 3, 1),
+(2, 'rahman555@gmail.com', 'rahman', '20', '9207616365', 'e10adc3949ba59abbe56e057f20f883e', 0, 2, 1);
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `booking`
+--
+ALTER TABLE `booking`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `show_id` (`showtime_id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
+-- Indexes for table `category`
+--
+ALTER TABLE `category`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `district`
+--
+ALTER TABLE `district`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `state_id` (`state_id`);
+
+--
+-- Indexes for table `language`
+--
+ALTER TABLE `language`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `movie`
+--
+ALTER TABLE `movie`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `language_id` (`language_id`);
+
+--
+-- Indexes for table `movie_category`
+--
+ALTER TABLE `movie_category`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `cat_id` (`cat_id`),
+  ADD KEY `movie_id` (`movie_id`);
+
+--
+-- Indexes for table `movie_show`
+--
+ALTER TABLE `movie_show`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `movie_id` (`movie_id`),
+  ADD KEY `screen_no` (`screen_id`);
+
+--
+-- Indexes for table `rating`
+--
+ALTER TABLE `rating`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `film_id` (`movie_id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
+-- Indexes for table `screen`
+--
+ALTER TABLE `screen`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `theatre_id` (`theatre_id`);
+
+--
+-- Indexes for table `screen_details`
+--
+ALTER TABLE `screen_details`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `screen_id` (`screen_id`);
+
+--
+-- Indexes for table `show_time`
+--
+ALTER TABLE `show_time`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `screen_id` (`screen_id`),
+  ADD KEY `time_slot_id` (`time_slot_id`);
+
+--
+-- Indexes for table `state`
+--
+ALTER TABLE `state`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `theatre`
+--
+ALTER TABLE `theatre`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `district_id` (`district_id`),
+  ADD KEY `mgr_id` (`mgr_id`);
+
+--
+-- Indexes for table `time_slots`
+--
+ALTER TABLE `time_slots`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `booking`
+--
+ALTER TABLE `booking`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `category`
+--
+ALTER TABLE `category`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `district`
+--
+ALTER TABLE `district`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=604;
+
+--
+-- AUTO_INCREMENT for table `language`
+--
+ALTER TABLE `language`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `movie`
+--
+ALTER TABLE `movie`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `movie_category`
+--
+ALTER TABLE `movie_category`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `movie_show`
+--
+ALTER TABLE `movie_show`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `rating`
+--
+ALTER TABLE `rating`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `screen`
+--
+ALTER TABLE `screen`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `screen_details`
+--
+ALTER TABLE `screen_details`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `show_time`
+--
+ALTER TABLE `show_time`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `state`
+--
+ALTER TABLE `state`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+
+--
+-- AUTO_INCREMENT for table `theatre`
+--
+ALTER TABLE `theatre`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `time_slots`
+--
+ALTER TABLE `time_slots`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `user`
+--
+ALTER TABLE `user`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `booking`
+--
+ALTER TABLE `booking`
+  ADD CONSTRAINT `booking_ibfk_1` FOREIGN KEY (`showtime_id`) REFERENCES `show_time` (`id`),
+  ADD CONSTRAINT `booking_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
+
+--
+-- Constraints for table `district`
+--
+ALTER TABLE `district`
+  ADD CONSTRAINT `district_ibfk_1` FOREIGN KEY (`state_id`) REFERENCES `state` (`id`);
+
+--
+-- Constraints for table `movie`
+--
+ALTER TABLE `movie`
+  ADD CONSTRAINT `movie_ibfk_1` FOREIGN KEY (`language_id`) REFERENCES `language` (`id`);
+
+--
+-- Constraints for table `movie_category`
+--
+ALTER TABLE `movie_category`
+  ADD CONSTRAINT `movie_category_ibfk_1` FOREIGN KEY (`cat_id`) REFERENCES `category` (`id`),
+  ADD CONSTRAINT `movie_category_ibfk_2` FOREIGN KEY (`movie_id`) REFERENCES `movie` (`id`);
+
+--
+-- Constraints for table `movie_show`
+--
+ALTER TABLE `movie_show`
+  ADD CONSTRAINT `movie_show_ibfk_1` FOREIGN KEY (`movie_id`) REFERENCES `movie` (`id`),
+  ADD CONSTRAINT `movie_show_ibfk_2` FOREIGN KEY (`screen_id`) REFERENCES `screen_details` (`id`);
+
+--
+-- Constraints for table `rating`
+--
+ALTER TABLE `rating`
+  ADD CONSTRAINT `rating_ibfk_1` FOREIGN KEY (`movie_id`) REFERENCES `movie` (`id`),
+  ADD CONSTRAINT `rating_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
+
+--
+-- Constraints for table `screen`
+--
+ALTER TABLE `screen`
+  ADD CONSTRAINT `screen_ibfk_1` FOREIGN KEY (`theatre_id`) REFERENCES `theatre` (`id`);
+
+--
+-- Constraints for table `screen_details`
+--
+ALTER TABLE `screen_details`
+  ADD CONSTRAINT `screen_details_ibfk_1` FOREIGN KEY (`screen_id`) REFERENCES `screen` (`id`);
+
+--
+-- Constraints for table `show_time`
+--
+ALTER TABLE `show_time`
+  ADD CONSTRAINT `show_time_ibfk_1` FOREIGN KEY (`screen_id`) REFERENCES `screen` (`id`),
+  ADD CONSTRAINT `show_time_ibfk_2` FOREIGN KEY (`time_slot_id`) REFERENCES `time_slots` (`id`);
+
+--
+-- Constraints for table `theatre`
+--
+ALTER TABLE `theatre`
+  ADD CONSTRAINT `theatre_ibfk_1` FOREIGN KEY (`district_id`) REFERENCES `district` (`id`),
+  ADD CONSTRAINT `theatre_ibfk_2` FOREIGN KEY (`mgr_id`) REFERENCES `user` (`id`);
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
