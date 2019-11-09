@@ -112,7 +112,7 @@ include_once('head.php');
                 
             $_POST['category']=mysqli_real_escape_string($link,$_POST['category']);
                 $sql="SELECT * FROM item_category WHERE Name='{$_POST['category']}'";
-                //echo $sql;
+
                 
                 $result = mysqli_query($link,$sql);
                 if(mysqli_error($link))
