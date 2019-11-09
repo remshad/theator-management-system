@@ -109,16 +109,9 @@ include_once('head.php');
             {
                 //echo '<script>alert("'.$_GET['nvalue'].'")</script>';
                 
-<<<<<<< HEAD
-            $_POST['category']=mysqli_real_escape_string($link,$_POST['category']);
-                $sql="SELECT * FROM item_category WHERE Name='{$_POST['category']}'";
+                $_POST['new_cat']=mysqli_real_escape_string($link,$_POST['new_cat']);
+                $sql="SELECT * FROM category WHERE Name='{$_POST['new_cat']}'";
 
-=======
-            $_POST['new_cat']=mysqli_real_escape_string($link,$_POST['new_cat']);
-                $sql="SELECT * FROM category WHERE name='{$_POST['new_cat']}'";
-                
-                //echo $sql;
->>>>>>> parent of 609ee6c... Revert "Update add_category.php"
                 
                 $result = mysqli_query($link,$sql);
                 if(mysqli_error($link))
