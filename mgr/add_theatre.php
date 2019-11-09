@@ -103,7 +103,7 @@ button{
               <form name="form1" id="form1" method="post" action="add_theatre_action.php">
  <table>
  <tr><td>Theatre Name</td><td><input type="text" name="theatre" ></td></tr>
- <!-- <tr><td>Select State: </td><td><select name="state" id="state" >
+ <tr><td>Select State: </td><td><select name="state" onChange="stateSelect(this);" id="state" >
 <option>Select State</option>
 <?php
 $sql="SELECT * FROM `state`";
@@ -122,8 +122,8 @@ echo "<option value='{$row['id']}' >{$row['s_name']}</option>";
 
 ?>
 </select>
-</td></tr> -->
-<tr><td>Select District: </td><td><select name="district" id="district" >
+<tr><td>Select District</td><td><select name="district" onchange="setLocation(this)"></select></td></tr>
+<!-- <tr><td>Select District: </td><td><select name="district" id="district" onchange="setLocation(this)"> >
 <option>Select District</option>
 <?php
 $sql="SELECT * FROM `district`";
@@ -142,7 +142,7 @@ echo "<option value='{$row['id']}' >{$row['d_name']}</option>";
 
 ?>
 </select>
-</td></tr>
+</td></tr> -->
  <!-- <tr><td>Location</td><td><input type="text" name="location"></td></tr> -->
  <!-- <tr><td>Morning Show Time</td><td><input type="Time" name="morning"></td></tr>
  <tr><td>Noon Show Time</td><td><input type="Time" name="noon"></td></tr>
@@ -158,6 +158,44 @@ echo "<option value='{$row['id']}' >{$row['d_name']}</option>";
             
         </div>
     </div>
+    <script type="text/javascript"> 
+  
+  
+  function setLocation(district)
+  {
+//alert(district.value);
+setCookie('location',district.value,360000);
+$('#myModal').modal('hide'); 
+  }
+  
+  
+  function stateSelect() {
+    // Creating the XMLHttpRequest object
+    var request = new XMLHttpRequest();
+
+var frm=document.getElementById('model_frm');
+var state=frm.state.value;
+
+
+
+
+    // Instantiating the request object
+    request.open("GET", "../ajax/state.php?state_id="+state);
+
+    // Defining event listener for readystatechange event
+    request.onreadystatechange = function() {
+        // Check if the request is compete and was successful
+        if(this.readyState === 4 && this.status === 200) {
+//          console.log(this.response);
+            // Inserting the response from server into an HTML element
+            frm.district.innerHTML = this.responseText;
+        }
+    };
+
+    // Sending the request to the server
+    request.send();
+}
+</script>
     
  
  

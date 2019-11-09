@@ -17,8 +17,9 @@
         if($_COOKIE["share_status"] == 0)
         {
           echo '<script language="javascript">';
-  echo 'alert(you have already added your theatre details and waiting for the aproval of admin)';
-  echo '</script>';
+echo 'alert("you are waiting for the aproval of admin")';
+echo '</script>';
+//header("Location:../index.php");
         }
       }
     }
