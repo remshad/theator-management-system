@@ -1,5 +1,28 @@
 <?php
     include_once('dbs.php');
+    if (!isset($_COOKIE["share_id"]))
+    {
+      header("Location:login1.php");
+    }
+    if (isset($_COOKIE["share_id"]))
+    {
+      $mgr_id=$_COOKIE["share_id"];
+      $th_details=mysqli_query($link,"select * from `theatre` where `mgr_id`='$mgr_id'" ) ;
+      if(mysqli_num_rows($th_details) == 0)
+      {
+        header("Location:add_theatre.php");
+      }
+      else
+      {
+        if($_COOKIE["share_status"] == 0)
+        {
+          echo '<script language="javascript">';
+  echo 'alert(you have already added your theatre details and waiting for the aproval of admin)';
+  echo '</script>';
+        }
+      }
+    }
+
   
 ?>
 <html>

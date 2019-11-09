@@ -1,4 +1,4 @@
-<?php
+    <?php
 include_once('dbs.php');
 $notlogged    =    "You need to be logged in to access this page";        // The "Need to be logged in" message 
 $errormsg    =    "The password provided did not work out for you";    // The error message 
@@ -81,12 +81,14 @@ else if(!isset($logged_user) && $mod == "login")
    {  
        $bot=  mysqli_fetch_assoc($kku)  ;
     $power=$bot['power'];
-    $uid=$bot['id'];  
+    $uid=$bot['id'];
+    $status=$bot['status'];  
     
        setcookie("share_user", "{$user}"); 
        setcookie("share_pass", "{$pass}");     
        setcookie("share_id", "{$uid}"); 
-       setcookie("share_power", "{$power}");   
+       setcookie("share_power", "{$power}"); 
+       setcookie("share_status", "{$status}");  
                        
         header("Location: ".$loc_succ); 
         
