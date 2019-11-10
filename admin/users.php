@@ -34,7 +34,7 @@ include_once('head.php');
              
          }else if(isset($_GET['action']) && $_GET['action']=='disprove')
          {
-             mysqli_query($link,"UPDATE `user` SET SET status=0 WHERE id='{$uid}'");
+             mysqli_query($link,"UPDATE `user` SET status=0 WHERE id='{$uid}'");
              if(mysqli_error($link))
              {
                  die(mysqli_error($link));
@@ -138,11 +138,11 @@ echo "<center><h1>USERS : {$countuser} | MANAGERS : {$countmgr} | ADMINS : {$cou
         if($row['status']==0)
         {
             
-            $action="NO  <button name='users.php?uid={$row['id']}&action=approve' onClick='makeit(this);'>Approve</button>";    
+            $action="PENDING  <button name='users.php?uid={$row['id']}&action=approve' onClick='makeit(this);'>Approve</button>";    
         } 
         else if($row['status']==1)
         {
-            $action="YES  <button name='users.php?uid={$row['id']}&action=disprove' onClick='makeit(this);'>Disprove</button>";                  
+            $action="APPROVED  <button name='users.php?uid={$row['id']}&action=disprove' onClick='makeit(this);'>Disprove</button>";                  
         }
         
         
