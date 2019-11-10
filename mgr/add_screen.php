@@ -7,7 +7,11 @@ session_start();
       $th_id=$th_details['id'];
       $i=0;
       $no_screen=$_SESSION['screens'];
-      $today=date("Y-m-d");
+      $today1=date("Y-m-d");
+      $today=strtotime($today1);
+      // echo $today;
+      // $tomorrow=date("Y-m-d",$today);
+      // echo $tomorrow;
     ?>
 <html>
     <style type="text/css">
@@ -228,7 +232,7 @@ for($i=0;$i<$no_screen;$i++)
 	function addRow(tableID) {
 	var table = document.getElementById(tableID);
 	var rowCount = table.rows.length;
-	if(rowCount < 5){                            // limit the user from creating fields more than your limits
+	if(rowCount < 10){                            // limit the user from creating fields more than your limits
 		var row = table.insertRow(rowCount);
 		var colCount = table.rows[0].cells.length;
 		for(var i=0; i <colCount; i++) {
@@ -238,7 +242,7 @@ for($i=0;$i<$no_screen;$i++)
 	}
 	else
 	{
-		 alert("Maximum Passenger per ticket is 5");
+		 alert("Maximum ten screen is allowed to include");
 			   
 	}
 }

@@ -173,14 +173,14 @@ $('#myModal').modal('hide');
     // Creating the XMLHttpRequest object
     var request = new XMLHttpRequest();
 
-var frm=document.getElementById('model_frm');
+
+var frm=document.getElementById('form1');
 var state=frm.state.value;
 
 
 
-
     // Instantiating the request object
-    request.open("GET", "../ajax/state.php?state_id="+state);
+    request.open("GET", "get_district.php?state_id="+state);
 
     // Defining event listener for readystatechange event
     request.onreadystatechange = function() {

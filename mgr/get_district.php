@@ -1,16 +1,21 @@
 <?php
-require_once("config.php");
-if(!empty($_POST["state_id"])) 
+
+
+require_once('dbs.php');
+
+
+$id=intval($_GET['state_id']);
+
+$sql="SELECT * FROM `district` WHERE `state_id`  like '{$id}' ";
+
+$result=mysqli_query($link,$sql);
+
+while($row=mysqli_fetch_assoc($result))
 {
-$query =mysqli_query($con,"SELECT * FROM district WHERE StCode = '" . $_POST["state_id"] . "'");
-?>
-<option value="">Select District</option>
-<?php
-while($row=mysqli_fetch_array($query))  
-{
-?>
-<option value="<?php echo $row["DistrictName"]; ?>"><?php echo $row["DistrictName"]; ?></option>
-<?php
+
+echo "<option value='{$row['id']}'>{$row['d_name']}</option>";
+
 }
-}
+
+
 ?>

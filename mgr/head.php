@@ -23,6 +23,8 @@ echo '</script>';
         }
       }
     }
+    
+
 
   
 ?>
@@ -51,14 +53,28 @@ echo '</script>';
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>                        
       </button>
-      <a class="navbar-brand" href="index.php">Admin Control</a>
+      <a class="navbar-brand" href="index.php">Theatre Control</a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
     
     <ul class="nav navbar-nav">
-      <li <?php if(strstr($_SERVER['PHP_SELF'],'add_category.php')) echo 'class="active"';  ?> ><a href="add_category.php">Category</a></li>
-          <li <?php if(strstr($_SERVER['PHP_SELF'],'users.php')) echo 'class="active"';  ?> ><a href="users.php">Users</a></li>
-        <li <?php if(strstr($_SERVER['PHP_SELF'],'report.php')) echo 'class="active"';  ?> ><a href="report.php">Report</a></li>
+      <li><a href="add_timeslot.php">Add Timeslot</a></li>
+          <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Movie
+                    <span class="caret"></span>
+                  </a>
+                  <ul class="dropdown-menu" role="menu">
+                    <li>
+                      <a href="add_movie.php">Add movie</a>
+                    </li>
+                    <li>
+                      <a href="remove_movie.php">Remove movie</a>
+                    </li>
+                    </ul>
+                </li>
+        <li><a href="show_order.php">Orders</a></li>
+        <li><a href="show_report.php">Report</a></li>
+        <li><a href="change_profile.php">Change Profile</a></li>
       <li><a href="logout.php">Logout</a></li>
     </ul>
     </div>
