@@ -116,9 +116,12 @@
                             <a class="nav-link" href="contact-us.html">Contact us</a>
                         </li>
                     </ul>
-                    <div class="navbar-extra">
-                        <a class="btn-theme btn" href="#"><i class="fas fa-ticket-alt"></i>&nbsp;&nbsp;Buy Ticket</a>
-                        <a class="btn-theme btn" href="#" onclick="{ $('#myModal').modal('show'); }"><i class="fas fa-ticket-alt" ></i>&nbsp;&nbsp;Change Location</a>
+                    <div class="navbar-extra" style="position:fixed; float:left; right:10px;">
+                        <a class="btn-theme btn" href="login.php"><i class="fas fa-ticket-alt"></i>&nbsp;Login</a>
+
+                        <a class="btn-theme btn" href="#"><i class="fas fa-ticket-alt"></i>&nbsp;Signup</a>
+
+                        <a class="btn-theme btn" href="#" onclick="{ $('#myModal').modal('show'); }"><i class="fas fa-ticket-alt" ></i>&nbsp;Change Location</a>
                 
                     </div>
                 </div>

@@ -1,1 +1,3 @@
 renewed db abailable in sql folder please .. drop and import
+
+ALTER TABLE `screen` CHANGE `name` `name` VARCHAR(250) NOT NULL;
