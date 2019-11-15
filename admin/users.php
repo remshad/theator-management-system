@@ -26,7 +26,7 @@ include_once('head.php');
          $uid=intval($_GET['uid']);
          if(isset($_GET['action']) && $_GET['action']=='approve')
          {
-             mysqli_query($link,"UPDATE `user` SET status=1 WHERE id='{$uid}'");
+             mysqli_query($link,"UPDATE `user` SET u_status=1 WHERE u_id='{$uid}'");
              if(mysqli_error($link))
              {
                  die(mysqli_error($link));
@@ -34,7 +34,7 @@ include_once('head.php');
              
          }else if(isset($_GET['action']) && $_GET['action']=='disprove')
          {
-             mysqli_query($link,"UPDATE `user` SET status=0 WHERE id='{$uid}'");
+             mysqli_query($link,"UPDATE `user` SET u_status=0 WHERE u_id='{$uid}'");
              if(mysqli_error($link))
              {
                  die(mysqli_error($link));
@@ -59,7 +59,7 @@ include_once('head.php');
  <?php
       
     //$sql="SELECT * FROM  `user` WHERE type!=3 and status=0 order by type desc, id desc";
-    $sql="SELECT * FROM  `user` order by type desc, id desc";
+    $sql="SELECT * FROM  `user` order by u_type desc";
     $i=0;
     $result=mysqli_query($link,$sql);
 
@@ -74,26 +74,26 @@ include_once('head.php');
         $i++;
         $action='';
         $type='';
-        if($row['type']==0)
+        if($row['u_type']==0)
         {
             $type="Customer";
             $countuser++;
             //$link="<button name='users.php?uid={$row['id']}&action=approve' onClick='makeit(this);'>Approve</button>";    
         } 
-        else if($row['type']==1)
+        else if($row['u_type']==1)
         {
             $type="Theatre Manager";
             $countmgr++;
             //$link="<button name='users.php?uid={$row['id']}&action=disprove' onClick='makeit(this);'>Disprove</button>";                  
         }
-        else if($row['type']==2)
+        else if($row['u_type']==2)
         {
             $type="Administrator";
             $countadmin++;
             //$link="<button name='users.php?uid={$row['id']}&action=disprove' onClick='makeit(this);'>Disprove</button>";                  
         }
         
-    echo "<tr><td>{$i}</td><td>{$row['id']}</td><td>{$row['name']}</td><td>{$type}</td><td>{$action}</td></tr>";   
+    echo "<tr><td>{$i}</td><td>{$row['u_id']}</td><td>{$row['u_name']}</td><td>{$type}</td><td>{$action}</td></tr>";   
         
         
     }
@@ -117,7 +117,7 @@ echo "<center><h1>USERS : {$countuser} | MANAGERS : {$countmgr} | ADMINS : {$cou
     
 <?php
     //$sql="SELECT * FROM  `user` NATURAL JOIN `theatre` NATURAL JOIN `district` NATURAL JOIN `state` WHERE user.type=1";
-    $sql="SELECT user.id,user.name,user.status,theatrename,d_name,s_name FROM `user`,`theatre`,`district`,`state` WHERE user.type=1 AND user.id=theatre.mgr_id AND theatre.district_id=district.id AND district.state_id=state.id";
+    $sql="SELECT u_id,u_name,u_status,t_theatrename,district_name,state_name FROM `user` NATURAL JOIN `theatre` NATURAL JOIN `district` NATURAL JOIN `state`";
     $i=0;
     $result=mysqli_query($link,$sql);
 
@@ -134,19 +134,19 @@ echo "<center><h1>USERS : {$countuser} | MANAGERS : {$countmgr} | ADMINS : {$cou
     while($row=mysqli_fetch_assoc($result))
     {
         $i++;
-        $area="{$row['d_name']}, {$row['s_name']}";
-        if($row['status']==0)
+        $area=$row['district_name'].", ".$row['state_name'];
+        if($row['u_status']==0)
         {
             
-            $action="PENDING  <button name='users.php?uid={$row['id']}&action=approve' onClick='makeit(this);'>Approve</button>";    
+            $action="PENDING  <button name='users.php?uid={$row['u_id']}&action=approve' onClick='makeit(this);'>Approve</button>";    
         } 
-        else if($row['status']==1)
+        else if($row['u_status']==1)
         {
-            $action="APPROVED  <button name='users.php?uid={$row['id']}&action=disprove' onClick='makeit(this);'>Disprove</button>";                  
+            $action="APPROVED  <button name='users.php?uid={$row['u_id']}&action=disprove' onClick='makeit(this);'>Disprove</button>";                  
         }
         
         
-    echo "<tr><td>{$i}</td><td>{$row['id']}</td><td>{$row['name']}</td><td>{$row['theatrename']}</td><td>{$area}</td><td>{$action}</td></tr>";   
+    echo "<tr><td>{$i}</td><td>{$row['u_id']}</td><td>{$row['u_name']}</td><td>{$row['t_theatrename']}</td><td>{$area}</td><td>{$action}</td></tr>";   
         
         
     }

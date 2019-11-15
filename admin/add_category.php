@@ -65,7 +65,7 @@ include_once('head.php');
                     $_GET['nvalue']=mysqli_real_escape_string($link,$_GET['nvalue']);
                     $_GET['cat_id']=intval($_GET['cat_id']);
                     urldecode($_GET['nvalue']);
-                    $sql="UPDATE category set name='{$_GET['nvalue']}' WHERE id='{$_GET['cat_id']}'";
+                    $sql="UPDATE category set cat_name='{$_GET['nvalue']}' WHERE cat_id='{$_GET['cat_id']}'";
                     $result=mysqli_query($link,$sql);
                     if(mysqli_error($link))
                     {
@@ -86,11 +86,11 @@ include_once('head.php');
                 
                 $cat_id=intval($_GET['cat_id']); 
 
-                $result1=mysqli_query($link,"SELECT * FROM category WHERE id='{$cat_id}'");
+                $result1=mysqli_query($link,"SELECT * FROM category WHERE cat_id='{$cat_id}'");
                 if(mysqli_num_rows($result1)==1)
                 {
                     //echo "deleting";
-                    $sql="DELETE FROM category WHERE id='{$cat_id}' ";
+                    $sql="DELETE FROM category WHERE cat_id='{$cat_id}' ";
                     mysqli_query($link,$sql);
                     if(mysqli_error($link))
                     {
@@ -110,7 +110,7 @@ include_once('head.php');
                 //echo '<script>alert("'.$_GET['nvalue'].'")</script>';
                 
                 $_POST['new_cat']=mysqli_real_escape_string($link,$_POST['new_cat']);
-                $sql="SELECT * FROM category WHERE Name='{$_POST['new_cat']}'";
+                $sql="SELECT * FROM category WHERE cat_name='{$_POST['new_cat']}'";
 
                 
                 $result = mysqli_query($link,$sql);
@@ -148,7 +148,7 @@ include_once('head.php');
                         }
                     */
                     
-                    $sql="INSERT INTO category (name) VALUES ('{$_POST['new_cat']}')";
+                    $sql="INSERT INTO category (cat_name) VALUES ('{$_POST['new_cat']}')";
                     //echo $sql;
                     
                     $result = mysqli_query($link,$sql);
@@ -172,9 +172,9 @@ include_once('head.php');
        
        while($row=mysqli_fetch_assoc($result))
        {
-           echo "<tr> <td>{$row['id']}</td> <td>{$row['name']}</td> 
-                <td><button name='add_category.php?cat_id={$row['id']}&action=edit' onclick='edit(this);'>Edit</button></td>
-                <td><button name='add_category.php?cat_id={$row['id']}&action=delete' onclick='deletes(this);'>Delete</button></td>
+           echo "<tr> <td>{$row['cat_id']}</td> <td>{$row['cat_name']}</td> 
+                <td><button name='add_category.php?cat_id={$row['cat_id']}&action=edit' onclick='edit(this);'>Edit</button></td>
+                <td><button name='add_category.php?cat_id={$row['cat_id']}&action=delete' onclick='deletes(this);'>Delete</button></td>
                 </tr>";
        }
        

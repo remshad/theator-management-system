@@ -75,7 +75,7 @@ else if(!isset($logged_user) && $mod == "login")
    $pass=preg_replace('/[^0-9a-zA-Z ]/','',$_POST['pass']);       
    $pass=md5($pass);
   
-   $aaf="select * from `user` where `name`='{$user}' and password='{$pass}'" ;
+   $aaf="select * from `user` where `u_name`='{$user}' and u_password='{$pass}'" ;
      $kku=mysqli_query($link,$aaf) ;
    if(mysqli_num_rows($kku)>0)
    {  
