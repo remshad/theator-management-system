@@ -59,20 +59,7 @@ echo '</script>';
     
     <ul class="nav navbar-nav">
       <li><a href="add_timeslot.php">Add Timeslot</a></li>
-          <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Movie
-                    <span class="caret"></span>
-                  </a>
-                  <ul class="dropdown-menu" role="menu">
-                    <li>
-                      <a href="add_movie.php">Add movie</a>
-                    </li>
-                    <li>
-                      <a href="remove_movie.php">Remove movie</a>
-                    </li>
-                    </ul>
-                </li>
-        <li><a href="show_order.php">Orders</a></li>
+         <li><a href="add_movie.php">Add Movie</a></li> 
         <li><a href="show_report.php">Report</a></li>
         <li><a href="change_profile.php">Change Profile</a></li>
       <li><a href="logout.php">Logout</a></li>

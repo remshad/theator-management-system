@@ -1,116 +1,126 @@
 <?php
 require('login1.php');   
-include_once('head.php');    
+include_once('head.php');
+$mgr_id=$_COOKIE["share_id"];
+$the_details=mysqli_query($link,"select * from `theatre` where `mgr_id`='$mgr_id'" ) ;
+      $th_details=mysqli_fetch_array($the_details);
+      $th_id=$th_details['id'];
+ $screen_details=mysqli_query($link,"select * from `screen` where `theatre_id`='$th_id'" ) ; 
+ $screens=array();
+		while ($myrow =mysqli_fetch_array($screen_details))
+		{
+			$screens[]=$myrow;
+		}   
+$time_slots=mysqli_query($link,"select * from `time_slots`" ) ; 
+ $time_slot=array();
+		while ($myrow =mysqli_fetch_array($time_slots))
+		{
+			$time_slot[]=$myrow;
+		}       
 ?>  
 <style type="text/css">
-.form-style-3
-{
-	max-width: 450px;
-	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	.background {
+  position: fixed;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
 }
-.form-style-3 label{
-	display:block;
-	margin-bottom: 10px;
-}
-.form-style-3 label > span{
-	float: left;
-	width: 100px;
-	font-weight: bold;
-	font-size: 13px;
-	text-shadow: 1px 1px 1px #fff;
-}
-.form-style-3 fieldset{
-	border-radius: 10px;
-	-webkit-border-radius: 10px;
-	-moz-border-radius: 10px;
-	margin: 0px 0px 10px 0px;
-	border: 1px solid #FFD2D2;
-	padding: 20px;
-	background:gray;
-	box-shadow: inset 0px 0px 15px #FFE5E5;
-	-moz-box-shadow: inset 0px 0px 15px #FFE5E5;
-	-webkit-box-shadow: inset 0px 0px 15px #FFE5E5;
-}
-.form-style-3 fieldset legend{
-	color: black;
-	border-top: 1px solid #FFD2D2;
-	border-left: 1px solid #FFD2D2;
-	border-right: 1px solid #FFD2D2;
-	border-radius: 5px 5px 0px 0px;
-	-webkit-border-radius: 5px 5px 0px 0px;
-	-moz-border-radius: 5px 5px 0px 0px;
-	background: #FFF4F4;
-	padding: 0px 8px 3px 8px;
-	box-shadow: -0px -1px 2px #F1F1F1;
-	-moz-box-shadow:-0px -1px 2px #F1F1F1;
-	-webkit-box-shadow:-0px -1px 2px #F1F1F1;
-	font-weight: normal;
-	font-size: 12px;
-}
-.form-style-3 textarea{
-	width:250px;
-	height:100px;
-}
-.form-style-3 input[type=text],
-.form-style-3 input[type=date],
-.form-style-3 input[type=datetime],
-.form-style-3 input[type=number],
-.form-style-3 input[type=search],
-.form-style-3 input[type=time],
-.form-style-3 input[type=url],
-.form-style-3 input[type=email],
-.form-style-3 select, 
-.form-style-3 textarea{
-	border-radius: 3px;
-	-webkit-border-radius: 3px;
-	-moz-border-radius: 3px;
-	border: 1px solid #FFC2DC;
-	outline: none;
-	color: #F072A9;
-	padding: 5px 8px 5px 8px;
-	box-shadow: inset 1px 1px 4px #FFD5E7;
-	-moz-box-shadow: inset 1px 1px 4px #FFD5E7;
-	-webkit-box-shadow: inset 1px 1px 4px #FFD5E7;
-	background: #FFEFF6;
-	width:50%;
-}
-.form-style-3  input[type=submit],
-.form-style-3  input[type=button]{
-	background: #EB3B88;
-	border: 1px solid #C94A81;
-	padding: 5px 15px 5px 15px;
-	color: #FFCBE2;
-	box-shadow: inset -1px -1px 3px #FF62A7;
-	-moz-box-shadow: inset -1px -1px 3px #FF62A7;
-	-webkit-box-shadow: inset -1px -1px 3px #FF62A7;
-	border-radius: 3px;
-	border-radius: 3px;
-	-webkit-border-radius: 3px;
-	-moz-border-radius: 3px;	
-	font-weight: bold;
+td {
+    margin: 20px;
+    padding: 10px;
+    border: 0px solid #808080;
+    text-align: left;
+
+  }
+
+
+.form-card {
+  border-radius: 2px;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  transition: all 0.56s cubic-bezier(0.25, 0.8, 0.25, 1);
+  max-width: 500px;
+  padding: 0;
+  margin: 50px auto;
 }
 
+
+.form-card:focus-within {
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+.form-actions {
+  position: relative;
+  display: -ms-flexbox;
+  display: flex;
+  margin-top: 2.25rem;
+}
+
+.form-actions .form-btn-cancel {
+  -ms-flex-order: -1;
+  order: -1;
+}
+.form-card h2 {
+    text-align: center;
+    padding: 2px 0px;
+    
+}
+.form-card h1 {
+    text-align: center;
+    padding: 2px 0px;
+    
+}
+
+
+
+.form-actions > * {
+  -ms-flex: 1;
+  flex: 1;
+  margin-top: 0;
+}
+body {
+  margin: 40px auto;
+  background-image: linear-gradient(to top, #a3bded 0%, #6991c7 100%);
+}
 </style>
-<!-- <?php
-$the_details=mysqli_fetch_array($th_details);
-    $th_id=$the_details['id'];
-    $screen_details=mysqli_query($link,"select * from `screen` where `theatre_id`='$th_id'" ) ;
-    $sc_details=array();
-    while ($myrow =mysqli_fetch_array($screen_details))
-    {
-      $sc_details[]=$myrow;
-    }
-    ?>	 -->
-<div class="form-style-3">
-<form>
-<fieldset><legend>Add Timeslot</legend>
-<label for="field1"><span>Select Screen</span><input type="text" class="input-field" name="field1" value="" /></label>
-<label><span><input type="button" value="add existing" onclick="addRow('')"></span></label>
-<label for="field3"><span>Phone</span><input type="text" class="input-field" name="field3" value="" /></label>
-<label for="field4"><span>Subject</span><input type="text" class="input-field" name="field3" value="" /></label>
-</fieldset>
+<form class="form-card" method="post" action="add_timeslot_action.php">
+    <h1>Add Show Time</h1>
+	<h2><?php echo $th_details['theatrename'];?> theatres</h2>
+	<table>
+<tr><td>Select Screen</td><td>
+	<select name="screen">
+		<option>select screen</option>
+<?php
+foreach($screens as $sc)
+{
+?>
+  <option value="<?php echo $sc['id'];?>"><?php echo $sc['name'];?></option>
+  <?php
+  }
+  ?>
+</select>
+</td></tr>
+<tr><td>Select Timeslots</td>
+<?php
+foreach($time_slot as $ts)
+{
+?>
+<td><input type="checkbox" id="slots" name="slots[]" value="<?php echo date($ts['id']);?>">
+  <label for="slots"><?php echo date('h.i',$ts['showtime']);?></label></td><tr><td></td>
+  <?php
+  }
+  ?>
+</td></tr>
+</table>
+    <div class="form-actions">
+        <input value="ADD" class="form-btn" name="submit" type="submit">
+    </div>
 </form>
-</div>
 <?php
     include_once('foot.php');
 ?>

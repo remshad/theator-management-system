@@ -1,5 +1,5 @@
 <?php
 
-$link=mysqli_connect("localhost","root","password","theatre");
+$link=mysqli_connect("localhost","root","","theatre");
 
 ?>
