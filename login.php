@@ -26,6 +26,9 @@ $row=mysqli_fetch_assoc($result);
 if($row['type']==0)
 {
 //header('Location:'profile.php');
+setcookie("t_user", "{$row['u_name']}"); 
+setcookie("t_pass", "{$row['u_password']}");  
+echo "<script>window.location.href='profile.php'</script>";   
 
 }else if($row['type']==1)
 {
