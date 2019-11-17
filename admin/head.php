@@ -32,10 +32,14 @@
     <div class="collapse navbar-collapse" id="myNavbar">
     
     <ul class="nav navbar-nav">
-      <li <?php if(strstr($_SERVER['PHP_SELF'],'add_category.php')) echo 'class="active"';  ?> ><a href="add_category.php">Category</a></li>
-          <li <?php if(strstr($_SERVER['PHP_SELF'],'users.php')) echo 'class="active"';  ?> ><a href="users.php">Users</a></li>
+        <li <?php if(strstr($_SERVER['PHP_SELF'],'add_category.php')) echo 'class="active"';  ?> ><a href="add_category.php">Category</a></li>
+        <li <?php if(strstr($_SERVER['PHP_SELF'],'add_category.php')) echo 'class="active"';  ?> ><a href="add_lang.php">Languages</a></li>
+        <li <?php if(strstr($_SERVER['PHP_SELF'],'add_category.php')) echo 'class="active"';  ?> ><a href="time_slots.php">Time Slots</a></li>
+        <li <?php if(strstr($_SERVER['PHP_SELF'],'add_category.php')) echo 'class="active"';  ?> ><a href="location.php">Locations</a></li>
+        <li <?php if(strstr($_SERVER['PHP_SELF'],'users.php')) echo 'class="active"';  ?> ><a href="users.php">Users</a></li>
+        <li <?php if(strstr($_SERVER['PHP_SELF'],'movie.php')) echo 'class="active"';  ?> ><a href="movie.php">Movies</a></li>
         <li <?php if(strstr($_SERVER['PHP_SELF'],'report.php')) echo 'class="active"';  ?> ><a href="report.php">Report</a></li>
-      <li><a href="logout.php">Logout</a></li>
+        <li><a href="logout.php">Logout</a></li>
     </ul>
     </div>
   </div>

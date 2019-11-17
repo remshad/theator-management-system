@@ -9,11 +9,11 @@ $head=
     
         function add(myid)
         {
-        var new_cat=prompt('Enter new category name');
+        var new_lang=prompt('Enter new language name');
         
-        if(new_cat!=null)
+        if(new_lang!=null)
             {
-                myid.name=myid.name+'&new_cat='+new_cat;
+                myid.name=myid.name+'&new_lang='+new_lang;
                 window.location=myid.name;
             }
         }
@@ -21,7 +21,7 @@ $head=
         function edit(myid)
         {
           //  alert(myid.name);
-        var nvalue=prompt('Enter new category name');
+        var nvalue=prompt('Enter new language name');
         //myid.href=myid.href+'&nvalue='+nvalue;
 
             if(nvalue!=null)
@@ -58,14 +58,14 @@ include_once('head.php');
         if($_GET['action']=='edit')
         {    
     
-            if(isset($_GET['cat_id']))
+            if(isset($_GET['lang_id']))
               {
                 if(isset($_GET['nvalue']) && strlen($_GET['nvalue'])>0)
                 {
                     $_GET['nvalue']=mysqli_real_escape_string($link,$_GET['nvalue']);
-                    $_GET['cat_id']=intval($_GET['cat_id']);
+                    $_GET['lang_id']=intval($_GET['lang_id']);
                     urldecode($_GET['nvalue']);
-                    $sql="UPDATE category set cat_name='{$_GET['nvalue']}' WHERE cat_id='{$_GET['cat_id']}'";
+                    $sql="UPDATE language set language='{$_GET['nvalue']}' WHERE lang_id='{$_GET['lang_id']}'";
                     $result=mysqli_query($link,$sql);
                     if(mysqli_error($link))
                     {
@@ -81,16 +81,16 @@ include_once('head.php');
         }
         else if($_GET['action']=='delete')
         {    
-            if(isset($_GET['cat_id']))
+            if(isset($_GET['lang_id']))
             {
                 
-                $cat_id=intval($_GET['cat_id']); 
+                $lang_id=intval($_GET['lang_id']); 
 
-                $result1=mysqli_query($link,"SELECT * FROM category WHERE cat_id='{$cat_id}'");
+                $result1=mysqli_query($link,"SELECT * FROM language WHERE lang_id='{$lang_id}'");
                 if(mysqli_num_rows($result1)==1)
                 {
                     //echo "deleting";
-                    $sql="DELETE FROM category WHERE cat_id='{$cat_id}' ";
+                    $sql="DELETE FROM language WHERE lang_id='{$lang_id}' ";
                     mysqli_query($link,$sql);
                     if(mysqli_error($link))
                     {
@@ -105,12 +105,12 @@ include_once('head.php');
     {
         
        
-            if(isset($_POST['new_cat']) && strlen($_POST['new_cat'])>2)
+            if(isset($_POST['new_lang']) && strlen($_POST['new_lang'])>2)
             {
                 //echo '<script>alert("'.$_GET['nvalue'].'")</script>';
                 
-                $_POST['new_cat']=mysqli_real_escape_string($link,$_POST['new_cat']);
-                $sql="SELECT * FROM category WHERE cat_name='{$_POST['new_cat']}'";
+                $_POST['new_lang']=mysqli_real_escape_string($link,$_POST['new_lang']);
+                $sql="SELECT * FROM language WHERE language='{$_POST['new_lang']}'";
 
                 
                 $result = mysqli_query($link,$sql);
@@ -123,32 +123,7 @@ include_once('head.php');
                 {
                     echo '<script>alert("Duplicate Entry Not Allowed")</script>';
                 } else {
-                    /*
-                    $target_dir = "../uploads/";
-                    $target_file = $target_dir . basename($_FILES["myImage"]["name"]);
-                    $uploadOk = 1;
-                    $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-                    // Check if image file is a actual image or fake image
-
-                        $check = getimagesize($_FILES["myImage"]["tmp_name"]);
-                        if($check !== false) {
-                        // echo "File is an image - " . $check["mime"] . ".";
-                            $uploadOk = 1;
-                        } else {
-                            echo "File is not an image.";
-                            $uploadOk = 0;
-                        }
-                        
-                        if (move_uploaded_file($_FILES["myImage"]["tmp_name"], $target_file)) {
-                    //        echo "The file ". basename( $_FILES["myImage"]["name"]). " has been uploaded.";
-                            $uploadOk = 1;
-                        } else {
-                            $uploadOk = 0;
-                            echo "Sorry, there was an error uploading your file.";
-                        }
-                    */
-                    
-                    $sql="INSERT INTO category (cat_name) VALUES ('{$_POST['new_cat']}')";
+                    $sql="INSERT INTO language (language) VALUES ('{$_POST['new_lang']}')";
                     //echo $sql;
                     
                     $result = mysqli_query($link,$sql);
@@ -161,7 +136,7 @@ include_once('head.php');
         
     }
   
-       $sql="SELECT * FROM category";
+       $sql="SELECT * FROM language";
        $result = mysqli_query($link,$sql);
        if(mysqli_error($link))
         {
@@ -169,30 +144,25 @@ include_once('head.php');
         }
        
         echo "
-        <form action='add_category.php' method='post' enctype='multipart/form-data'>
+        <form action='add_lang.php' method='post' enctype='multipart/form-data'>
         <center><table>
-        <tr><td>Add New Category as </td><td>&nbsp<input type='text' name='new_cat'> </td><td>&nbsp<input type='submit' name='submit' value='Add' > </td></tr>
+        <tr><td>Add New Language as </td><td>&nbsp<input type='text' name='new_lang'> </td><td>&nbsp<input type='submit' name='submit' value='Add' > </td></tr>
         </table></center> 
         </form>
         <br><br>";
 
-        echo "<table class='table table-hover'><tr><th>Category No</th><th>Category Name</th></tr>";
+        echo "<table class='table table-hover'><tr><th>Language No</th><th>Language</th></tr>";
        
         while($row=mysqli_fetch_assoc($result))
         {
-           echo "<tr> <td>{$row['cat_id']}</td> <td>{$row['cat_name']}</td> 
-                <td><button name='add_category.php?cat_id={$row['cat_id']}&action=edit' onclick='edit(this);'>Edit</button></td>
-                <td><button name='add_category.php?cat_id={$row['cat_id']}&action=delete' onclick='deletes(this);'>Delete</button></td>
+           echo "<tr> <td>{$row['lang_id']}</td> <td>{$row['language']}</td> 
+                <td><button name='add_lang.php?lang_id={$row['lang_id']}&action=edit' onclick='edit(this);'>Edit</button></td>
+                <td><button name='add_lang.php?lang_id={$row['lang_id']}&action=delete' onclick='deletes(this);'>Delete</button></td>
                 </tr>";
         }
        
        
        echo "</table>";
-       
-
-
-        
-        //<tr><td colspan='2'><button name='add_category.php?&action=add' onclick='add(this);'>Add</button></td></tr>
    ?>
         
   </div>
