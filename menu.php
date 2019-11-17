@@ -117,9 +117,21 @@
                         </li>
                     </ul>
                     <div class="navbar-extra" style="position:fixed; float:left; right:10px;">
-                        <a class="btn-theme btn" href="login.php"><i class="fas fa-ticket-alt"></i>&nbsp;Login</a>
 
-                        <a class="btn-theme btn" href="#"><i class="fas fa-ticket-alt"></i>&nbsp;Signup</a>
+                    <?php
+if(!isset($power))
+{
+echo '   <a class="btn-theme btn" href="login.php"><i class="fas fa-ticket-alt"></i>&nbsp;Login</a>
+
+<a class="btn-theme btn" href="#"><i class="fas fa-ticket-alt"></i>&nbsp;Signup</a>';
+}else
+{
+    echo '   <a class="btn-theme btn" href="logout.php"><i class="fas fa-ticket-alt"></i>&nbsp;Logout</a>';
+
+}
+
+?>
+                     
 
                         <a class="btn-theme btn" href="#" onclick="{ $('#myModal').modal('show'); }"><i class="fas fa-ticket-alt" ></i>&nbsp;Change Location</a>
                 
