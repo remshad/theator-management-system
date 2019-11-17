@@ -114,7 +114,7 @@ foreach($time_slot as $ts)
   <label for="slots"><?php echo date('h.i',$ts['showtime']);?></label></td><tr><td></td>
   <?php
   }
-  ?>
+  ?>	
 </td></tr>
 </table>
     <div class="form-actions">
