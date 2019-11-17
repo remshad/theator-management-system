@@ -10,13 +10,26 @@ $the_details=mysqli_query($link,"select * from `theatre` where `mgr_id`='$mgr_id
 		while ($myrow =mysqli_fetch_array($movie_details))
 		{
 			$movies[]=$myrow;
-		}   
-$screen_details=mysqli_query($link,"select * from `screen` where `theatre_id`='$th_id'" ) ; 
- $sc_details=array();
-		while ($myrow =mysqli_fetch_array($screen_details))
-		{
-			$sc_details[]=$myrow;
-		}       
+		}
+    $sc_id=$_GET['sc_id'];
+    $sql="SELECT * FROM `show_time` WHERE `screen_id`='{$sc_id}' ";
+$result=mysqli_query($link,$sql);
+$show_times=mysqli_fetch_array($result);
+$shows1=array();
+$shows=array();
+$shows1= explode(',', $show_times['time_slot_id']); 
+$shows= array_filter($shows1,'is_numeric');
+// for($i=0;$i<count($shows);$i++)
+// {
+//   echo $shows[$i];
+// }
+//print_r($show_times); 
+// $screen_details=mysqli_query($link,"select * from `screen` where `theatre_id`='$th_id'" ) ; 
+//  $sc_details=array();
+// 		while ($myrow =mysqli_fetch_array($screen_details))
+// 		{
+// 			$sc_details[]=$myrow;
+// 		}       
 ?>  
 <style type="text/css">
 	.background {
@@ -88,10 +101,11 @@ body {
   background-image: linear-gradient(to top, #a3bded 0%, #6991c7 100%);
 }
 </style>
-<form class="form-card" id="form1" method="post" action="add_timeslot_action.php">
+<form class="form-card" id="form1" method="post" action="add_movie_action.php">
     <h1>Add Movie</h1>
 	<h2><?php echo $th_details['theatrename'];?> theatres</h2>
 	<table>
+    <input type="hidden" name="screen_id" value="<?php echo $sc_id?>">
 <tr><td>Select Movie</td><td>
 	<select name="movie">
 		<option>select movie</option>
@@ -105,22 +119,22 @@ foreach($movies as $mv)
   ?>
 </select>
 </td></tr>
-<tr><td>Starting Time</td><td><input type="date" name="s_date"></td></tr>
-<tr><td>Ending Time</td><td><input type="date" name="e_date"></td></tr>
-<tr><td>Select Screen</td><td>
-	<select name="screen" onChange="screenSelect(this);" id="screen">
-		<option>select screen</option>
+<tr><td>Starting Date</td><td><input type="date" name="s_date"></td></tr>
+<tr><td>Ending Date</td><td><input type="date" name="e_date"></td></tr>
+<tr><td>Select Timeslots</td>
 <?php
-foreach($sc_details as $sc)
+for($i=0;$i<count($shows);$i++)
 {
+  $time_slots=mysqli_query($link,"select * from `time_slots` where id='$shows[$i]'" ) ; 
+  //echo "select * from `time_slots` where id='$shows[$i]'";
+ $time_slot=mysqli_fetch_array($time_slots);   
 ?>
-  <option value="<?php echo $sc['id'];?>"><?php echo $sc['name'];?></option>
+<td><input type="checkbox" id="slots" name="slots[]" value="<?php echo date($time_slot['id']);?>">
+  <label for="slots"><?php echo date('h.i',$time_slot['showtime']);?></label></td><tr><td></td>
   <?php
   }
-  ?>
-</select>
+  ?>  
 </td></tr>
-<tr><td>Select Timeslots</td><select name="slots" id="slots"></select>
 <!--  <?php
 foreach($time_slot as $ts)
 {
@@ -136,40 +150,7 @@ foreach($time_slot as $ts)
         <input value="ADD" class="form-btn" name="submit" type="submit">
     </div>
 </form>
-<script type="text/javascript">
-  
-  function screenSelect() {
-alert("hello");
-    // Creating the XMLHttpRequest object
-    var request = new XMLHttpRequest();
 
-
-var frm=document.getElementById('form1');
-var screen=frm.screen.value;
-//alert(screen);
-
-
-
-document.location="get_times.php?screen_id="+screen;
-    // Instantiating the request object
-//     request.open("GET", "get_times.php?screen_id="+screen);
-// //alert(this.responseText);
-//     // Defining event listener for readystatechange event
-// //     request.onreadystatechange = function() {
-// //         // Check if the request is compete and was successful
-//         if(this.readyState === 4 && this.status === 200) {
-// //         console.log(this.response);
-//             // Inserting the response from server into an HTML element
-//           alert(this.responseText);
-//            //alert(screen);
-//             frm.slots.innerHTML = this.responseText;
-//         }
-//     };
-
-// //     // Sending the request to the server
-//    request.send();
-// }
-</script>
 <?php
     include_once('foot.php');
 ?>  

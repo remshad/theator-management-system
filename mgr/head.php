@@ -7,13 +7,14 @@
     if (isset($_COOKIE["share_id"]))
     {
       $mgr_id=$_COOKIE["share_id"];
-      $th_details=mysqli_query($link,"select * from `theatre` where `mgr_id`='$mgr_id'" ) ;
-      if(mysqli_num_rows($th_details) == 0)
+      $th_details1=mysqli_query($link,"select * from `theatre` where `mgr_id`='$mgr_id'" ) ;
+      if(mysqli_num_rows($th_details1) == 0)
       {
         header("Location:add_theatre.php");
       }
       else
       {
+        $th_details=mysqli_fetch_array($th_details1);
         if($_COOKIE["share_status"] == 0)
         {
           echo '<script language="javascript">';
@@ -23,6 +24,14 @@ echo '</script>';
         }
       }
     }
+    $th_id=$th_details['id'];
+    $screen_details=mysqli_query($link,"select * from `screen` where `theatre_id`='$th_id'" ) ; 
+ $sc_details=array();
+    while ($myrow =mysqli_fetch_array($screen_details))
+    {
+      $sc_details[]=$myrow;
+    }  
+    //print_r($sc_details);     
     
 
 
@@ -59,7 +68,23 @@ echo '</script>';
     
     <ul class="nav navbar-nav">
       <li><a href="add_timeslot.php">Add Timeslot</a></li>
-         <li><a href="add_movie.php">Add Movie</a></li> 
+      <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Add Movie
+                    <span class="caret"></span>
+                  </a>
+      <ul class="dropdown-menu" role="menu">
+        <?php
+        foreach ($sc_details as $sc)
+         {
+        ?>
+                    <li>
+                      <a href="add_movie.php?sc_id=<?php echo $sc['id']; ?>"><?php echo $sc['name']; ?></a>
+                    </li>
+                    <?php
+                  }
+                  ?>
+                  </ul>
+                </li>
         <li><a href="show_report.php">Report</a></li>
         <li><a href="change_profile.php">Change Profile</a></li>
       <li><a href="logout.php">Logout</a></li>
