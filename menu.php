@@ -119,14 +119,16 @@
                     <div class="navbar-extra" style="position:fixed; float:left; right:10px;">
 
                     <?php
-if(!isset($power))
+if(!isset($_COOKIE['t_power']))
 {
 echo '   <a class="btn-theme btn" href="login.php"><i class="fas fa-ticket-alt"></i>&nbsp;Login</a>
 
 <a class="btn-theme btn" href="#"><i class="fas fa-ticket-alt"></i>&nbsp;Signup</a>';
 }else
 {
+    echo '   <a class="btn-theme btn" href="profile.php"><i class="fas fa-ticket-alt"></i>&nbsp;Profile</a>';
     echo '   <a class="btn-theme btn" href="logout.php"><i class="fas fa-ticket-alt"></i>&nbsp;Logout</a>';
+
 
 }
 

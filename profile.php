@@ -16,6 +16,9 @@ require_once('menu.php');
 
 </section>
 </div>
+<?php
 
+include_once('model.php');
+?>
 </body>
 </html>

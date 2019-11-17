@@ -1,4 +1,6 @@
 <?php
+
+require_once('db.php'); 
 require_once('head.php');
 require_once('menu.php');
 
