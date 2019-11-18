@@ -11,7 +11,7 @@ $power=0;
 $user='';
 
 
-if(isset($_COOKIE['t_user']) && isset($_COOKIE['t_pass'])   )
+if(isset($_COOKIE['t_user']) && isset($_COOKIE['t_pass'])  && isset($_COOKIE['t_power']) && $_COOKIE['t_power']==0 )
 {
     $logged_user = $_COOKIE['t_user'];
     $logged_pass = $_COOKIE['t_pass'];
