@@ -8,25 +8,95 @@ margin-left: 10px;
     padding: 25px;
 }
 
+
 .collapsible {
     background-color: #777;
     color: white;
     cursor: pointer;
     padding: 18px;
-    width: 100%;
+    margin: 0 10%;
+    width: 80%;
     border: none;
-    text-align: left;
+    text-align: center;
     outline: none;
-    font-size: 15px;
+    font-size: 25px;
+    border-radius: 4px;
     }
 
-    .active, .collapsible:hover {
+    .activec, .collapsible:hover {
     background-color: #555;
+    width: 80%;
     }
 
     .content {
     padding: 0 18px;
+    margin: 0 10%;
     display: none;
     overflow: hidden;
     background-color: #f1f1f1;
+    width: 80%;
+    font-size: 20px;
+    }
+
+    .content input[type=text], input[type=date], input[type=time], select, textarea {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 4px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    }
+
+    .content textarea:focus {
+    height: 10em;
+    background-color: rgb(243, 243, 243);
+    }
+
+    .content input[type=submit] {
+    width: 80%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 4px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    }
+    .content input:focus, select:focus {
+    background-color: rgb(243, 243, 243);
+    }
+
+    .movgrid-container {
+    display: grid;
+    grid-template-columns: auto auto;
+    background-color: #ffc34a;
+    padding: 6px;
+    border-radius: 4px;
+    }
+    .movgrid-item {
+    background-color: #ffebc2;
+    display: grid;
+    grid-template-columns: 30% auto;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    padding: 5px;
+    border-radius: 4px;
+    margin: 2%;
+    max-width: 96%;
+    font-size: 18px;
+    }
+    .movgrid-itemimg {
+    max-height: 100%;
+    padding-top: auto;
+    }
+    .movgrid-itemimg img{
+    max-width: 100%;
+    padding:2%;
+    }
+    .movgrid-itemdesc {
+    display: grid;
+    grid-template-rows: 80% 20%;
+    }
+    .movgrid-itemdesc input[type=button]{
+    padding: 5px;
     }

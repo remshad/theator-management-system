@@ -38,95 +38,7 @@ $head=
 
 include_once('head.php');    
 ?>  
-<head>
 
-<style>
-        .collapsible {
-        background-color: #777;
-        color: white;
-        cursor: pointer;
-        padding: 18px;
-        width: 80%;
-        border: none;
-        text-align: left;
-        outline: none;
-        font-size: 25px;
-        border-radius: 4px;
-        align: center;
-        }
-
-        .activec, .collapsible:hover {
-        background-color: #555;
-        width: 80%;
-        }
-
-        .content {
-        padding: 0 18px;
-        display: none;
-        overflow: hidden;
-        background-color: #f1f1f1;
-        width: 80%;
-        font-size: 20px;
-        }
-
-        input, select {
-        width: 100%;
-        padding: 12px 20px;
-        margin: 4px 0;
-        display: inline-block;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        box-sizing: border-box;
-        }
-
-        input[type=submit] {
-        width: 80%;
-        background-color: #4CAF50;
-        color: white;
-        padding: 14px 20px;
-        margin: 4px 0;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        }
-
-        .movgrid-container {
-        display: grid;
-        grid-template-columns: auto auto auto auto;
-        background-color: #ffc34a;
-        padding: 6px;
-        border-radius: 4px;
-        }
-        .movgrid-item {
-        background-color: #ffebc2;
-        display: grid;
-        grid-template-columns: 30% auto;
-        border: 1px solid rgba(0, 0, 0, 0.5);
-        padding: 5px;
-        border-radius: 4px;
-        max-width: 50%;
-        font-size: 18px;
-        }
-        .movgrid-itemimg {
-        max-height: 100%;
-        padding-top: auto;
-        }
-        .movgrid-itemimg img{
-        max-width: 100%;
-        align: center;
-        padding:2%;
-        }
-        .movgrid-itemdesc {
-        display: grid;
-        grid-template-rows: 80% 20%;
-        }
-        .movgrid-itemdesc input[type=button]{
-        padding: 5px;
-        }
-
-</style>
-
-</head>
 
  <div class="container">
    
@@ -134,12 +46,10 @@ include_once('head.php');
   
     if(isset($_GET['action']))
     {
-       
         if($_GET['action']=='edit')
         {    
-    
             if(isset($_GET['cat_id']))
-              {
+            {
                 if(isset($_GET['nvalue']) && strlen($_GET['nvalue'])>0)
                 {
                     $_GET['nvalue']=mysqli_real_escape_string($link,$_GET['nvalue']);
@@ -147,31 +57,6 @@ include_once('head.php');
                     urldecode($_GET['nvalue']);
                     $sql="UPDATE category set cat_name='{$_GET['nvalue']}' WHERE cat_id='{$_GET['cat_id']}'";
                     $result=mysqli_query($link,$sql);
-                    if(mysqli_error($link))
-                    {
-                        die(mysqli_error($link));
-                    }
-                    
-                }
-                 
-              }
-    
-            
-        
-        }
-        else if($_GET['action']=='delete')
-        {    
-            if(isset($_GET['cat_id']))
-            {
-                
-                $cat_id=intval($_GET['cat_id']); 
-
-                $result1=mysqli_query($link,"SELECT * FROM category WHERE cat_id='{$cat_id}'");
-                if(mysqli_num_rows($result1)==1)
-                {
-                    //echo "deleting";
-                    $sql="DELETE FROM category WHERE cat_id='{$cat_id}' ";
-                    mysqli_query($link,$sql);
                     if(mysqli_error($link))
                     {
                         die(mysqli_error($link));
@@ -184,60 +69,37 @@ include_once('head.php');
     if(isset($_POST['submit']))
     {
         
-       
-            if(isset($_POST['new_cat']) && strlen($_POST['new_cat'])>2)
-            {
-                //echo '<script>alert("'.$_GET['nvalue'].'")</script>';
-                
-                $_POST['new_cat']=mysqli_real_escape_string($link,$_POST['new_cat']);
-                $sql="SELECT * FROM category WHERE cat_name='{$_POST['new_cat']}'";
+    /*
+        if(isset($_POST['new_cat']) && strlen($_POST['new_cat'])>2)
+        {
+            //echo '<script>alert("'.$_GET['nvalue'].'")</script>';
+            
+            $_POST['new_cat']=mysqli_real_escape_string($link,$_POST['new_cat']);
+            $sql="SELECT * FROM category WHERE cat_name='{$_POST['new_cat']}'";
 
+            
+            $result = mysqli_query($link,$sql);
+            if(mysqli_error($link))
+            {
+                die(mysqli_error($link));
+            }
+            
+            if(mysqli_num_rows($result)>0)
+            {
+                echo '<script>alert("Duplicate Entry Not Allowed")</script>';
+            } else {
+
+                $sql="INSERT INTO category (cat_name) VALUES ('{$_POST['new_cat']}')";
+                //echo $sql;
                 
                 $result = mysqli_query($link,$sql);
                 if(mysqli_error($link))
                 {
                     die(mysqli_error($link));
                 }
-                
-                if(mysqli_num_rows($result)>0)
-                {
-                    echo '<script>alert("Duplicate Entry Not Allowed")</script>';
-                } else {
-                    /*
-                    $target_dir = "../uploads/";
-                    $target_file = $target_dir . basename($_FILES["myImage"]["name"]);
-                    $uploadOk = 1;
-                    $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-                    // Check if image file is a actual image or fake image
-
-                        $check = getimagesize($_FILES["myImage"]["tmp_name"]);
-                        if($check !== false) {
-                        // echo "File is an image - " . $check["mime"] . ".";
-                            $uploadOk = 1;
-                        } else {
-                            echo "File is not an image.";
-                            $uploadOk = 0;
-                        }
-                        
-                        if (move_uploaded_file($_FILES["myImage"]["tmp_name"], $target_file)) {
-                    //        echo "The file ". basename( $_FILES["myImage"]["name"]). " has been uploaded.";
-                            $uploadOk = 1;
-                        } else {
-                            $uploadOk = 0;
-                            echo "Sorry, there was an error uploading your file.";
-                        }
-                    */
-                    
-                    $sql="INSERT INTO category (cat_name) VALUES ('{$_POST['new_cat']}')";
-                    //echo $sql;
-                    
-                    $result = mysqli_query($link,$sql);
-                    if(mysqli_error($link))
-                    {
-                        die(mysqli_error($link));
-                    }
-                }    
-            }
+            }    
+        }
+        */
         
     }
   
@@ -253,12 +115,26 @@ include_once('head.php');
         {
            $langoption=$langoption."<option value='{$row['lang_id']}'>{$row['language']}</option>";
         }
+
+
+        $sql="SELECT * FROM category";
+        $result = mysqli_query($link,$sql);
+        if(mysqli_error($link))
+        {
+            die(mysqli_error($link));
+        }   
+        $genreoption="";
+
+        while($row=mysqli_fetch_assoc($result))
+        {
+           $genreoption=$genreoption."{$row['cat_name']}&nbsp;<input type='checkbox' name='new_movcat[]' value='{$row['cat_id']}'>&nbsp;&nbsp;";
+        }
         
        
         echo "
         <button type='button' class='collapsible'>Add New Movie</button>
         <div class='content'>
-        <form action='movie.php' method='post' enctype='multipart/form-data'>
+        <form action='movieadd.php' method='post' enctype='multipart/form-data'>
         
             <div>
                 <div>Movie Name:</div>
@@ -267,6 +143,10 @@ include_once('head.php');
             <div>
                 <div>Language:</div>
                 <div><select name='new_lang'>{$langoption}</select></div>
+            </div>
+            <div>
+                <div>Genre:</div>
+                <div>{$genreoption}</div>
             </div>
             <div>
                 <div>Image Path:</div>
@@ -290,14 +170,18 @@ include_once('head.php');
             </div>
             <div>
                 <div>Cast:</div>
-                <div><input type='text' name='new_movcast'></div>
+                <div><textarea name='new_movcast'>Enter text here...</textarea></div>
             </div>
             <div>
                 <div>Production:</div>
                 <div><input type='text' name='new_movprod'></div>
             </div>
+            <div>
+                <div>Description:</div>
+                <div><textarea name='new_movdesc'>Enter text here...</textarea></div>
+            </div>
         
-            <center><input type='submit' name='submit' value='Add' ></center>
+            <center><input type='submit' name='submitadd' value='Add' ></center>
         </form>
         </div>";
 
@@ -326,7 +210,7 @@ include_once('head.php');
         {
             die(mysqli_error($link));
         }
-
+/*
             $sqlcat="SELECT * FROM movie NATURAL JOIN movie_category NATURAL JOIN category";
             $resultcat = mysqli_query($link,$sqlcat);
             if(mysqli_error($link))
@@ -349,18 +233,38 @@ include_once('head.php');
             while($row=mysqli_fetch_assoc($resultcat))
             {
                 $categories.="{$row['cat_name']}&nbsp";
-            }
+            }*/
         echo "<div class='movgrid-container'>";
        
         while($row=mysqli_fetch_assoc($result))
         {
+            $sqlcat="SELECT * FROM movie NATURAL JOIN movie_category NATURAL JOIN category WHERE mov_id='{$row['mov_id']}'";
+            $resultcat = mysqli_query($link,$sqlcat);
+            if(mysqli_error($link))
+            {
+                die(mysqli_error($link));
+            }
+            $categories="";
+            while($rowcat=mysqli_fetch_assoc($resultcat))
+            {
+                $categories.="{$rowcat['cat_name']}&nbsp";
+            }
+            $sqlcount="SELECT COUNT(DISTINCT(t_id)) FROM movie NATURAL JOIN movie_show NATURAL JOIN show_time NATURAL JOIN screen NATURAL JOIN theatre WHERE mov_id='{$row['mov_id']}'";
+            $resultcount = mysqli_query($link,$sqlcount);
+            if(mysqli_error($link))
+            {
+                die(mysqli_error($link));
+            }
+            while($rowcount=mysqli_fetch_assoc($resultcount))
+            {
+                $theatrecount=$rowcount['COUNT(DISTINCT(t_id))'];
+            }
 
-
-            $desc=" <b>{$row['mov_name']}&nbsp({$row['language']})&nbsp{$row['mov_duration']}mins</b><br>
+            $desc=" <b>{$row['mov_id']}.{$row['mov_name']}&nbsp({$row['language']})&nbsp{$row['mov_duration']}mins</b><br>
                     {$categories}<br>
                     Director:&nbsp{$row['mov_direction']}<br>
-                    Running in theatres:&nbsp{$row['mov_direction']}<br>
-                    {$row['mov_name']}<br>";
+                    Running in theatres:&nbsp{$theatrecount}<br>
+                    Production:&nbsp;{$row['mov_production']}<br>";
             
 
            echo "<div class='movgrid-item'>
