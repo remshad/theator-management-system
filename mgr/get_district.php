@@ -13,7 +13,7 @@ $result=mysqli_query($link,$sql);
 while($row=mysqli_fetch_assoc($result))
 {
 
-echo "<option value='{$row['id']}'>{$row['d_name']}</option>";
+echo "<option value='{$row['district_id']}'>{$row['district_name']}</option>";
 
 }
 
