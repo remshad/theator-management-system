@@ -7,15 +7,25 @@ include_once('dbs.php');
       $district=$_POST['district'];
       $_SESSION['screens']=$_POST['screens'];
       $mgr_id=$_COOKIE["share_id"];
-      $result= mysqli_query($link,"INSERT INTO `theatre`(`theatrename`,`district_id`,`mgr_id`) VALUES ('$theatre','$district','$mgr_id')");
+      $count=mysqli_query($link,"select * from theatre where u_id='$mgr_id'");
+      if(mysqli_num_rows($count)>0)
+   {
+    header("Location:index.php");
+      
+    }
+    else
+    {
+      $result= mysqli_query($link,"INSERT INTO `theatre`(`t_theatrename`,`district_id`,`u_id`) VALUES ('$theatre','$district','$mgr_id')");
       if($result)
       {
-      	header("Location:add_screen.php");
+          header("Location:add_screen.php");
       }
       else
       {
-      	die("prepare statement error.....");
+        die("prepare statement error.....");
       }
+    }
+
 
 
     }

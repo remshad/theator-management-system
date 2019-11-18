@@ -2,9 +2,9 @@
 session_start();
     include_once('dbs.php');
     $mgr_id=$_COOKIE["share_id"];
-      $the_details=mysqli_query($link,"select * from `theatre` where `mgr_id`='$mgr_id'" ) ;
+      $the_details=mysqli_query($link,"select * from `theatre` where `u_id`='$mgr_id'" ) ;
       $th_details=mysqli_fetch_array($the_details);
-      $th_id=$th_details['id'];
+      $th_id=$th_details['t_id'];
       $i=0;
       $no_screen=$_SESSION['screens'];
       $today1=date("Y-m-d");
@@ -172,7 +172,7 @@ for($i=0;$i<$no_screen;$i++)
 	//print_r($sc_name);
 	for($j=0;$j<$no_screen;$j++)
 	{
-		$result= mysqli_query($link,"INSERT INTO `screen`(`theatre_id`,`name`,`added_date`) VALUES ('$th_id','$sc_name[$j]','$today')");
+		$result= mysqli_query($link,"INSERT INTO `screen`(`t_id`,`scr_name`,`scr_added_date`) VALUES ('$th_id','$sc_name[$j]','$today')");
 
       if($result)
       {
@@ -182,7 +182,7 @@ for($i=0;$i<$no_screen;$i++)
 	$cl_seats=$_POST['cl_seats'.$j];
 	for($k=0;$k<sizeof($cl_name);$k++)
 	{
-		$result1= mysqli_query($link,"INSERT INTO `screen_details`(`screen_id`,`class_name`,`price`,`seat_avail`) VALUES ('$sc_id','$cl_name[$k]','$cl_price[$k]','$cl_seats[$k]')");
+		$result1= mysqli_query($link,"INSERT INTO `screen_details`(`scr_id`,`scrd_class_name`,`scrd_price`,`scrd_seat_avail`) VALUES ('$sc_id','$cl_name[$k]','$cl_price[$k]','$cl_seats[$k]')");
 		if(!$result1)
 		{
 			die("prepare statement error...");
@@ -198,7 +198,7 @@ for($i=0;$i<$no_screen;$i++)
 	}
 	if($j==$no_screen)
 	{
-	header("Location:index.php");
+	echo "<script>window.location.href='index.php'</script>";
 	}      	  
 }				
 ?>
