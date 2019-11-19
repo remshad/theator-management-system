@@ -1,8 +1,9 @@
 <?php
     include_once('dbs.php');
-    if (isset($_COOKIE["share_id"]))
+    if (isset($_COOKIE["t_id"]))
     {
-      $mgr_id=$_COOKIE["share_id"];
+      $mgr_id=$_COOKIE["t_id"];
+      //echo "select * from `theatre` where `u_id`='$mgr_id'";
       $th_details1=mysqli_query($link,"select * from `theatre` where `u_id`='$mgr_id'" ) ;
       if(mysqli_num_rows($th_details1) == 0)
       {
@@ -11,7 +12,7 @@
       else
       {
         $th_details=mysqli_fetch_array($th_details1);
-        if($_COOKIE["share_status"] == 0)
+        if($_COOKIE["t_status"] == 0)
         {
           echo '<script language="javascript">';
 echo 'alert("you are waiting for the aproval of admin")';
@@ -19,14 +20,15 @@ echo '</script>';
 //header("Location:../index.php");
         }
       }
-    }
-    $th_id=$th_details['id'];
-    $screen_details=mysqli_query($link,"select * from `screen` where `theatre_id`='$th_id'" ) ; 
+    
+    $th_id=$th_details['t_id'];
+    $screen_details=mysqli_query($link,"select * from `screen` where `t_id`='$th_id'" ) ; 
  $sc_details=array();
     while ($myrow =mysqli_fetch_array($screen_details))
     {
       $sc_details[]=$myrow;
-    }  
+    } 
+    } 
     //print_r($sc_details);     
     
 
@@ -74,7 +76,7 @@ echo '</script>';
          {
         ?>
                     <li>
-                      <a href="add_movie.php?sc_id=<?php echo $sc['id']; ?>"><?php echo $sc['name']; ?></a>
+                      <a href="add_movie.php?sc_id=<?php echo $sc['scr_id']; ?>"><?php echo $sc['scr_name']; ?></a>
                     </li>
                     <?php
                   }

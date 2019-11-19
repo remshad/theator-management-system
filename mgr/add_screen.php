@@ -1,7 +1,7 @@
 <?php
 session_start();
     include_once('dbs.php');
-    $mgr_id=$_COOKIE["share_id"];
+    $mgr_id=$_COOKIE["t_id"];
       $the_details=mysqli_query($link,"select * from `theatre` where `u_id`='$mgr_id'" ) ;
       $th_details=mysqli_fetch_array($the_details);
       $th_id=$th_details['t_id'];
@@ -127,8 +127,8 @@ for($i=0;$i<$no_screen;$i++)
 	?>
 	<h2>Screen <?php echo $i+1;?></h2>
 <table>
- <tr><td>Screen Name</td><td><input type="text" name="sc_name[]"></td></tr>
- <tr><td><a href="#" onclick="addRow('dataTable<?php echo $i;?>')">add</a></td>
+ <tr><td>Screen Name</td><td><input type="text" name="sc_name[]" required="required" pattern="[A-Z a-z]+" title="charcters only allowed"></td></tr>
+ <tr><td><a href="#" onclick="addRow('dataTable<?php echo $i;?>')"><button type="button">add classes</button></a></td>
  	<!-- <td><input type="button" value="Remove Passenger" onClick="deleteRow('dataTable')" /></td></tr> -->
  <table id="dataTable<?php echo $i;?>" class="form" border="1">
  <tbody>
@@ -139,15 +139,15 @@ for($i=0;$i<$no_screen;$i++)
 	</td>
 	<td>
 	<label>Class Name</label>
-	<input type="text" name="cl_name<?php echo $i;?>[]">
+	<input type="text" name="cl_name<?php echo $i;?>[]" required="required" pattern="[A-Z a-z]+" title="charcters only allowed" >
 	</td>
 	<td>
 	<label>Price</label>
-	<input type="text" class="small"  name="cl_price<?php echo $i;?>[]">
+	<input type="text" class="small"  name="cl_price<?php echo $i;?>[]" required="required" pattern="[0-9.]+" title="numbers only allowed">
 	</td>
 	<td>
 	<label>Seats</label>
-	<input type="text" class="small"  name="cl_seats<?php echo $i;?>[]">
+	<input type="text" class="small"  name="cl_seats<?php echo $i;?>[]" required="required" pattern="[0-9]+" title="numbers only allowed">
 	</td>
 	</p>
   </tr>
@@ -185,7 +185,10 @@ for($i=0;$i<$no_screen;$i++)
 		$result1= mysqli_query($link,"INSERT INTO `screen_details`(`scr_id`,`scrd_class_name`,`scrd_price`,`scrd_seat_avail`) VALUES ('$sc_id','$cl_name[$k]','$cl_price[$k]','$cl_seats[$k]')");
 		if(!$result1)
 		{
-			die("prepare statement error...");
+			echo "<script>
+alert('cannot add a screen this time');
+window.location.href='login.php';
+</script>";
 		}
 
 	}
@@ -193,12 +196,18 @@ for($i=0;$i<$no_screen;$i++)
       }
       else
       {
-      	die("prepare statement error...");
+      	echo "<script>
+alert('cannot add a screen this time');
+window.location.href='login.php';
+</script>";
       }
 	}
 	if($j==$no_screen)
 	{
-	echo "<script>window.location.href='index.php'</script>";
+	echo "<script>
+alert('added successfully...wait for the aproval of admin');
+window.location.href='login.php';
+</script>";
 	}      	  
 }				
 ?>

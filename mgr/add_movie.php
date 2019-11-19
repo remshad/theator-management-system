@@ -1,24 +1,25 @@
 <?php
 require('login1.php');   
 include_once('head.php');
-$mgr_id=$_COOKIE["share_id"];
-$the_details=mysqli_query($link,"select * from `theatre` where `mgr_id`='$mgr_id'" ) ;
+$mgr_id=$_COOKIE["t_id"];
+$the_details=mysqli_query($link,"select * from `theatre` where `u_id`='$mgr_id'" ) ;
       $th_details=mysqli_fetch_array($the_details);
-      $th_id=$th_details['id'];
- $movie_details=mysqli_query($link,"select * from `movie` order by `id` desc" ) ; 
+      $th_id=$th_details['t_id'];
+ $movie_details=mysqli_query($link,"select * from `movie` order by `mov_id` desc" ) ; 
  $movies=array();
 		while ($myrow =mysqli_fetch_array($movie_details))
 		{
 			$movies[]=$myrow;
 		}
     $sc_id=$_GET['sc_id'];
-    $sql="SELECT * FROM `show_time` WHERE `screen_id`='{$sc_id}' ";
+    $sql="SELECT * FROM `show_time` WHERE `scr_id`='{$sc_id}' ";
 $result=mysqli_query($link,$sql);
-$show_times=mysqli_fetch_array($result);
-$shows1=array();
-$shows=array();
-$shows1= explode(',', $show_times['time_slot_id']); 
-$shows= array_filter($shows1,'is_numeric');
+$show_times=array();
+while ($myrow =mysqli_fetch_array($result))
+    {
+      $show_times[]=$myrow;
+    }
+
 // for($i=0;$i<count($shows);$i++)
 // {
 //   echo $shows[$i];
@@ -103,7 +104,7 @@ body {
 </style>
 <form class="form-card" id="form1" method="post" action="add_movie_action.php">
     <h1>Add Movie</h1>
-	<h2><?php echo $th_details['theatrename'];?> theatres</h2>
+	<h2><?php echo $th_details['t_theatrename'];?> theatres</h2>
 	<table>
     <input type="hidden" name="screen_id" value="<?php echo $sc_id?>">
 <tr><td>Select Movie</td><td>
@@ -113,24 +114,27 @@ body {
 foreach($movies as $mv)
 {
 ?>
-  <option value="<?php echo $mv['id'];?>"><?php echo $mv['name'];?></option>
+  <option value="<?php echo $mv['mov_id'];?>"><?php echo $mv['mov_name'];?></option>
   <?php
   }
   ?>
 </select>
 </td></tr>
-<tr><td>Starting Date</td><td><input type="date" name="s_date"></td></tr>
-<tr><td>Ending Date</td><td><input type="date" name="e_date"></td></tr>
+<tr><td>Starting Date</td><td><input type="date" name="s_date" required="required"></td></tr>
+<tr><td>Ending Date</td><td><input type="date" name="e_date" required="required"></td></tr>
 <tr><td>Select Timeslots</td>
 <?php
-for($i=0;$i<count($shows);$i++)
-{
-  $time_slots=mysqli_query($link,"select * from `time_slots` where id='$shows[$i]'" ) ; 
+
+foreach ($show_times as $sh)
+{ 
+$ti_id=$sh['time_id']; 
+  $time_slots=mysqli_query($link,"SELECT * FROM `time_slots` WHERE `time_id`='{$ti_id}' ");
+  //$time_slots=mysqli_query($link,"select * from time_slots where time_id='$sh['time_id']'"); 
   //echo "select * from `time_slots` where id='$shows[$i]'";
  $time_slot=mysqli_fetch_array($time_slots);   
 ?>
-<td><input type="checkbox" id="slots" name="slots[]" value="<?php echo date($time_slot['id']);?>">
-  <label for="slots"><?php echo date('h.i',$time_slot['showtime']);?></label></td><tr><td></td>
+<td><input type="checkbox" id="slots" name="slots[]" value="<?php echo date($time_slot['time_id']);?>">
+  <label for="slots"><?php echo date('H:i', mktime(0,$time_slot['time_showtime']));?></label></td><tr><td></td>
   <?php
   }
   ?>  

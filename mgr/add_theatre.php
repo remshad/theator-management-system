@@ -102,7 +102,7 @@ button{
             <div class="buttons">
               <form name="form1" id="form1" method="post" action="add_theatre_action.php">
  <table>
- <tr><td>Theatre Name</td><td><input type="text" name="theatre" ></td></tr>
+ <tr><td>Theatre Name</td><td><input type="text" name="theatre" required="required" pattern="[A-Z a-z]+" title="characters only allowed" ></td></tr>
  <tr><td>Select State: </td><td><select name="state" onChange="stateSelect(this);" id="state" >
 <option>Select State</option>
 <?php

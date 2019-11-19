@@ -1,11 +1,11 @@
 <?php
 require('login1.php');   
 include_once('head.php');
-$mgr_id=$_COOKIE["share_id"];
-$the_details=mysqli_query($link,"select * from `theatre` where `mgr_id`='$mgr_id'" ) ;
+$mgr_id=$_COOKIE["t_id"];
+$the_details=mysqli_query($link,"select * from `theatre` where `u_id`='$mgr_id'" ) ;
       $th_details=mysqli_fetch_array($the_details);
-      $th_id=$th_details['id'];
- $screen_details=mysqli_query($link,"select * from `screen` where `theatre_id`='$th_id'" ) ; 
+      $th_id=$th_details['t_id'];
+ $screen_details=mysqli_query($link,"select * from `screen` where `t_id`='$th_id'" ) ; 
  $screens=array();
 		while ($myrow =mysqli_fetch_array($screen_details))
 		{
@@ -90,16 +90,16 @@ body {
 </style>
 <form class="form-card" method="post" action="add_timeslot_action.php">
     <h1>Add Show Time</h1>
-	<h2><?php echo $th_details['theatrename'];?> theatres</h2>
+	<h2><?php echo $th_details['t_theatrename'];?> theatres</h2>
 	<table>
 <tr><td>Select Screen</td><td>
-	<select name="screen">
+	<select required="required" name="screen">
 		<option>select screen</option>
 <?php
 foreach($screens as $sc)
 {
 ?>
-  <option value="<?php echo $sc['id'];?>"><?php echo $sc['name'];?></option>
+  <option value="<?php echo $sc['scr_id'];?>"><?php echo $sc['scr_name'];?></option>
   <?php
   }
   ?>
@@ -110,8 +110,8 @@ foreach($screens as $sc)
 foreach($time_slot as $ts)
 {
 ?>
-<td><input type="checkbox" id="slots" name="slots[]" value="<?php echo date($ts['id']);?>">
-  <label for="slots"><?php echo date('h.i',$ts['showtime']);?></label></td><tr><td></td>
+<td><input type="checkbox" id="slots" name="slots[]" value="<?php echo date($ts['time_id']);?>">
+  <label for="slots"><?php echo date('H:i', mktime(0,$ts['time_showtime']));?></label></td><tr><td></td>
   <?php
   }
   ?>	
