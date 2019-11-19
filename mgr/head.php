@@ -1,9 +1,5 @@
 <?php
     include_once('dbs.php');
-    if (!isset($_COOKIE["share_id"]))
-    {
-      header("Location:login1.php");
-    }
     if (isset($_COOKIE["share_id"]))
     {
       $mgr_id=$_COOKIE["share_id"];

@@ -67,7 +67,7 @@ thead th, tfoot th, tfoot td {
 }
 </style>
 <?php
-$mgr_id=$_COOKIE["share_id"];
+$mgr_id=$_COOKIE["t_user"];
 $the_details=mysqli_query($link,"select * from `theatre` where `mgr_id`='$mgr_id'" ) ;
       $th_details=mysqli_fetch_array($the_details);
       $th_id=$th_details['id'];
