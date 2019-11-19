@@ -1,40 +1,6 @@
 <?php
 require('login1.php'); 
 
-$head=
-    "
-
-    <script>
-  
-
-        
-        function edit(myid)
-        {
-          //  alert(myid.name);
-        var nvalue=prompt('Enter new category name');
-        //myid.href=myid.href+'&nvalue='+nvalue;
-
-            if(nvalue!=null)
-            {
-            myid.name=myid.name+'&nvalue='+nvalue;
-            // alert(myid.name);
-            window.location=myid.name;
-            }        
-        
-        }
-        
-        
-        function deletes(myid)
-        {
-            if (confirm('Are you ok?')) {
-                window.location=myid.name;
-            } else {
-                alert('not ok');
-            }
-        }
-        
-    </script>";  
-
 
 include_once('head.php');    
 ?>  
@@ -210,30 +176,6 @@ include_once('head.php');
         {
             die(mysqli_error($link));
         }
-/*
-            $sqlcat="SELECT * FROM movie NATURAL JOIN movie_category NATURAL JOIN category";
-            $resultcat = mysqli_query($link,$sqlcat);
-            if(mysqli_error($link))
-            {
-                die(mysqli_error($link));
-            }
-            $categories="";
-            while($row=mysqli_fetch_assoc($resultcat))
-            {
-                $categories.="{$row['cat_name']}&nbsp";
-            }
-        
-            $sqlcount="SELECT * FROM movie NATURAL JOIN movie_category NATURAL JOIN category";
-            $resultcat = mysqli_query($link,$sqlcat);
-            if(mysqli_error($link))
-            {
-                die(mysqli_error($link));
-            }
-            $categories="";
-            while($row=mysqli_fetch_assoc($resultcat))
-            {
-                $categories.="{$row['cat_name']}&nbsp";
-            }*/
         echo "<div class='movgrid-container'>";
        
         while($row=mysqli_fetch_assoc($result))
@@ -272,7 +214,11 @@ include_once('head.php');
                     
                     <div class='movgrid-itemdesc'>
                         <div>{$desc}</div>
-                        <div><input type='button' value='Edit'></div>
+                        <div>
+                            <form name='editmovie' action='movieedit.php' method='post' enctype='multipart/form-data'>
+                            <input type='hidden' name='edit_movid' value={$row['mov_id']}>
+                            <input type='submit' name='submitedit' value='Edit'>
+                            </form></div>
                     </div>
                 </div>";
         }
