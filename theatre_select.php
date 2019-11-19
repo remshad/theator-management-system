@@ -8,84 +8,84 @@ require_once('menu.php');
 
 <section class="section-long">
     <div class="container">
-    <div class="section-pannel">
-    <form autocomplete="off">
-                    <div class="grid row">
-                        <div class="col-md-10">
-                            
-                                <div class="row form-grid">
-                                    <div class="col-sm-6 col-lg-3">
-                                        <div class="input-view-flat input-group">
-                                            <select class="form-control" name="genre">
-                                                <option selected="true">Select a movie</option>
-                                                <option>action</option>
-                                                <option>adventure</option>
-                                                <option>comedy</option>
-                                                <option>crime</option>
-                                                <option>detective</option>
-                                                <option>drama</option>
-                                                <option>fantasy</option>
-                                                <option>melodrama</option>
-                                                <option>romance</option>
-                                                <option>superhero</option>
-                                                <option>supernatural</option>
-                                                <option>thriller</option>
-                                                <option>sport</option>
-                                                <option>historical</option>
-                                                <option>horror</option>
-                                                <option>musical</option>
-                                                <option>sci-fi</option>
-                                                <option>war</option>
-                                                <option>western</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6 col-lg-3">
-                                        <div class="input-view-flat date input-group" data-toggle="datetimepicker" data-target="#release-year-field">
-                                            <input class="datetimepicker-input form-control" id="release-year-field" name="releaseYear" type="text" placeholder="release year" data-target="#release-year-field" data-date-format="Y">
-                                            <div class="input-group-append">
-                                                <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6 col-lg-3">
-                                        <div class="input-view-flat input-group">
-                                            <input type="date" name='date'  class="form-control" title="movie date" placeholder="moview date">
-                                        </div>
-                                    </div>
+        <div class="section-pannel">
+            <form autocomplete="off">
+                <div class="grid row">
+                    <div class="col-md-10">
 
-                                    <div class="col-sm-6 col-lg-3">
-                                        <div class="input-view-flat input-group">
-                                            <input type="submit" name='date'  class="form-control" value="submit" title="movie date" placeholder="moview date">
-                                        </div>
+                        <div class="row form-grid">
+                            <div class="col-sm-6 col-lg-3">
+                                <div class="input-view-flat input-group">
+                                    <select class="form-control" name="genre">
+                                        <option selected="true">Select a movie</option>
+                                        <option>action</option>
+                                        <option>adventure</option>
+                                        <option>comedy</option>
+                                        <option>crime</option>
+                                        <option>detective</option>
+                                        <option>drama</option>
+                                        <option>fantasy</option>
+                                        <option>melodrama</option>
+                                        <option>romance</option>
+                                        <option>superhero</option>
+                                        <option>supernatural</option>
+                                        <option>thriller</option>
+                                        <option>sport</option>
+                                        <option>historical</option>
+                                        <option>horror</option>
+                                        <option>musical</option>
+                                        <option>sci-fi</option>
+                                        <option>war</option>
+                                        <option>western</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-lg-3">
+                                <div class="input-view-flat date input-group" data-toggle="datetimepicker" data-target="#release-year-field">
+                                    <input class="datetimepicker-input form-control" id="release-year-field" name="releaseYear" type="text" placeholder="release year" data-target="#release-year-field" data-date-format="Y">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
                                     </div>
                                 </div>
-                           
+                            </div>
+                            <div class="col-sm-6 col-lg-3">
+                                <div class="input-view-flat input-group">
+                                    <input type="date" name='date' class="form-control" title="movie date" placeholder="moview date">
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6 col-lg-3">
+                                <div class="input-view-flat input-group">
+                                    <input type="submit" name='date' class="form-control" value="submit" title="movie date" placeholder="moview date">
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-md-2 my-md-auto d-flex">
-                            <span class="info-title d-md-none mr-3">Go</span>
-                            <ul class="ml-md-auto h5 list-inline">
-                               
-                                <li class="list-inline-item">
-                                    
-                                  
-                                </li>
-                            </ul>
-                        </div>
-                    </div> </form>
+
+                    </div>
+                    <div class="col-md-2 my-md-auto d-flex">
+                        <span class="info-title d-md-none mr-3">Go</span>
+                        <ul class="ml-md-auto h5 list-inline">
+
+                            <li class="list-inline-item">
+
+
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-       
+            </form>
+        </div>
 
-<?php
 
-$sql="SELECT * FROM `movie` NATURAL join movie_show   WHERE 1 ORDER by movsh_end_date DESC limit 10";
+        <?php
+        $movid = intval($_GET['mov_id']);
+        $sql = "SELECT * FROM `movie`  WHERE  `mov_id`='{$movid}' ";
 
-$result=mysqli_query($link,$sql);
+        $result = mysqli_query($link, $sql);
 
-while($row=mysqli_fetch_assoc($result))
-{
+        while ($row = mysqli_fetch_assoc($result)) {
 
-    echo "<article class='movie-line-entity'>
+            echo "<article class='movie-line-entity'>
     <div class='entity-poster' data-role='hover-wrap'>
         <div class='embed-responsive embed-responsive-poster'>
             <img class='embed-responsive-item' src='{$row['mov_img_path']}' alt=''>
@@ -104,30 +104,28 @@ while($row=mysqli_fetch_assoc($result))
         </h4>
         <div class='entity-category'>";
 
-        $sql1="SELECT * FROM category  NATURAL JOIN  `movie_category` WHERE mov_id='{$row['mov_id']}'";
-        $result1=mysqli_query($link,$sql1);
-        while($row1=mysqli_fetch_assoc($result1))
-        {
+            $sql1 = "SELECT * FROM category  NATURAL JOIN  `movie_category` WHERE mov_id='{$row['mov_id']}'";
+            $result1 = mysqli_query($link, $sql1);
+            while ($row1 = mysqli_fetch_assoc($result1)) {
 
-            echo "<a class='content-link' name='{$row1['cat_name']}' title='{$row1['cat_name']}'>{$row1['cat_name']}</a>";
-        }
-             echo "   </div>
+                echo "<a class='content-link' name='{$row1['cat_name']}' title='{$row1['cat_name']}'>{$row1['cat_name']}</a>";
+            }
+            echo "   </div>
         <div class='entity-info'>
             <div class='info-lines'>
                 <div class='info info-short'>
                     <span class='text-theme info-icon'><i class='fas fa-star'></i></span>
-                    <span class='info-text'>"; 
+                    <span class='info-text'>";
 
-    $sql1="SELECT sum(rat_rating)/COUNT(*) as rating FROM rating NATURAL JOIN movie WHERE mov_id={$row['mov_id']}";
-$result1=mysqli_query($link,$sql1);
-$row1=mysqli_fetch_assoc($result1);
+            $sql1 = "SELECT sum(rat_rating)/COUNT(*) as rating FROM rating NATURAL JOIN movie WHERE mov_id={$row['mov_id']}";
+            $result1 = mysqli_query($link, $sql1);
+            $row1 = mysqli_fetch_assoc($result1);
 
-          if($row1['rating']!=null)
-          {
-              
-              echo number_format((float) $row1['rating'], 2, '.', '');
-          }          
-                    echo "</span>
+            if ($row1['rating'] != null) {
+
+                echo number_format((float) $row1['rating'], 2, '.', '');
+            }
+            echo "</span>
                     <span class='info-rest'>/10</span>
                 </div>
                 <div class='info info-short'>
@@ -136,17 +134,16 @@ $row1=mysqli_fetch_assoc($result1);
                     <span class='info-rest'>&nbsp;min</span>
                 </div>";
 
-echo "<div class='info info-short'>
+            echo "<div class='info info-short'>
 <span class='text-theme info-icon'><i class='fas fa-language'></i></span>";
 
 
-$sql1="SELECT * FROM `language` NATURAL JOIN movie WHERE mov_id={$row['mov_id']}";
-$result1=mysqli_query($link,$sql1);
-while($row1=mysqli_fetch_assoc($result1))
-{
-echo "<span class='info-text'>{$row1['language']}</span>";
-echo "<span class='info-rest'>&nbsp;,</span>";
-}
+            $sql1 = "SELECT * FROM `language` NATURAL JOIN movie WHERE mov_id={$row['mov_id']}";
+            $result1 = mysqli_query($link, $sql1);
+            while ($row1 = mysqli_fetch_assoc($result1)) {
+                echo "<span class='info-text'>{$row1['language']}</span>";
+                echo "<span class='info-rest'>&nbsp;,</span>";
+            }
 
 
 
@@ -156,38 +153,11 @@ echo "<span class='info-rest'>&nbsp;,</span>";
         <p class='text-short entity-text'>{$row['mov_description']}
         </p>
     </div>
-    <div class='entity-extra'>
-        <div class='text-uppercase entity-extra-title'>Showtime</div>
-        <div class='entity-showtime'>
-            <div class='showtime-wrap'>
-                ";
-$sql1="SELECT * FROM `time_slots`  NATURAL JOIN show_time NATURAL JOIN movie_show WHERE mov_id='1'";
-$result1=mysqli_query($link,$sql1);
-if(mysqli_error($link))
-{
-
-    die(mysqli_error($link));
-}else {
-    while($row1=mysqli_fetch_assoc($result1))
-    {
-
-        $timestr = date('H:i', mktime(0,$row1['time_showtime']));
-
-        echo " <div class='showtime-item'>
-        <a class='btn-time btn' aria-disabled='false' href='#'>{$timestr}</a>
-    </div>";
-    }
-}
-
-
-               echo "
-            </div>
-        </div>";
-
-echo "<div class='text-uppercase entity-extra-title'><a href='theatre_select.php?mov_id={$row['mov_id']}'><button typ='button' class='btn btn-success' >Book</button></a></div>";
-
-    echo "</div>
+  
 </article>";
+        }
+
+        ?>
 
 
 
@@ -196,11 +166,40 @@ echo "<div class='text-uppercase entity-extra-title'><a href='theatre_select.php
 
 
 
-  }
 
-?>
+<?php
+        $movid = intval($_GET['mov_id']);
+        $location=intval($_COOKIE['location']);
+        $sql = "SELECT * FROM theatre NATURAL JOIN screen NATURAL JOIN show_time NATURAL JOIN movie_show NATURAL JOIN movie WHERE `mov_id`='{$movid}'  ORDER by `movsh_end_date` DESC ";
 
-</div>
+        $result = mysqli_query($link, $sql);
+
+        while ($row = mysqli_fetch_assoc($result)) {
+
+            echo "<article class='movie-line-entity'>
+    <div class='entity-poster' data-role='hover-wrap'>
+        <div class='entity-content'>
+        <img class='embed-responsive-item' src='./images/parts/theatre-img.jpg' style='width:110px' alt=''>
+        <div>{$row['t_theatrename']}</div>
+        <div>{$row['t_theatre_place']}</div>
+        </div>
+      </div>
+    <div class='entity-content'>
+        
+        <div class='entity-info'>
+        
+        <p class='text-short entity-text'>{$row['mov_description']} 
+        </div>
+       
+        </p>
+    </div>
+  
+</article>";
+        }
+
+        ?>
+
+    </div>
 </section>
 
 <a class="scroll-top disabled" href="#"><i class="fas fa-angle-up" aria-hidden="true"></i></a>
