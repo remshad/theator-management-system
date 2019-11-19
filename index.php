@@ -122,7 +122,7 @@ if(mysqli_error($link))
             </div>
         </div>";
 
-echo "<div class='text-uppercase entity-extra-title'><a href='theatre_select.php?mov_id={$row['mov_id']}'><button typ='button' class='btn btn-info' >Book</button></a></div>";
+echo "<div class='text-uppercase entity-extra-title'><a href='theatre_select.php?mov_id={$row['mov_id']}'><button typ='button' class='btn btn-success' >Book</button></a></div>";
 
     echo "</div>
 </article>";
