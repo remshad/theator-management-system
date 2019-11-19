@@ -152,7 +152,7 @@ echo "<span class='info-rest'>&nbsp;,</span>";
 
 
             echo "</div></div>
-        </div>
+        </div>  
         <p class='text-short entity-text'>{$row['mov_description']}
         </p>
     </div>
