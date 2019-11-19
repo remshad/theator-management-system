@@ -8,10 +8,72 @@ require_once('menu.php');
 
 <section class="section-long">
     <div class="container">
-        <div class="section-head">
-            <h2 class="section-title text-uppercase">Now in play</h2>
-            <p class="section-text"><?php echo 'Dates: '; echo date('d',time()); echo ' - '; echo date('d F Y',time()+60*60*24*2);  ?></p>
-        </div>
+    <div class="section-pannel">
+    <form autocomplete="off">
+                    <div class="grid row">
+                        <div class="col-md-10">
+                            
+                                <div class="row form-grid">
+                                    <div class="col-sm-6 col-lg-3">
+                                        <div class="input-view-flat input-group">
+                                            <select class="form-control" name="genre">
+                                                <option selected="true">Select a movie</option>
+                                                <option>action</option>
+                                                <option>adventure</option>
+                                                <option>comedy</option>
+                                                <option>crime</option>
+                                                <option>detective</option>
+                                                <option>drama</option>
+                                                <option>fantasy</option>
+                                                <option>melodrama</option>
+                                                <option>romance</option>
+                                                <option>superhero</option>
+                                                <option>supernatural</option>
+                                                <option>thriller</option>
+                                                <option>sport</option>
+                                                <option>historical</option>
+                                                <option>horror</option>
+                                                <option>musical</option>
+                                                <option>sci-fi</option>
+                                                <option>war</option>
+                                                <option>western</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-lg-3">
+                                        <div class="input-view-flat date input-group" data-toggle="datetimepicker" data-target="#release-year-field">
+                                            <input class="datetimepicker-input form-control" id="release-year-field" name="releaseYear" type="text" placeholder="release year" data-target="#release-year-field" data-date-format="Y">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-lg-3">
+                                        <div class="input-view-flat input-group">
+                                            <input type="date" name='date'  class="form-control" title="movie date" placeholder="moview date">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6 col-lg-3">
+                                        <div class="input-view-flat input-group">
+                                            <input type="submit" name='date'  class="form-control" value="submit" title="movie date" placeholder="moview date">
+                                        </div>
+                                    </div>
+                                </div>
+                           
+                        </div>
+                        <div class="col-md-2 my-md-auto d-flex">
+                            <span class="info-title d-md-none mr-3">Go</span>
+                            <ul class="ml-md-auto h5 list-inline">
+                               
+                                <li class="list-inline-item">
+                                    
+                                  
+                                </li>
+                            </ul>
+                        </div>
+                    </div> </form>
+                </div>
        
 
 <?php
