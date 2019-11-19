@@ -7,7 +7,7 @@
     if (isset($_COOKIE["share_id"]))
     {
       $mgr_id=$_COOKIE["share_id"];
-      $th_details1=mysqli_query($link,"select * from `theatre` where `mgr_id`='$mgr_id'" ) ;
+      $th_details1=mysqli_query($link,"select * from `theatre` where `u_id`='$mgr_id'" ) ;
       if(mysqli_num_rows($th_details1) == 0)
       {
         header("Location:add_theatre.php");
@@ -86,7 +86,7 @@ echo '</script>';
                   </ul>
                 </li>
         <li><a href="show_report.php">Report</a></li>
-        <li><a href="change_profile.php">Change Profile</a></li>
+        <!-- <li><a href="change_profile.php">Change Profile</a></li> -->
       <li><a href="logout.php">Logout</a></li>
     </ul>
     </div>

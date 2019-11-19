@@ -116,7 +116,7 @@ if(mysqli_error($link))
 
 while($row=mysqli_fetch_assoc($result))
 {
-echo "<option value='{$row['id']}' >{$row['s_name']}</option>";
+echo "<option value='{$row['state_id']}' >{$row['state_name']}</option>";
 }
 
 
