@@ -32,7 +32,9 @@
     <link href="./css/theme.css" rel="stylesheet" type="text/css">
 
     <script type="text/javascript" >
-   
+   <?php
+if(isset($script)) echo $script;
+   ?>
 
     </script>
 </head>

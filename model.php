@@ -45,6 +45,38 @@ echo "<option value='{$row['state_id']}' >{$row['state_name']}</option>";
     </div>
   </div>
 
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal2" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          
+          <h4 class="modal-title">Book Your Ticket</h4>
+        </div>
+        <div class="modal-body">
+
+<table>
+          <form name="modal2_frm" id="modal2_frm" action='#' method='post'>
+<tr><td>Select Date </td><td><input type='date' name="date" onChange="datePicked(this);" id="date" >
+
+</td></tr>
+<tr><td>Select class</td><td><select name="class" onchange="classPicked(this)"></select></td></tr>
+          </form>
+         </table>
+         
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
   <script type="text/javascript"> 
   
   function setCookie(name,value,days) {
@@ -114,6 +146,21 @@ var state=frm.state.value;
 
     // Sending the request to the server
     request.send();
+}
+
+
+function ajax(url,id)
+{
+var request=new XMLHttpRequest();
+request.open("GET",url);
+request.onreadystatechange=function(){
+  if(this.readyState===4 && this.status===200)
+  {
+
+    id.innerHTML=this.responseText;
+  }
+}
+
 }
 
 

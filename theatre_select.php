@@ -1,6 +1,29 @@
 <?php
 
 require_once('db.php');
+
+
+$script = "
+function book(mov_id,theator_id,mov_start,mov_nd)
+{    
+    $('#myModal2').modal('show'); 
+    var today = new Date();
+
+    date.value = today.toISOString().substr(0, 10);
+//alert(mov_start);
+    date.min=mov_start;
+    date.max=mov_nd;
+
+}
+
+function datePicked(pick)
+{
+
+    //alert(date.value);
+}
+";
+
+
 require_once('head.php');
 require_once('menu.php');
 
@@ -167,14 +190,16 @@ require_once('menu.php');
 
 
 
-<?php
+        <?php
         $movid = intval($_GET['mov_id']);
-        $location=intval($_COOKIE['location']);
+        $location = intval($_COOKIE['location']);
         $sql = "SELECT * FROM theatre NATURAL JOIN screen NATURAL JOIN show_time NATURAL JOIN movie_show NATURAL JOIN movie WHERE `mov_id`='{$movid}'  ORDER by `movsh_end_date` DESC ";
 
         $result = mysqli_query($link, $sql);
 
         while ($row = mysqli_fetch_assoc($result)) {
+            $mov_start = date('Y-m-d', $row['movsh_start_date']);
+            $mov_end = date('Y-m-d', $row['movsh_end_date']);
 
             echo "<article class='movie-line-entity'>
     <div class='entity-poster' data-role='hover-wrap'>
@@ -187,9 +212,24 @@ require_once('menu.php');
     <div class='entity-content'>
         
         <div class='entity-info'>
-        
-        <p class='text-short entity-text'>{$row['mov_description']} 
-        </div>
+        <h3 class='entity-category'>Movie Playing From {$mov_start} to  {$mov_end} </h3>
+        <p class='text-short entity-text'>
+        ";
+
+            $sql1 = "SELECT * from time_slots NATURAL JOIN show_time WHERE showt_id='{$row['showt_id']}'";
+            $result1 = mysqli_query($link, $sql1);
+
+            while ($row1 = mysqli_fetch_assoc($result1)) {
+                $timestr = date('H:i', mktime(0, $row1['time_showtime']));
+                echo "<div class='showtime-item'>
+    <i class='btn-time btn' aria-disabled='false'>{$timestr}</i>
+</div>";
+            }
+
+            echo "<div class='text-uppercase entity-extra-title'> <button typ='button' class='btn-theme btn' onclick='book({$row['mov_id']},{$row['t_id']},\"{$mov_start}\",\"{$mov_end}\");' style='margin-top:10px;' >Book</button></div>";
+
+
+            echo "</div>
        
         </p>
     </div>
