@@ -12,7 +12,7 @@ function book(mov_id,theator_id,mov_start,mov_nd,screen_id,location)
     modal2_frm.theatre.value=theator_id;
     modal2_frm.screen.value=screen_id;
 
-     var today = new Date();
+    var today = new Date();
     modal2_frm.date.value = today.toISOString().substr(0, 10);
 modal2_frm.date.min=mov_start;
 modal2_frm.date.max=mov_nd;
@@ -21,7 +21,8 @@ modal2_frm.date.max=mov_nd;
 
 function datePicked(pick)
 {
-
+    modal2_frm.date.value;
+    
     var url='./ajax/selectClass.php?date=+mov_id=+screen=+';
     var id='';
    // ajax(url,id);
