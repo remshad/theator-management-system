@@ -4,22 +4,28 @@ require_once('db.php');
 
 
 $script = "
-function book(mov_id,theator_id,mov_start,mov_nd)
+function book(mov_id,theator_id,mov_start,mov_nd,screen_id,location)
 {    
-    $('#myModal2').modal('show'); 
-    var today = new Date();
+    $('#myModal2').modal('show');
+    modal2_frm.movid.value=mov_id;
+    modal2_frm.location.value=location;
+    modal2_frm.theatre.value=theator_id;
+    modal2_frm.screen.value=screen_id;
 
-    date.value = today.toISOString().substr(0, 10);
-//alert(mov_start);
-    date.min=mov_start;
-    date.max=mov_nd;
+     var today = new Date();
+    modal2_frm.date.value = today.toISOString().substr(0, 10);
+modal2_frm.date.min=mov_start;
+modal2_frm.date.max=mov_nd;
 
 }
 
 function datePicked(pick)
 {
 
-    //alert(date.value);
+    var url='./ajax/selectClass.php?date=+mov_id=+screen=+';
+    var id='';
+   // ajax(url,id);
+   alert(modal2_frm.date.value);
 }
 ";
 
@@ -205,8 +211,9 @@ require_once('menu.php');
     <div class='entity-poster' data-role='hover-wrap'>
         <div class='entity-content'>
         <img class='embed-responsive-item' src='./images/parts/theatre-img.jpg' style='width:110px' alt=''>
-        <div>{$row['t_theatrename']}</div>
-        <div>{$row['t_theatre_place']}</div>
+        <div>Theatre:{$row['t_theatrename']}</div>
+        <div>Screen:{$row['scr_name']}</div>
+        <div>Place:{$row['t_theatre_place']}</div>
         </div>
       </div>
     <div class='entity-content'>
@@ -226,7 +233,7 @@ require_once('menu.php');
 </div>";
             }
 
-            echo "<div class='text-uppercase entity-extra-title'> <button typ='button' class='btn-theme btn' onclick='book({$row['mov_id']},{$row['t_id']},\"{$mov_start}\",\"{$mov_end}\");' style='margin-top:10px;' >Book</button></div>";
+            echo "<div class='text-uppercase entity-extra-title'> <button typ='button' class='btn-theme btn' onclick='book({$row['mov_id']},{$row['t_id']},\"{$mov_start}\",\"{$mov_end}\",{$row['scr_id']},{$location});' style='margin-top:10px;' >Book</button></div>";
 
 
             echo "</div>

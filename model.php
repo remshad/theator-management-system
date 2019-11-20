@@ -61,10 +61,17 @@ echo "<option value='{$row['state_id']}' >{$row['state_name']}</option>";
 
 <table>
           <form name="modal2_frm" id="modal2_frm" action='#' method='post'>
-<tr><td>Select Date </td><td><input type='date' name="date" onChange="datePicked(this);" id="date" >
+<tr><td>Select Date </td><td><input type='date' name="date" onChange="datePicked(this);" >
 
 </td></tr>
-<tr><td>Select class</td><td><select name="class" onchange="classPicked(this)"></select></td></tr>
+<tr><td>Select class</td><td><select name="class" onChange="classPicked(this);" ></select></td></tr>
+<input type="hidden" name="movid" >
+<input type="hidden" name="location" >
+<input type="hidden" name="theatre" >
+<input type="hidden" name="screen" >
+<tr><td colspan="2"><input type='button' name="submit" value="submit"  >
+
+</td></tr>
           </form>
          </table>
          
@@ -160,7 +167,7 @@ request.onreadystatechange=function(){
     id.innerHTML=this.responseText;
   }
 }
-
+request.send();
 }
 
 
