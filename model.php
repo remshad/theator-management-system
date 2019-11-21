@@ -59,21 +59,34 @@ echo "<option value='{$row['state_id']}' >{$row['state_name']}</option>";
         </div>
         <div class="modal-body">
 
-<table>
-          <form name="modal2_frm" id="modal2_frm" action='#' method='post'>
-<tr><td>Select Date </td><td><input type='date' name="date" onChange="datePicked(this);" >
 
-</td></tr>
-<tr><td>Select class</td><td><select name="class" onChange="classPicked(this);" ></select></td></tr>
+          <form name="modal2_frm" class="form-horizontal" id="modal2_frm" action='bookticket.php' method='post' onsubmit="return validateForm();" >
+          <div class="form-group">
+            
+          <label class="control-label" for="date">Select Date </label>
+      <div class="col-sm-10"> 
+        
+       <input type='date' name="date" onChange="datePicked(this);" >
+</div>
+</div>
+          <div class="form-group">
+          <label class="control-label" for="class">Select class </label>
+      <div class="col-sm-10"> 
+<select name="class"  id="class" onchange="{seat.focus();}" ></select></div></div>
+<div class="form-group">
+<label class="control-label" for="seat">How many seats  </label>
+      <div class="col-sm-10">  <input type="number" name="seat" onBlur="seatEntered(this);" id="seat" ></div></div>
+<div class="form-group"><span id="seat_msg"></span></div>
 <input type="hidden" name="movid" >
 <input type="hidden" name="location" >
 <input type="hidden" name="theatre" >
 <input type="hidden" name="screen" >
-<tr><td colspan="2"><input type='button' name="submit" value="submit"  >
+<input type="hidden" name="conv_fee">
+<div class="form-group">
+          <label class="control-label col-sm-2" for="submit"></label>
+      <div class="col-sm-10"> <div class="form-group"><input type='submit' name="submit" value="submit" ></div></div>
 
-</td></tr>
           </form>
-         </table>
          
         </div>
         <div class="modal-footer">
@@ -163,8 +176,9 @@ request.open("GET",url);
 request.onreadystatechange=function(){
   if(this.readyState===4 && this.status===200)
   {
-
-    id.innerHTML=this.responseText;
+//alert(id);
+var assign=document.getElementById(id);
+assign.innerHTML=this.responseText;
   }
 }
 request.send();

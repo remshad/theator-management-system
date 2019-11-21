@@ -14,9 +14,10 @@ function book(mov_id,theator_id,mov_start,mov_nd,screen_id,location)
 
     var today = new Date();
     modal2_frm.date.value = today.toISOString().substr(0, 10);
-modal2_frm.date.min=mov_start;
-modal2_frm.date.max=mov_nd;
+    modal2_frm.date.min=mov_start;
+    modal2_frm.date.max=mov_nd;
 
+datePicked(today);
 }
 
 function datePicked(pick)
@@ -26,8 +27,66 @@ function datePicked(pick)
     var url='./ajax/selectClass.php?date='+modal2_frm.date.value+'&mov_id='+modal2_frm.movid.value+'&screen='+modal2_frm.screen.value;
     var id='class';
     ajax(url,id);
-   alert(url);
 }
+
+function seatEntered(data)
+{
+    var e=document.getElementById('class');
+  
+   if((e.options[e.selectedIndex].getAttribute('data-available')-data.value)<0)
+   {
+    seat_msg.style='background-color:red;color:white; display:block; padding:5px;border:2px solid white;';
+    seat_msg.innerText='Select seat equal to or below '+e.options[e.selectedIndex].getAttribute('data-available');
+   }else
+   {
+    seat_msg.style='background-color:green;color:white; display:block; padding:5px;border:2px solid white;';
+    modal2_frm.conv_fee.value=Math.floor(e.options[e.selectedIndex].getAttribute('data-price')*data.value*.1);
+    seat_msg.innerHTML='Ticket price '+e.options[e.selectedIndex].getAttribute('data-price')*data.value+'<br/>Conveniant fee:'+modal2_frm.conv_fee.value+'<br/>Total :'+(parseInt(modal2_frm.conv_fee.value)+parseInt(e.options[e.selectedIndex].getAttribute('data-price')*data.value));
+   }
+   
+    
+}
+
+function validateForm()
+{
+    if(modal2_frm.date.value.length>0)
+    {
+
+        if(modal2_frm.class.value.length>0)
+        {
+            if(modal2_frm.seat.value.length>0)
+        {
+            if(modal2_frm.conv_fee.value>0)
+            {
+               // modal2_frm.submit();
+                return true;
+            }else
+            {
+                alert('unknown error');
+            }
+
+        }else
+        {
+            modal2_frm.seat.focus();
+            alert('Enter seat..!');
+        } 
+
+        }else
+        {
+            modal2_frm.class.focus();
+            alert('select a class..!');
+
+        }
+
+    }else
+    {
+        modal2_frm.date.focus();
+        alert('select a date..!');   
+    }
+
+    return false;
+}
+
 ";
 
 
