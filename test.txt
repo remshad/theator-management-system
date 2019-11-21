@@ -1,11 +1,12 @@
 array (
-  'date' => '2018-12-15',
+  'date' => '2018-12-07',
+  'times' => '5',
   'class' => '1',
-  'seat' => '44',
+  'seat' => '25',
   'movid' => '1',
   'location' => '223',
   'theatre' => '1',
   'screen' => '1',
-  'conv_fee' => '440',
+  'conv_fee' => '250',
   'submit' => 'submit',
 )

@@ -53,7 +53,7 @@ echo "<option value='{$row['state_id']}' >{$row['state_name']}</option>";
     
       <!-- Modal content-->
       <div class="modal-content">
-        <div class="modal-header">
+        <div class="modal-header btn-theme">
           
           <h4 class="modal-title">Book Your Ticket</h4>
         </div>
@@ -66,7 +66,15 @@ echo "<option value='{$row['state_id']}' >{$row['state_name']}</option>";
           <label class="control-label" for="date">Select Date </label>
       <div class="col-sm-10"> 
         
-       <input type='date' name="date" onChange="datePicked(this);" >
+       <input type='date' name="date" onChange="datePicked();">
+</div>
+</div>
+
+<div class="form-group">
+<label class="control-label" for="times">Select Timing </label>
+      <div class="col-sm-10"> 
+        <select name="times" id="times" onChange="timeSelect();"  onblur="timeSelect();" ></select>
+      
 </div>
 </div>
           <div class="form-group">
@@ -176,7 +184,7 @@ request.open("GET",url);
 request.onreadystatechange=function(){
   if(this.readyState===4 && this.status===200)
   {
-//alert(id);
+//alert(this.responseText);
 var assign=document.getElementById(id);
 assign.innerHTML=this.responseText;
   }

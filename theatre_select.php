@@ -20,11 +20,19 @@ function book(mov_id,theator_id,mov_start,mov_nd,screen_id,location)
 datePicked(today);
 }
 
-function datePicked(pick)
+function datePicked()
 {
-    modal2_frm.date.value;
+ 
+    var url='./ajax/selecttime.php?date='+modal2_frm.date.value+'&mov_id='+modal2_frm.movid.value+'&screen='+modal2_frm.screen.value;
+    var id='times';
+    ajax(url,id);   
+    this.focus();
+}
 
-    var url='./ajax/selectClass.php?date='+modal2_frm.date.value+'&mov_id='+modal2_frm.movid.value+'&screen='+modal2_frm.screen.value;
+function timeSelect()
+{
+    
+    var url='./ajax/selectClass.php?date='+modal2_frm.date.value+'&mov_id='+modal2_frm.movid.value+'&screen='+modal2_frm.screen.value+'&times='+modal2_frm.times.value;;
     var id='class';
     ajax(url,id);
 }

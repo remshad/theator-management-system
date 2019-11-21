@@ -26,6 +26,7 @@ if (isset($_POST['submit']) && $_POST['submit'] = 'submit') {
                                         setcookie("t_user", "{$row['u_name']}", time() + (86400 * 30), "/");
                                         setcookie("t_pass", "{$row['u_password']}", time() + (86400 * 30), "/");
                                         setcookie("t_power", "0", time() + (86400 * 30), "/");
+                                        setcookie("t_id",  "{$row['u_id']}", time() + (86400 * 30), "/");
                                         echo "<script>window.location.href='profile.php'</script>";   
 
                                 } else if ($row['type'] == 1) {

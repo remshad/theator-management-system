@@ -7,20 +7,25 @@ require_once('login1.php');
 file_put_contents('test.txt',var_export($_POST,true));
 
 
-'date' => '2018-12-13',
-  'class' => '1',
-  'seat' => '25',
-  'movid' => '1',
-  'location' => '223',
-  'theatre' => '1',
-  'screen' => '1',
-  'conv_fee' => '250',
+//$date=strtotime($_POST['date']);
+$b_booked_time=time();
+$b_booked_seats=$_POST['seat'];
+$u_id=$_COOKIE['t_id'];
+$b_visit_date=strtotime($_POST['date']);
+$b_status=0;
+$b_conv_charge=$_POST['conv_fee'];
+$scrd_id=$_POST['class'];
+$showt_id=$_POST['times'];
 
-  $date=strtotime($_POST['date']);
-  $b_booked_time=time();
-  $b_booked_seats=$_POST['seat'];
-  $movsh_id=$_POST['seat'];
+$sql="INSERT INTO `booking`( `b_booked_time`, `b_booked_seats`, `u_id`, `b_visit_date`, `b_status`, `b_conv_charge`, `scrd_id`, `showt_id`) VALUES ('{$b_booked_time}','{$b_booked_seats}','{$u_id}','{$b_visit_date}','{$b_status}','{$b_conv_charge}','{$scrd_id}','{$showt_id}')";
 
+$result=mysqli_query($link,$sql);
 
-
+if(mysqli_error($link))
+{
+    die(mysqli_error($link).$sql);
+}else
+{
+       header('Location:profile.php?book=sucess');
+}
 ?>

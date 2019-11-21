@@ -42,10 +42,12 @@ if (isset($_POST['submit']) && $_POST['submit'] = 'submit') {
                                                                                 if (mysqli_error($link)) {
                                                                                         $error[] = "SQL error <br/>" . mysqli_error($link);
                                                                                 } else {
+                                                                                        $id=mysqli_insert_id($link);
                                                                                         $sucess[] = "User Registered <br/>Will be redirected to login page within 2 seconds";
 
                                                                                         setcookie("t_user", "{$_POST['uname']}", time() + (86400 * 30), "/");
                                                                                         setcookie("t_pass", "{$password}", time() + (86400 * 30), "/");
+                                                                                        setcookie("t_uid", "{$$id}", time() + (86400 * 30), "/");
 
                                                                                         if ($type == 0) {
                                                                                                 setcookie("t_power", "0", time() + (86400 * 30), "/");

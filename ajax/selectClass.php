@@ -10,13 +10,16 @@ file_put_contents('save.txt',var_export($_GET,true));
 $date=strtotime($_GET['date']);
 $mov_id=$_GET['mov_id'];
 $screen=$_GET['screen'];
+$times=$_GET['times'];
 
 $sql="SELECT * from screen_details WHERE scr_id='1'";
 $result=mysqli_query($link,$sql);
+
+echo "<option>Select Class</option>";
 while($row=mysqli_fetch_assoc($result))
 {
     
-    $sql1="SELECT SUM(b_booked_seats) as booked,scrd_id from booking WHERE scrd_id={$row['scrd_id']} and showt_id in (SELECT showt_id from show_time WHERE scr_id={$screen}) and `b_visit_date`='{$date}'";
+    $sql1="SELECT SUM(b_booked_seats) as booked,scrd_id from booking WHERE scrd_id={$row['scrd_id']} and showt_id ='{$times}' and `b_visit_date`='{$date}' group by showt_id";
     $results=mysqli_query($link,$sql1);
     if(mysqli_num_rows($results)>0)
     {
