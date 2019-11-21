@@ -22,11 +22,11 @@ modal2_frm.date.max=mov_nd;
 function datePicked(pick)
 {
     modal2_frm.date.value;
-    
-    var url='./ajax/selectClass.php?date=+mov_id=+screen=+';
-    var id='';
-   // ajax(url,id);
-   alert(modal2_frm.date.value);
+
+    var url='./ajax/selectClass.php?date='+modal2_frm.date.value+'&mov_id='+modal2_frm.movid.value+'&screen='+modal2_frm.screen.value;
+    var id='class';
+    ajax(url,id);
+   alert(url);
 }
 ";
 
