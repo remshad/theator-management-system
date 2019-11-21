@@ -16,7 +16,7 @@ $result=mysqli_query($link,$sql);
 while($row=mysqli_fetch_assoc($result))
 {
     
-    $sql1="SELECT SUM(b_booked_seats) as booked,scrd_id,movsh_id from booking WHERE scrd_id={$row['scrd_id']} and movsh_id in (SELECT movsh_id from movie_show NATURAL JOIN show_time WHERE scr_id={$screen}) and `b_visit_date`='{$date}'";
+    $sql1="SELECT SUM(b_booked_seats) as booked,scrd_id from booking WHERE scrd_id={$row['scrd_id']} and showt_id in (SELECT showt_id from show_time WHERE scr_id={$screen}) and `b_visit_date`='{$date}'";
     $results=mysqli_query($link,$sql1);
     if(mysqli_num_rows($results)>0)
     {
