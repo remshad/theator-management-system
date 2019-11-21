@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 21, 2019 at 12:56 PM
+-- Generation Time: Nov 21, 2019 at 02:14 PM
 -- Server version: 10.4.8-MariaDB
 -- PHP Version: 7.3.10
 
@@ -753,17 +753,8 @@ CREATE TABLE `movie_show` (
   `movsh_id` int(11) NOT NULL,
   `mov_id` int(11) NOT NULL,
   `movsh_start_date` int(11) NOT NULL,
-  `movsh_end_date` int(11) NOT NULL,
-  `showt_id` int(11) NOT NULL
+  `movsh_end_date` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_unicode_ci;
-
---
--- Dumping data for table `movie_show`
---
-
-INSERT INTO `movie_show` (`movsh_id`, `mov_id`, `movsh_start_date`, `movsh_end_date`, `showt_id`) VALUES
-(1, 1, 1571390162, 1576660589, 1),
-(2, 1, 1574204400, 1575068400, 1);
 
 -- --------------------------------------------------------
 
@@ -836,18 +827,9 @@ INSERT INTO `screen_details` (`scrd_id`, `scr_id`, `scrd_class_name`, `scrd_pric
 CREATE TABLE `show_time` (
   `showt_id` int(11) NOT NULL,
   `scr_id` int(11) NOT NULL,
-  `time_id` int(11) NOT NULL
+  `time_id` int(11) NOT NULL,
+  `movsh_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_unicode_ci;
-
---
--- Dumping data for table `show_time`
---
-
-INSERT INTO `show_time` (`showt_id`, `scr_id`, `time_id`) VALUES
-(1, 1, 1),
-(3, 1, 1),
-(4, 1, 2),
-(5, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -1022,8 +1004,7 @@ ALTER TABLE `movie_category`
 --
 ALTER TABLE `movie_show`
   ADD PRIMARY KEY (`movsh_id`),
-  ADD KEY `movie_id` (`mov_id`),
-  ADD KEY `screen_id` (`showt_id`);
+  ADD KEY `movie_id` (`mov_id`);
 
 --
 -- Indexes for table `rating`
@@ -1053,7 +1034,8 @@ ALTER TABLE `screen_details`
 ALTER TABLE `show_time`
   ADD PRIMARY KEY (`showt_id`),
   ADD KEY `screen_id` (`scr_id`),
-  ADD KEY `time_slot_id` (`time_id`);
+  ADD KEY `time_slot_id` (`time_id`),
+  ADD KEY `movsh_id` (`movsh_id`);
 
 --
 -- Indexes for table `state`
@@ -1125,7 +1107,7 @@ ALTER TABLE `movie_category`
 -- AUTO_INCREMENT for table `movie_show`
 --
 ALTER TABLE `movie_show`
-  MODIFY `movsh_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `movsh_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `rating`
@@ -1149,7 +1131,7 @@ ALTER TABLE `screen_details`
 -- AUTO_INCREMENT for table `show_time`
 --
 ALTER TABLE `show_time`
-  MODIFY `showt_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `showt_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `state`
@@ -1210,8 +1192,7 @@ ALTER TABLE `movie_category`
 -- Constraints for table `movie_show`
 --
 ALTER TABLE `movie_show`
-  ADD CONSTRAINT `movie_show_ibfk_1` FOREIGN KEY (`mov_id`) REFERENCES `movie` (`mov_id`),
-  ADD CONSTRAINT `movie_show_ibfk_2` FOREIGN KEY (`showt_id`) REFERENCES `show_time` (`showt_id`);
+  ADD CONSTRAINT `movie_show_ibfk_1` FOREIGN KEY (`mov_id`) REFERENCES `movie` (`mov_id`);
 
 --
 -- Constraints for table `rating`
@@ -1237,7 +1218,8 @@ ALTER TABLE `screen_details`
 --
 ALTER TABLE `show_time`
   ADD CONSTRAINT `show_time_ibfk_1` FOREIGN KEY (`scr_id`) REFERENCES `screen` (`scr_id`),
-  ADD CONSTRAINT `show_time_ibfk_2` FOREIGN KEY (`time_id`) REFERENCES `time_slots` (`time_id`);
+  ADD CONSTRAINT `show_time_ibfk_2` FOREIGN KEY (`time_id`) REFERENCES `time_slots` (`time_id`),
+  ADD CONSTRAINT `show_time_ibfk_3` FOREIGN KEY (`movsh_id`) REFERENCES `movie_show` (`movsh_id`);
 
 --
 -- Constraints for table `theatre`
