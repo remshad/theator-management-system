@@ -47,13 +47,13 @@ function seatEntered(data)
     seat_msg.innerText='Select seat equal to or below '+e.options[e.selectedIndex].getAttribute('data-available');
    }else
    {
-    seat_msg.style='background-color:green;color:white; display:block; padding:5px;border:2px solid white;';
+    seat_msg.style='background-color:white;color:black; display:block; padding:5px;border:2px solid white;';
     modal2_frm.conv_fee.value=Math.floor(e.options[e.selectedIndex].getAttribute('data-price')*data.value*.1);
 
     modal2_frm.ticket_fare.value=e.options[e.selectedIndex].getAttribute('data-price')*data.value;
 
 
-    seat_msg.innerHTML='Ticket price '+modal2_frm.ticket_fare.value+'<br/>Conveniant fee:'+modal2_frm.conv_fee.value+'<br/>Total :'+(parseInt(modal2_frm.conv_fee.value)+parseInt(modal2_frm.ticket_fare.value));
+    seat_msg.innerHTML='<table class=\"table table-bordered\"><tr><td>Ticket price </td><td>'+modal2_frm.ticket_fare.value+' &#8377;</td></tr><tr><td>Conveniant fee:</td><td>'+modal2_frm.conv_fee.value+' &#8377;</td></tr><tr><td>Total :</td><td>'+(parseInt(modal2_frm.conv_fee.value)+parseInt(modal2_frm.ticket_fare.value))+' &#8377;</td></tr></table>';
    }
    
     

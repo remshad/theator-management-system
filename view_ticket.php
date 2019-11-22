@@ -26,7 +26,7 @@ if(mysqli_error($link))
         die(mysqli_error($link));
 }
 
-$codeContents="http://gectcr.ac.in/theatr-project?b_id={$book_id}";
+$codeContents="http://mca2019.autopermit.in/view_ticket.php?book_id={$book_id}";
 QRcode::png($codeContents, 'qr.png');
     
    // echo $svgCode;
@@ -101,9 +101,9 @@ echo "<tr><td>Show Date</td><td>{$visittime}</td></tr>";
 echo "<tr><td>Class</td><td>{$row1['scrd_class_name']}</td></tr>";
 echo "<tr><td>Time</td><td>{$showtime}</td></tr>";
 echo "<tr><td>Booked Seats</td><td>{$row['b_booked_seats']}</td></tr>";
-echo "<tr><td>Ticket Fare</td><td>{$row['b_ticket_fare']} Rs</td></tr>";
-echo "<tr><td>Conveniance Charge</td><td>{$row['b_conv_charge']} Rs</td></tr>";
-echo "<tr><td>Total Fare</td><td>{$total} Rs</td></tr>";
+echo "<tr><td>Ticket Fare</td><td>{$row['b_ticket_fare']} &#8377;</td></tr>";
+echo "<tr><td>Conveniance Charge</td><td>{$row['b_conv_charge']} &#8377;</td></tr>";
+echo "<tr><td>Total Fare</td><td>{$total} &#8377; </td></tr>";
 echo "<tr><td colspan=2 style='text-align:center;'><button onclick='window.print();'>Print</button></td></tr>";
 }
 echo '</tbody>';

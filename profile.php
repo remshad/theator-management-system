@@ -45,7 +45,7 @@ $booktime=date('d-m-Y h:m',$row['b_booked_time']);
 $visittime=date('d-m-Y',$row['b_visit_date']);
 
 
-echo "<tr><td>{$booktime}</td><td>{$visittime}</td><td>{$row['b_booked_seats']}</td><td>{$fare}</td><td>{$status}</td><td><a href='view_ticket.php?book_id={$row['b_id']}' target='_blank'>View Ticket</a></td><td>Pay</td></tr>";
+echo "<tr><td>{$booktime}</td><td>{$visittime}</td><td>{$row['b_booked_seats']}</td><td>{$fare} &#8377;</td><td>{$status}</td><td><a href='view_ticket.php?book_id={$row['b_id']}' target='_blank'>View Ticket</a></td><td>Pay</td></tr>";
 
 }
 
