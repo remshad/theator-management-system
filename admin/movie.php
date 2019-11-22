@@ -10,64 +10,8 @@ include_once('head.php');
    
   <?php
   
-    if(isset($_GET['action']))
-    {
-        if($_GET['action']=='edit')
-        {    
-            if(isset($_GET['cat_id']))
-            {
-                if(isset($_GET['nvalue']) && strlen($_GET['nvalue'])>0)
-                {
-                    $_GET['nvalue']=mysqli_real_escape_string($link,$_GET['nvalue']);
-                    $_GET['cat_id']=intval($_GET['cat_id']);
-                    urldecode($_GET['nvalue']);
-                    $sql="UPDATE category set cat_name='{$_GET['nvalue']}' WHERE cat_id='{$_GET['cat_id']}'";
-                    $result=mysqli_query($link,$sql);
-                    if(mysqli_error($link))
-                    {
-                        die(mysqli_error($link));
-                    }
-                }
-            }
-        }
-    }
-    
-    if(isset($_POST['submit']))
-    {
-        
-    /*
-        if(isset($_POST['new_cat']) && strlen($_POST['new_cat'])>2)
-        {
-            //echo '<script>alert("'.$_GET['nvalue'].'")</script>';
-            
-            $_POST['new_cat']=mysqli_real_escape_string($link,$_POST['new_cat']);
-            $sql="SELECT * FROM category WHERE cat_name='{$_POST['new_cat']}'";
 
-            
-            $result = mysqli_query($link,$sql);
-            if(mysqli_error($link))
-            {
-                die(mysqli_error($link));
-            }
-            
-            if(mysqli_num_rows($result)>0)
-            {
-                echo '<script>alert("Duplicate Entry Not Allowed")</script>';
-            } else {
 
-                $sql="INSERT INTO category (cat_name) VALUES ('{$_POST['new_cat']}')";
-                //echo $sql;
-                
-                $result = mysqli_query($link,$sql);
-                if(mysqli_error($link))
-                {
-                    die(mysqli_error($link));
-                }
-            }    
-        }
-        */
-        
-    }
   
         $sql="SELECT * FROM language";
         $result = mysqli_query($link,$sql);
@@ -90,10 +34,11 @@ include_once('head.php');
             die(mysqli_error($link));
         }   
         $genreoption="";
-
+        $genreoptionsort="<option default>-select genre-</option>";
         while($row=mysqli_fetch_assoc($result))
         {
            $genreoption=$genreoption."{$row['cat_name']}&nbsp;<input type='checkbox' name='new_movcat[]' value='{$row['cat_id']}'>&nbsp;&nbsp;";
+           $genreoptionsort=$genreoptionsort."<option value='{$row['cat_id']}'>{$row['cat_name']}</option>";
         }
         
        
@@ -169,13 +114,90 @@ include_once('head.php');
         </script>
         
         <br><br>";
+        if(isset($_POST['filter'])){
 
-        $sql="SELECT * FROM movie NATURAL JOIN language";
-        $result = mysqli_query($link,$sql);
-        if(mysqli_error($link))
-        {
-            die(mysqli_error($link));
-        }
+            $filterorder=$filterlang=$filtergenre=$catjoin=$where="";
+            
+            if(!(($_POST['sort_lang'])=='-select language-')){
+                $filterlang=" lang_id=".$_POST['sort_lang']." ";
+                $where=" WHERE ";
+            }
+
+            if(!(($_POST['sort_cat'])=='-select genre-')){
+                if(!$filterlang==""){
+                    $filtergenre=" cat_id=".$_POST['sort_cat']." AND ";
+                } else{
+                    $filtergenre=" cat_id=".$_POST['sort_cat']." ";
+                }
+                
+                
+                $catjoin= " category NATURAL JOIN movie_category NATURAL JOIN ";
+                $where=" WHERE ";
+            }
+
+            if(!(($_POST['sort_id'])=='-select filter-')){
+                if(($_POST['sort_id'])==1){
+                    $filterorder=" ORDER BY mov_released";
+                } else if(($_POST['sort_id'])==2) {
+                    $filterorder=" ORDER BY mov_released DESC";
+                } else if(($_POST['sort_id'])==3) {
+                    $filterorder=" ORDER BY mov_name";
+                } else if(($_POST['sort_id'])==4) {
+                    $filterorder=" ORDER BY mov_name DESC";
+                }
+            }
+
+
+            $sql="SELECT * FROM $catjoin movie NATURAL JOIN language $where $filtergenre $filterlang $filterorder";
+            //echo $sql;
+            $result = mysqli_query($link,$sql);
+            if(mysqli_error($link))
+            {
+                die(mysqli_error($link));
+            }
+
+        } else {
+            $sql="SELECT * FROM movie NATURAL JOIN language";
+            $result = mysqli_query($link,$sql);
+            if(mysqli_error($link))
+            {
+                die(mysqli_error($link));
+            }
+
+        }   
+
+
+        echo "
+            <div class='movieboxborder'>
+            <center>
+            <form action='movie.php' method='post' enctype='multipart/form-data'>
+            <div class='contentsortbar'>
+                <div class='csb-tem'>
+                Language:<select name='sort_lang'>{$langoption}</select>
+                </div>
+                <div class='csb-tem'>
+                Genre:<select name='sort_cat'>{$genreoptionsort}</select>
+                </div>
+                <div class='csb-tem'>
+                Sort by:
+                    <select name='sort_id'>
+                    <option default>-select filter-</option>
+                    <option value='1'>Release Date ASC</option>
+                    <option value='2'>Release Date DESC</option>
+                    <option value='3'>Movie name ASC</option>
+                    <option value='4'>Movie name DESC</option>
+                    </select>
+                </div>
+                <div class='csb-tem'>
+                <input type='submit' name='filter' value='Apply Filter'>
+                </div>
+           
+            </div>
+            </form>
+            </center>";
+
+
+
         echo "<div class='movgrid-container'>";
        
         while($row=mysqli_fetch_assoc($result))
@@ -224,7 +246,7 @@ include_once('head.php');
         }
        
        
-        echo "</div>";
+        echo "</div></div>";
     ?>
         
   </div>
