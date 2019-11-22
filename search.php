@@ -109,10 +109,13 @@ $part[]=" `mov_name` like '%{$_POST['mov_name']}%' ";
 
 if(isset($_POST['releaseYear']) && intval($_POST['releaseYear'])>0)
 {
-    
-$year=strtotime($_POST['releaseYear']);
 
-    $part[]=" `mov_released` like '{$year}' ";
+$start = mktime(0, 0, 0, 1, 1, intval($_POST['releaseYear']));
+$end = mktime(23, 59, 59, 12, 31, intval($_POST['releaseYear']));
+
+
+
+    $part[]=" `mov_released` between '{$start}' and '{$end}' ";
 }
 
 
@@ -136,7 +139,7 @@ if(count($part)>0)
 }
 
 
-             $sql = "SELECT * FROM `movie` NATURAL join movie_show natural join movie_category WHERE $all ORDER by movsh_end_date DESC  LIMIT 25";
+          $sql = "SELECT * FROM `movie` NATURAL join movie_show natural join movie_category WHERE $all group by mov_id ORDER by movsh_end_date DESC  LIMIT 25";
 
                 $result = mysqli_query($link, $sql);
 if(mysqli_num_rows($result)){
@@ -164,12 +167,12 @@ if(mysqli_num_rows($result)){
 
 
                     $sql = "SELECT * FROM  movie_category  NATURAL JOIN category WHERE mov_id={$row['mov_id']}";
-                    $result = mysqli_query($link, $sql);
+                    $result5 = mysqli_query($link, $sql);
                     if (mysqli_error($link)) {
                         die(mysqli_errno($link));
                     }
 
-                    while ($row1 = mysqli_fetch_assoc($result)) {
+                    while ($row1 = mysqli_fetch_assoc($result5)) {
 
                         $links[] = "<a class='content-link' '#' >{$row1['cat_name']}</a>";
                     }
