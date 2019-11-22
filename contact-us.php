@@ -40,7 +40,7 @@ require_once('menu.php');
                                         <div class="input-group-prepend">
                                             <div class="input-group-text"><i class="fa fa-envelope text-info"></i></div>
                                         </div>
-                                        <input type="email" class="form-control" id="nombre" name="email" placeholder="jeevanjose@gmail.com" required>
+                                        <input type="email" class="form-control" id="nombre" name="email" placeholder="email like jeevanjose@gmail.com" required>
                                     </div>
                                 </div>
 

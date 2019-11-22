@@ -102,7 +102,7 @@ require_once('menu.php');
            </div>';
 
 
-if(isset($_POST['mov_name']))
+if(isset($_POST['mov_name']) && strlen($_POST['mov_name'])>0)
 {
 $part[]=" `mov_name` like '%{$_POST['mov_name']}%' ";
 }
@@ -136,10 +136,10 @@ if(count($part)>0)
 }
 
 
-                $sql = "SELECT * FROM `movie` NATURAL join movie_show  WHERE $all ORDER by movsh_end_date DESC  LIMIT 25";
+             $sql = "SELECT * FROM `movie` NATURAL join movie_show natural join movie_category WHERE $all ORDER by movsh_end_date DESC  LIMIT 25";
 
                 $result = mysqli_query($link, $sql);
-
+if(mysqli_num_rows($result)){
                 while ($row = mysqli_fetch_assoc($result)) {
 
                     echo "<article class='movie-line-entity'>
@@ -250,7 +250,9 @@ if(count($part)>0)
                     echo "<br/><div class='text-uppercase entity-extra-title'><a href='theatre_select.php?mov_id={$row['mov_id']}'><button typ='button' class='btn-theme btn'  >Go To Booking Page</button></a></div>";
 
                     echo "</div>
-</article>";
+</article>";}
+                }else{
+                    echo '<h1>No result found</h1>';
                 }
             } else { }
 
