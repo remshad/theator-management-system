@@ -42,13 +42,26 @@ while($row=mysqli_fetch_assoc($result))
         </h4>
         <div class='entity-category'>";
 
-        $sql1="SELECT * FROM category  NATURAL JOIN  `movie_category` WHERE mov_id='{$row['mov_id']}'";
-        $result1=mysqli_query($link,$sql1);
-        while($row1=mysqli_fetch_assoc($result1))
-        {
 
-            echo "<a class='content-link' name='{$row1['cat_name']}' title='{$row1['cat_name']}'>{$row1['cat_name']}</a>";
-        }
+
+        $sql="SELECT * FROM  movie_category  NATURAL JOIN category WHERE mov_id={$row['mov_id']}";
+$result=mysqli_query($link,$sql);
+if(mysqli_error($link))
+{
+    die(mysqli_errno($link));
+}
+
+while($row1=mysqli_fetch_assoc($result))
+{
+
+$links[]="<a class='content-link' '#' >{$row1['cat_name']}</a>";
+
+}
+
+echo implode(",",$links);
+
+
+
              echo "   </div>
         <div class='entity-info'>
             <div class='info-lines'>

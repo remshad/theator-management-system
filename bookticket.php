@@ -22,11 +22,13 @@ $sql="INSERT INTO `booking`( `b_booked_time`, `b_booked_seats`, `u_id`, `b_visit
 
 $result=mysqli_query($link,$sql);
 
+$book_id=mysqli_insert_id($link);
+
 if(mysqli_error($link))
 {
     die(mysqli_error($link).$sql);
 }else
 {
-       header('Location:profile.php?book=sucess');
+       header("Location:view_ticket.php?book_id={$book_id}");
 }
 ?>
