@@ -31,7 +31,7 @@ require_once('menu.php');
                     <div class="col-sm-6 col-lg-3">
                         <div class="input-view-flat input-group">
                             <select class="form-control" name="language">
-                                
+                                <option selected="true">Language</option>
                                 <?php $sql = "SELECT * FROM `language` WHERE 1";
 
                                 $result = mysqli_query($link, $sql);
@@ -41,7 +41,7 @@ require_once('menu.php');
                                     die(mysqli_errno($link));
                                 }
 
-                                echo "<option>Select</option>";
+                                
 
                                 while ($row = mysqli_fetch_assoc($result)) {
 
@@ -66,8 +66,7 @@ require_once('menu.php');
                                     die(mysqli_errno($link));
                                 }
 
-                                echo "<option>Select</option>";
-
+                               
 
                                 while ($row = mysqli_fetch_assoc($result)) {
 
