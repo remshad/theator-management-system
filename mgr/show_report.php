@@ -69,6 +69,10 @@ thead th, tfoot th, tfoot td {
 <?php
 $today1=date("Y-m-d");
       $today=strtotime($today1);
+ $first_day1=date("Y-m-01");
+ //echo $first_day1;
+ $first_day=strtotime($first_day1);
+     
 $mgr_id=$_COOKIE["t_id"];
 $the_details=mysqli_query($link,"select * from `theatre` where `u_id`='$mgr_id'" ) ;
       $th_details=mysqli_fetch_array($the_details);
@@ -102,12 +106,8 @@ while ($myrow =mysqli_fetch_array($result))
 	<h1><?php echo $sc['scr_name'];?></h1>
 	<table>
 		<thead>
-		<tr><th rowspan="2">Class Name</th>
-			<th rowspan="2">Ticket Price</th>
-			<th colspan="3">Booked Seats By Show</th>
-			<th rowspan="2">Total Price</th>
-		</tr>
-		<tr>
+		<tr><th>Class Name</th>
+			<th>Ticket Price</th>
 			<?php
 foreach($show_times as $sh_ti)
 {
@@ -119,8 +119,9 @@ foreach($show_times as $sh_ti)
 <th><?php echo date('H:i', mktime(0,$time_slot['time_showtime']));?></th>
   <?php
   }
-  ?>  
-		</tr>
+  ?>
+  <th>Total Price</th>
+    </tr>
 	</thead>
 		<?php
 		foreach ($circles as $cd) 
@@ -138,12 +139,12 @@ foreach($show_times as $sh_ti)
 			  <?php
 foreach($show_times as $sh_ti)
 {
-  $sh_timeid=$sh_ti['showt_id'];
-  $mov_shows1=mysqli_query($link,"select * from `movie_show` where showt_id='$sh_timeid'" ) ; 
+  $sh_timeid=$sh_ti['movsh_id'];
+  $mov_shows1=mysqli_query($link,"select * from `movie_show` where movsh_id='$sh_timeid'" ) ; 
   //echo "select * from `time_slots` where id='$shows[$i]'";
  $mov_shows=mysqli_fetch_array($mov_shows1);
  $mov_sh_id=$mov_shows['movsh_id'];
-  $circle_booked1=mysqli_query($link,"select sum(b_booked_seats) as booked from booking where scrd_class_name='$scrd_id' and b_visit_date='$today' and movsh_id='{$mov_sh_id}'" ) ; 
+  $circle_booked1=mysqli_query($link,"select sum(b_booked_seats) as booked from booking where scrd_id='$scrd_id' and b_visit_date between '$today' and showt_id='{$sh_timeid}'" ) ; 
   //echo "select * from `time_slots` where id='$shows[$i]'";
  $circle_booked=mysqli_fetch_array($circle_booked1);
  $total=$total+$circle_booked['booked'];  
