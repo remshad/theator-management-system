@@ -51,6 +51,24 @@ include_once('head.php');
  <div class="container">
    
   <?php
+
+    function testtext($text){
+        if((!preg_match("/^[a-zA-Z0-9\W ]+$/",$text))||(preg_match("/^[ ]+$/",$text)))  
+        {
+            return false;     
+        } else {
+            return true;
+        }
+    }
+
+    function testtexta($text){
+        if((!preg_match("/^[a-zA-Z ]+$/",$text))||(preg_match("/^[ ]+$/",$text)))  
+        {
+            return false;     
+        } else {
+            return true;
+        }
+    }
   
     if(isset($_GET['action']))
     {
@@ -60,7 +78,7 @@ include_once('head.php');
     
             if(isset($_GET['cat_id']))
               {
-                if(isset($_GET['nvalue']) && strlen($_GET['nvalue'])>0)
+                if(isset($_GET['nvalue']) && strlen($_GET['nvalue'])>2 && testtexta($_GET['nvalue']))
                 {
                     $_GET['nvalue']=mysqli_real_escape_string($link,$_GET['nvalue']);
                     $_GET['cat_id']=intval($_GET['cat_id']);
@@ -79,7 +97,7 @@ include_once('head.php');
             
         
         }
-        else if($_GET['action']=='delete')
+        /* else if($_GET['action']=='delete')
         {    
             if(isset($_GET['cat_id']))
             {
@@ -98,14 +116,14 @@ include_once('head.php');
                     }
                 }
             }
-        }
+        } */
     }
     
     if(isset($_POST['submit']))
     {
         
        
-            if(isset($_POST['new_cat']) && strlen($_POST['new_cat'])>2)
+            if(isset($_POST['new_cat']) && strlen($_POST['new_cat'])>2 && testtexta($_POST['new_cat']))
             {
                 //echo '<script>alert("'.$_GET['nvalue'].'")</script>';
                 
@@ -123,30 +141,6 @@ include_once('head.php');
                 {
                     echo '<script>alert("Duplicate Entry Not Allowed")</script>';
                 } else {
-                    /*
-                    $target_dir = "../uploads/";
-                    $target_file = $target_dir . basename($_FILES["myImage"]["name"]);
-                    $uploadOk = 1;
-                    $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-                    // Check if image file is a actual image or fake image
-
-                        $check = getimagesize($_FILES["myImage"]["tmp_name"]);
-                        if($check !== false) {
-                        // echo "File is an image - " . $check["mime"] . ".";
-                            $uploadOk = 1;
-                        } else {
-                            echo "File is not an image.";
-                            $uploadOk = 0;
-                        }
-                        
-                        if (move_uploaded_file($_FILES["myImage"]["tmp_name"], $target_file)) {
-                    //        echo "The file ". basename( $_FILES["myImage"]["name"]). " has been uploaded.";
-                            $uploadOk = 1;
-                        } else {
-                            $uploadOk = 0;
-                            echo "Sorry, there was an error uploading your file.";
-                        }
-                    */
                     
                     $sql="INSERT INTO category (cat_name) VALUES ('{$_POST['new_cat']}')";
                     //echo $sql;
@@ -182,11 +176,11 @@ include_once('head.php');
         {
            echo "<tr> <td>{$row['cat_id']}</td> <td>{$row['cat_name']}</td> 
                 <td><button name='add_category.php?cat_id={$row['cat_id']}&action=edit' onclick='edit(this);'>Edit</button></td>
-                <td><button name='add_category.php?cat_id={$row['cat_id']}&action=delete' onclick='deletes(this);'>Delete</button></td>
+                
                 </tr>";
         }
        
-       
+        //<td><button name='add_category.php?cat_id={$row['cat_id']}&action=delete' onclick='deletes(this);'>Delete</button></td>
        echo "</table>";
        
 

@@ -35,10 +35,27 @@ include_once('head.php');
 ?>  
 
 
- <div class="container">
+<div class="container">
    
-  <?php
+    <?php
   
+    function testtext($text){
+        if((!preg_match("/^[a-zA-Z0-9\W ]+$/",$text))||(preg_match("/^[ ]+$/",$text)))  
+        {
+            return false;     
+        } else {
+            return true;
+        }
+    }
+
+    function testtexta($text){
+        if((!preg_match("/^[a-zA-Z ]+$/",$text))||(preg_match("/^[ ]+$/",$text)))  
+        {
+            return false;     
+        } else {
+            return true;
+        }
+    }
     if(isset($_GET['action']))
     {
        
@@ -47,7 +64,7 @@ include_once('head.php');
     
             if(isset($_GET['lang_id']))
               {
-                if(isset($_GET['nvalue']) && strlen($_GET['nvalue'])>0)
+                if(isset($_GET['nvalue']) && strlen($_GET['nvalue'])>2 && testtexta($_GET['nvalue']))
                 {
                     $_GET['nvalue']=mysqli_real_escape_string($link,$_GET['nvalue']);
                     $_GET['lang_id']=intval($_GET['lang_id']);
@@ -66,7 +83,7 @@ include_once('head.php');
             
         
         }
-        else if($_GET['action']=='delete')
+        /* else if($_GET['action']=='delete')
         {    
             if(isset($_GET['lang_id']))
             {
@@ -85,14 +102,14 @@ include_once('head.php');
                     }
                 }
             }
-        }
+        } */
     }
     
     if(isset($_POST['submit']))
     {
         
        
-            if(isset($_POST['new_lang']) && strlen($_POST['new_lang'])>2)
+            if(isset($_POST['new_lang']) && strlen($_POST['new_lang'])>2  && testtexta($_POST['new_lang']))
             {
                 //echo '<script>alert("'.$_GET['nvalue'].'")</script>';
                 
@@ -144,10 +161,10 @@ include_once('head.php');
         {
            echo "<tr> <td>{$row['lang_id']}</td> <td>{$row['language']}</td> 
                 <td><button name='add_lang.php?lang_id={$row['lang_id']}&action=edit' onclick='edit(this);'>Edit</button></td>
-                <td><button name='add_lang.php?lang_id={$row['lang_id']}&action=delete' onclick='deletes(this);'>Delete</button></td>
+                
                 </tr>";
         }
-       
+        //<td><button name='add_lang.php?lang_id={$row['lang_id']}&action=delete' onclick='deletes(this);'>Delete</button></td>
        
        echo "</table>";
    ?>

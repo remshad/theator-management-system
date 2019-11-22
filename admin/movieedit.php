@@ -9,41 +9,8 @@ include_once('head.php');
 
 <?php
 
-    /* if(isset($_POST['change_name'])){
-        echo "name";
-        $display=true;
-    } else if(isset($_POST['change_lang'])){
-        echo "lang";
-        $display=true;
-    } else if(isset($_POST['change_genre'])){
-        echo "genre";
-        $display=true;
-    } else if(isset($_POST['change_img'])){
-        echo "img";   
-        $display=true;
-    } else if(isset($_POST['change_dur'])){
-        echo "name";
-        $display=true;
-    } else if(isset($_POST['change_vid'])){
-        echo "name";
-        $display=true;
-    } else if(isset($_POST['change_rel'])){
-        echo "name";
-        $display=true;
-    } else if(isset($_POST['change_dir'])){
-        echo "name";
-        $display=true;
-    } else if(isset($_POST['change_cast'])){
-        echo "name";
-        $display=true;
-    } else if(isset($_POST['change_prod'])){
-        echo "name";
-        $display=true;
-    } else if(isset($_POST['change_desc'])){
-        echo "name";
-        $display=true;
-    } */
 
+  
 
     
     if(isset($_POST['submitedit']) || ($_GET['movid']))

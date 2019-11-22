@@ -35,9 +35,18 @@ include_once('head.php');
 ?>  
 
 
- <div class="container">
+<div class="container">
    
-  <?php
+<?php
+
+function testtext($text){
+    if((!preg_match("/^[a-zA-Z0-9\W ]+$/",$text))||(preg_match("/^[ ]+$/",$text)))  
+    {
+        return false;     
+    } else {
+        return true;
+    }
+}
   
     if(isset($_GET['action']))
     {
@@ -47,7 +56,7 @@ include_once('head.php');
     
             if(isset($_GET['state_id']))
               {
-                if(isset($_GET['nvalue']) && strlen($_GET['nvalue'])>0)
+                if(isset($_GET['nvalue']) && strlen($_GET['nvalue'])>2 && testtext($_GET['nvalue']))
                 {
                     $_GET['nvalue']=mysqli_real_escape_string($link,$_GET['nvalue']);
                     $_GET['state_id']=intval($_GET['state_id']);
@@ -66,7 +75,7 @@ include_once('head.php');
             
         
         }
-        else if($_GET['action']=='delete')
+        /* else if($_GET['action']=='delete')
         {    
             if(isset($_GET['state_id']))
             {
@@ -85,13 +94,13 @@ include_once('head.php');
                     }
                 }
             }
-        }
+        } */
         else if($_GET['action']=='dedit')
         {    
     
             if(isset($_GET['district_id']))
               {
-                if(isset($_GET['nvalue']) && strlen($_GET['nvalue'])>0)
+                if(isset($_GET['nvalue']) && strlen($_GET['nvalue'])>0  && testtext($_GET['nvalue']))
                 {
                     $_GET['nvalue']=mysqli_real_escape_string($link,$_GET['nvalue']);
                     $_GET['district_id']=intval($_GET['district_id']);
@@ -110,7 +119,7 @@ include_once('head.php');
             
         
         }
-        else if($_GET['action']=='ddelete')
+        /* else if($_GET['action']=='ddelete')
         {    
             if(isset($_GET['district_id']))
             {
@@ -129,14 +138,14 @@ include_once('head.php');
                     }
                 }
             }
-        }
+        } */
     }
     
     if(isset($_POST['submit']))
     {
         
        
-            if(isset($_POST['new_state']) && strlen($_POST['new_state'])>2)
+            if(isset($_POST['new_state']) && strlen($_POST['new_state'])>2  && testtext($_POST['new_state']))
             {
                 //echo '<script>alert("'.$_GET['nvalue'].'")</script>';
                 
@@ -171,7 +180,7 @@ include_once('head.php');
     {
         
        
-            if(isset($_POST['new_district']) && strlen($_POST['new_district'])>2)
+            if(isset($_POST['new_district']) && strlen($_POST['new_district'])>2 && testtext($_POST['new_district']))
             {
                 //echo '<script>alert("'.$_GET['nvalue'].'")</script>';
                 
@@ -231,10 +240,11 @@ include_once('head.php');
         {
            echo "<tr> <td>{$row['state_id']}</td> <td>{$row['state_name']}</td> 
                 <td><button name='location.php?state_id={$row['state_id']}&action=edit' onclick='edit(this);'>Edit</button></td>
-                <td><button name='location.php?state_id={$row['state_id']}&action=delete' onclick='deletes(this);'>Delete</button></td>
+                
                 </tr>";
         }
         echo "</table>";
+        //<td><button name='location.php?state_id={$row['state_id']}&action=delete' onclick='deletes(this);'>Delete</button></td>
 
         $sql="SELECT * FROM district NATURAL JOIN state ORDER BY state_name,district_name";
         $result = mysqli_query($link,$sql);
@@ -242,8 +252,7 @@ include_once('head.php');
         {
             die(mysqli_error($link));
         }
-        /*
-        */
+        
 
         echo "<table class='table table-hover'><tr><th>District Id</th><th>District</th><th>State</th></tr>";
         
@@ -251,10 +260,11 @@ include_once('head.php');
         {
             echo "<tr> <td>{$row['district_id']}</td> <td>{$row['district_name']}</td> <td>{$row['state_name']}</td> 
                 <td><button name='location.php?district_id={$row['district_id']}&action=dedit' onclick='edit(this);'>Edit</button></td>
-                <td><button name='location.php?district_id={$row['district_id']}&action=ddelete' onclick='deletes(this);'>Delete</button></td>
+                
                 </tr>";
         }
         echo "</table>";
+        //<td><button name='location.php?district_id={$row['district_id']}&action=ddelete' onclick='deletes(this);'>Delete</button></td>
    ?>
         
   </div>

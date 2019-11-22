@@ -156,6 +156,20 @@ include_once('head.php');
                 die(mysqli_error($link));
             }
 
+        } else if(isset($_POST['filtername'])){
+
+            
+            
+
+
+            $sql='SELECT * FROM movie NATURAL JOIN language WHERE mov_name LIKE "'.$_POST['checkname'].'%"';
+            //echo $sql;
+            $result = mysqli_query($link,$sql);
+            if(mysqli_error($link))
+            {
+                die(mysqli_error($link));
+            }
+
         } else {
             $sql="SELECT * FROM movie NATURAL JOIN language";
             $result = mysqli_query($link,$sql);
@@ -172,13 +186,13 @@ include_once('head.php');
             <center>
             <form action='movie.php' method='post' enctype='multipart/form-data'>
             <div class='contentsortbar'>
-                <div class='csb-tem'>
+                <div class='csb-item'>
                 Language:<select name='sort_lang'>{$langoption}</select>
                 </div>
-                <div class='csb-tem'>
+                <div class='csb-item'>
                 Genre:<select name='sort_cat'>{$genreoptionsort}</select>
                 </div>
-                <div class='csb-tem'>
+                <div class='csb-item'>
                 Sort by:
                     <select name='sort_id'>
                     <option default>-select filter-</option>
@@ -188,8 +202,18 @@ include_once('head.php');
                     <option value='4'>Movie name DESC</option>
                     </select>
                 </div>
-                <div class='csb-tem'>
+                <div class='csb-item'>
                 <input type='submit' name='filter' value='Apply Filter'>
+                </div>
+           
+            </div>
+            <div class='contentsortbarb'>
+                <div class='csb-itemb'>
+                Name:<input type='text' name='checkname'>
+                </div>
+                
+                <div class='csb-itemb'>
+                <input type='submit' name='filtername' value='Search by name'>
                 </div>
            
             </div>
