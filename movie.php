@@ -7,26 +7,8 @@ $style="";
 
   
   $script='
-  function sens(val){
-    uid=getCookie("t_id");
-  var request=new XMLHttpRequest();
-  request.open("GET","./ajax/rating.php?val="+val+"&user="+uid+"&mov_id='.$mov_id.'");
-  request.onreadystatechange=function(){
-    if(this.readyState===4 && this.status===200)
-    {
-//alert(this.responseText);
- // var assign=document.getElementById(id);
- // assign.innerHTML=this.responseText;
- if(parseInt(this.responseText)==2)
- {
-     alert("Sucess");
- }else
- {
-    alert("Either you are not logged in already starred..!");
- }
-    }
-  }
-  request.send(); } ';
+
+   ';
 
 require_once('head.php');
 require_once('menu.php');
@@ -85,7 +67,7 @@ echo implode(",",$links);
                                 <div class="entity-info">
                                     <div class="info-lines">
                                         <div class="info info-short">
-                                            <span class="text-theme info-icon"><i class="fas fa-star"></i></span>
+                                            <span class="text-theme info-icon"><i class="fas fa-star" onclick='rating(this)'></i></span>
 <span class="info-text"><?php   $sql1="SELECT sum(rat_rating)/COUNT(*) as rating FROM rating NATURAL JOIN movie WHERE mov_id={$mov_id}";
 $result1=mysqli_query($link,$sql1);
 $row1=mysqli_fetch_assoc($result1);
