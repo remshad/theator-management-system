@@ -9,41 +9,29 @@ require('login1.php');
 
 <?php
   
-    
+  function testtext($text){
+    if((!preg_match("/^[a-zA-Z0-9\W ]+$/",$text))||(preg_match("/^[ ]+$/",$text)))  
+    {
+        return false;     
+    } else {
+        return true;
+    }
+}
+
+function testtexta($text){
+    if((!preg_match("/^[a-zA-Z ]+$/",$text))||(preg_match("/^[ ]+$/",$text)))  
+    {
+        return false;     
+    } else {
+        return true;
+    }
+}   
     
     if(isset($_POST['submiteditc']))
     {
         
     /*
-        if(isset($_POST['new_cat']) && strlen($_POST['new_cat'])>2)
-        {
-            //echo '<script>alert("'.$_GET['nvalue'].'")</script>';
-            
-            $_POST['new_cat']=mysqli_real_escape_string($link,$_POST['new_cat']);
-            $sql="SELECT * FROM category WHERE cat_name='{$_POST['new_cat']}'";
-
-            
-            $result = mysqli_query($link,$sql);
-            if(mysqli_error($link))
-            {
-                die(mysqli_error($link));
-            }
-            
-            if(mysqli_num_rows($result)>0)
-            {
-                echo '<script>alert("Duplicate Entry Not Allowed")</script>';
-            } else {
-
-                $sql="INSERT INTO category (cat_name) VALUES ('{$_POST['new_cat']}')";
-                //echo $sql;
-                
-                $result = mysqli_query($link,$sql);
-                if(mysqli_error($link))
-                {
-                    die(mysqli_error($link));
-                }
-            }    
-        }
+        
 
 
         array(12) { 
@@ -75,9 +63,11 @@ require('login1.php');
         //echo "<br><br>";
         //var_dump($_POST['new_movcat']);
 
-        for ($i=0;$i<count($_POST["new_movcat"]);$i++){
+        /* for ($i=0;$i<count($_POST["new_movcat"]);$i++){
             echo $_POST["new_movcat"][$i];
-        }
+        } */
+        
+
         $movid = $_POST["new_movid"];
         $movname = $_POST["new_movname"];
         $movlang = $_POST["new_lang"];
@@ -88,12 +78,17 @@ require('login1.php');
         $movreld = $_POST["new_movreldate"];
             $movreld = strtotime($movreld);
         $movdir = $_POST["new_movdir"];
-        $movcast = $_POST["new_movcast"];
+        $movcast = trim($_POST["new_movcast"], '\'');
         $movprod = $_POST["new_movprod"];
-        $movdesc = $_POST["new_movdesc"];
+        $movdesc = trim($_POST["new_movdesc"], '\'');
 
 
-        $sql='UPDATE movie SET 
+        
+        //echo "<br><br>".$sql;
+
+
+        if (testtexta($movname) && testtexta($movdir) && testtext($movcast) && testtext($movprod) && testtext($movdesc)){
+            $sql='UPDATE movie SET 
                 mov_name="'.$movname.'",
                 lang_id="'.$movlang.'",
                 mov_img_path="'.$movimg.'",
@@ -106,32 +101,17 @@ require('login1.php');
                 mov_production="'.$movprod.'" 
                 WHERE 
                 mov_id='.$movid;
-        //echo "<br><br>".$sql;
+            $result=mysqli_query($link,$sql);
 
-
-        $result=mysqli_query($link,$sql);
-
-        if(mysqli_error($link))
-        {
-            die(mysqli_error($link));
-        } else {
-            /*
-
-            for ($i=0;$i<count($_POST["new_movcat"]);$i++){
-                $sql="INSERT INTO movie_category (mov_id, cat_id) VALUES ($movid, {$_POST['new_movcat'][$i]})";
-                //echo $sql;
-
-                $result = mysqli_query($link,$sql);
-                if(mysqli_error($link))
-                {
-                    die(mysqli_error($link));
-                    break;
-                }
-            } */
-            echo "<H1>SUCCESS</H1>";
-            header( "refresh:2;url=movieedit.php?movid=".$movid); 
+            if(mysqli_error($link))
+            {
+                die(mysqli_error($link));
+            } else {
+                
+                echo "<H1>SUCCESS</H1>";
+                header( "refresh:2;url=movieedit.php?movid=".$movid); 
+            }
         }
-        
     }       
 ?>
         

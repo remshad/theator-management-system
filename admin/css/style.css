@@ -11,6 +11,8 @@ padding: 25px;
 
 body {
     font-family: "Cairo";
+    
+font-size: 20px;
 }
 
 .collapsible {
@@ -76,6 +78,7 @@ background-color: rgb(243, 243, 243);
 .movieboxborder {
     border: 5px solid #ffebc2;
     border-radius: 10px;
+    background-color: #ffc34a;
 }
 
 .movgrid-container {
