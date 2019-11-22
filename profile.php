@@ -23,6 +23,8 @@ if(mysqli_error($link))
         die(mysqli_error($link));
 }
 
+if(mysqli_num_rows($result)>0)
+{
 echo "<table class='table'><tr><th>Booked Time</th><th>Show Date</th><th>Seats</th><th>Fare</th><th>Status</th><th colspan=2></th></tr>";
 while($row=mysqli_fetch_assoc($result))
 {
@@ -40,14 +42,19 @@ while($row=mysqli_fetch_assoc($result))
        break;
        }
 $booktime=date('d-m-Y h:m',$row['b_booked_time']);
-$visittime=date('d-m-Y h:m',$row['b_visit_date']);
+$visittime=date('d-m-Y',$row['b_visit_date']);
 
 
-echo "<tr><td>{$booktime}</td><td>{$row['b_visit_date']}</td><td>{$row['b_booked_seats']}</td><td>{$fare}</td><td>{$status}</td><td><a href='view_ticket.php?book_id={$row['b_id']}' target='_blank'>View Ticket</a></td><td>Pay</td></tr>";
+echo "<tr><td>{$booktime}</td><td>{$visittime}</td><td>{$row['b_booked_seats']}</td><td>{$fare}</td><td>{$status}</td><td><a href='view_ticket.php?book_id={$row['b_id']}' target='_blank'>View Ticket</a></td><td>Pay</td></tr>";
 
 }
 
 echo '</table>';
+
+}else
+{
+echo "<h1>No booking History found..!</h1>";
+}
 
 ?>
 

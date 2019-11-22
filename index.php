@@ -15,15 +15,18 @@ require_once('menu.php');
         <div class="section-head">
             <h2 class="section-title text-uppercase">Now in play</h2>
             <p class="section-text"><?php echo 'Dates: ';
-                                    echo date('d', time());
+                                    echo date('d F ', time());
                                     echo ' - ';
-                                    echo date('d F Y', time() + 60 * 60 * 24 * 2);  ?></p>
+                                    echo date('d F Y', time() + 60 * 60 * 24 * 10);  ?></p>
         </div>
 
 
         <?php
 
-        $sql = "SELECT * FROM `movie` NATURAL join movie_show   WHERE 1 ORDER by movsh_end_date DESC limit 10";
+        $sart=microtime( date('d F ', time()));
+        $ends=microtime( date('d F Y', time() + 60 * 60 * 24 * 10));
+
+        $sql = "SELECT * FROM `movie` NATURAL join movie_show   WHERE  {$sart} <  movsh_end_date and movsh_start_date<{$ends} ORDER by movsh_end_date DESC limit 10";
 
         $result = mysqli_query($link, $sql);
 
@@ -51,12 +54,12 @@ require_once('menu.php');
 
 
             $sql = "SELECT * FROM  movie_category  NATURAL JOIN category WHERE mov_id={$row['mov_id']}";
-            $result = mysqli_query($link, $sql);
+            $result12 = mysqli_query($link, $sql);
             if (mysqli_error($link)) {
                 die(mysqli_errno($link));
             }
 
-            while ($row1 = mysqli_fetch_assoc($result)) {
+            while ($row1 = mysqli_fetch_assoc($result12)) {
 
                 $links[] = "<a class='content-link' '#' >{$row1['cat_name']}</a>";
             }
@@ -96,10 +99,14 @@ require_once('menu.php');
             $sql1 = "SELECT * FROM `language` NATURAL JOIN movie WHERE mov_id={$row['mov_id']}";
             $result1 = mysqli_query($link, $sql1);
             while ($row1 = mysqli_fetch_assoc($result1)) {
-                echo "<span class='info-text'>{$row1['language']}</span>";
-                echo "<span class='info-rest'>&nbsp;,</span>";
+                $sds[]= "<span class='info-text'>{$row1['language']}</span>";
+                
             }
-
+if(count($sds)>0)
+{
+    echo implode("<span class='info-text'>,</span>",$sds);
+}
+unset($sds);
 
 
 
@@ -134,7 +141,7 @@ require_once('menu.php');
             </div>
         </div>";
 
-            echo "<br/><div class='text-uppercase entity-extra-title'><a href='theatre_select.php?mov_id={$row['mov_id']}'><button typ='button' class='btn-theme btn'  >Book</button></a></div>";
+            echo "<br/><div class='text-uppercase entity-extra-title'><a href='theatre_select.php?mov_id={$row['mov_id']}'><button typ='button' class='btn-theme btn'  >Go To Booking Page</button></a></div>";
 
             echo "</div>
 </article>";

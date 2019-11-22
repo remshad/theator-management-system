@@ -247,7 +247,7 @@ if(count($part)>0)
             </div>
         </div>";
 
-                    echo "<br/><div class='text-uppercase entity-extra-title'><a href='theatre_select.php?mov_id={$row['mov_id']}'><button typ='button' class='btn-theme btn'  >Book</button></a></div>";
+                    echo "<br/><div class='text-uppercase entity-extra-title'><a href='theatre_select.php?mov_id={$row['mov_id']}'><button typ='button' class='btn-theme btn'  >Go To Booking Page</button></a></div>";
 
                     echo "</div>
 </article>";

@@ -1,9 +1,36 @@
 <?php
 
 require_once('db.php');
+$mov_id=$_GET['mov_id'];
+
+$style="";
+
+  
+  $script='
+  function sens(val){
+    uid=getCookie("t_id");
+  var request=new XMLHttpRequest();
+  request.open("GET","./ajax/rating.php?val="+val+"&user="+uid+"&mov_id='.$mov_id.'");
+  request.onreadystatechange=function(){
+    if(this.readyState===4 && this.status===200)
+    {
+//alert(this.responseText);
+ // var assign=document.getElementById(id);
+ // assign.innerHTML=this.responseText;
+ if(parseInt(this.responseText)==2)
+ {
+     alert("Sucess");
+ }else
+ {
+    alert("Either you are not logged in already starred..!");
+ }
+    }
+  }
+  request.send(); } ';
+
 require_once('head.php');
 require_once('menu.php');
-$mov_id=$_GET['mov_id'];
+
 ?>
 
 <?php
@@ -75,7 +102,10 @@ $row1=mysqli_fetch_assoc($result1);
                                             <span class="text-theme info-icon"><i class="fas fa-clock"></i></span>
                                             <span class="info-text"><?php echo $row['mov_duration'];  ?></span>
                                             <span class="info-rest">&nbsp;min</span>
+                                            
                                         </div>
+                                  
+
                                     </div>
                                 </div>
                                 <ul class="entity-list">
@@ -166,14 +196,14 @@ while($row3=mysqli_fetch_assoc($ressult))
 {
 
 echo "<div class='movie-short-line-entity'>
-<a class='entity-preview' href='movie-info-sidebar-right.html'>
+<a class='entity-preview' href='movie.php?mov_id={$row3['mov_id']}'>
     <span class='embed-responsive embed-responsive-16by9'>
         <img class='embed-responsive-item' src='{$row3['mov_img_path']}' alt='' style='height:auto;'>
     </span>
 </a>
 <div class='entity-content'>
     <h4 class='entity-title'>
-        <a class='content-link' href='movie-info-sidebar-right.html'>{$row3['mov_name']}</a>
+        <a class='content-link' href='movie.php?mov_id={$row3['mov_id']}'>{$row3['mov_name']}</a>
     </h4>
     <p class='entity-subtext'>".date('d F Y',$row3['mov_released'])."</p>
 </div>
@@ -187,7 +217,7 @@ echo "<div class='movie-short-line-entity'>
               
                 <section class="section-sidebar">
                     <a class="d-block" href="#">
-                       <a href="theatre_select.php?mov_id=<?php echo $mov_id; ?>"><button type='button' class="btn-theme btn" >Book Movie</button></a>
+                       <a href="theatre_select.php?mov_id=<?php echo $mov_id; ?>"><button type='button' class="btn-theme btn" >Go to Booking Page</button></a>
                     </a>
                 </section>
             </div>

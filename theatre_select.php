@@ -248,7 +248,7 @@ require_once('menu.php');
         <?php
         $movid = intval($_GET['mov_id']);
         $location = intval($_COOKIE['location']);
-        $sql = "SELECT * FROM theatre NATURAL JOIN screen NATURAL JOIN show_time NATURAL JOIN movie_show NATURAL JOIN movie WHERE `mov_id`='{$movid}'  ORDER by `movsh_end_date` DESC ";
+        $sql = "SELECT * FROM theatre NATURAL JOIN screen NATURAL JOIN show_time NATURAL JOIN movie_show NATURAL JOIN movie WHERE `mov_id`='{$movid}' group by scr_id ORDER by `movsh_end_date` DESC ";
 
         $result = mysqli_query($link, $sql);
 
@@ -259,10 +259,22 @@ require_once('menu.php');
             echo "<article class='movie-line-entity'>
     <div class='entity-poster' data-role='hover-wrap'>
         <div class='entity-content'>
-        <img class='embed-responsive-item' src='./images/parts/theatre-img.jpg' style='width:110px' alt=''>
-        <div>Theatre:{$row['t_theatrename']}</div>
-        <div>Screen:{$row['scr_name']}</div>
-        <div>Place:{$row['t_theatre_place']}</div>
+      ";
+      $sql1 = "SELECT * from show_time  NATURAL JOIN time_slots  WHERE scr_id='{$row['scr_id']}' and movsh_id='{$row['movsh_id']}'";
+      $result1 = mysqli_query($link, $sql1);
+
+      while ($row1 = mysqli_fetch_assoc($result1)) {
+          $timestr = date('H:i', mktime(0, $row1['time_showtime']));
+          echo "<div class='showtime-item'>
+<i class='btn-time btn' aria-disabled='false'>{$timestr}</i>
+</div>";
+      }
+
+      echo "<div class='text-uppercase entity-extra-title'> <button typ='button' class='btn-theme btn' onclick='book({$row['mov_id']},{$row['t_id']},\"{$mov_start}\",\"{$mov_end}\",{$row['scr_id']},{$location});' style='margin-top:10px;' >Book</button></div>";
+
+
+
+      echo "
         </div>
       </div>
     <div class='entity-content'>
@@ -270,23 +282,20 @@ require_once('menu.php');
         <div class='entity-info'>
         <h3 class='entity-category'>Movie Playing From {$mov_start} to  {$mov_end} </h3>
         <p class='text-short entity-text'>
+
+        
+        <div>Theatre:{$row['t_theatrename']}</div>
+        <div>Screen:{$row['scr_name']}</div>
+        <div>Place:{$row['t_theatre_place']}</div>
+        
         ";
 
-            $sql1 = "SELECT * from time_slots NATURAL JOIN show_time WHERE showt_id='{$row['showt_id']}'";
-            $result1 = mysqli_query($link, $sql1);
-
-            while ($row1 = mysqli_fetch_assoc($result1)) {
-                $timestr = date('H:i', mktime(0, $row1['time_showtime']));
-                echo "<div class='showtime-item'>
-    <i class='btn-time btn' aria-disabled='false'>{$timestr}</i>
-</div>";
-            }
-
-            echo "<div class='text-uppercase entity-extra-title'> <button typ='button' class='btn-theme btn' onclick='book({$row['mov_id']},{$row['t_id']},\"{$mov_start}\",\"{$mov_end}\",{$row['scr_id']},{$location});' style='margin-top:10px;' >Book</button></div>";
-
-
+           
             echo "</div>
        
+        </p>
+        <p >
+        <img class='embed-responsive-item' src='./images/parts/theatre-img.jpg' style='width:110px;' alt=''>
         </p>
     </div>
   
