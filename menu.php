@@ -32,7 +32,7 @@
                             <a class="nav-link" href="search.php">Search</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="contact-us.html">Contact us</a>
+                            <a class="nav-link" href="contact-us.php">Contact us</a>
                         </li>
                     </ul>
                     <div class="navbar-extra" style="position:fixed; float:left; right:10px;">
