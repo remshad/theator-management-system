@@ -49,7 +49,11 @@ function seatEntered(data)
    {
     seat_msg.style='background-color:green;color:white; display:block; padding:5px;border:2px solid white;';
     modal2_frm.conv_fee.value=Math.floor(e.options[e.selectedIndex].getAttribute('data-price')*data.value*.1);
-    seat_msg.innerHTML='Ticket price '+e.options[e.selectedIndex].getAttribute('data-price')*data.value+'<br/>Conveniant fee:'+modal2_frm.conv_fee.value+'<br/>Total :'+(parseInt(modal2_frm.conv_fee.value)+parseInt(e.options[e.selectedIndex].getAttribute('data-price')*data.value));
+
+    modal2_frm.ticket_fare.value=e.options[e.selectedIndex].getAttribute('data-price')*data.value;
+
+
+    seat_msg.innerHTML='Ticket price '+modal2_frm.ticket_fare.value+'<br/>Conveniant fee:'+modal2_frm.conv_fee.value+'<br/>Total :'+(parseInt(modal2_frm.conv_fee.value)+parseInt(modal2_frm.ticket_fare.value));
    }
    
     
@@ -70,7 +74,7 @@ function validateForm()
                 return true;
             }else
             {
-                alert('unknown error');
+                alert('Please correct the details');
             }
 
         }else

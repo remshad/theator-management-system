@@ -1,12 +1,13 @@
 array (
-  'date' => '2018-12-07',
+  'date' => '2018-12-08',
   'times' => '5',
-  'class' => '1',
-  'seat' => '25',
+  'class' => '2',
+  'seat' => '55',
   'movid' => '1',
-  'location' => '223',
+  'location' => '260',
   'theatre' => '1',
   'screen' => '1',
-  'conv_fee' => '250',
+  'conv_fee' => '1100',
+  'ticket_fare' => '11000',
   'submit' => 'submit',
 )

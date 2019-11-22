@@ -16,8 +16,9 @@ $b_status=0;
 $b_conv_charge=$_POST['conv_fee'];
 $scrd_id=$_POST['class'];
 $showt_id=$_POST['times'];
+$fare=$_POST['ticket_fare'];
 
-$sql="INSERT INTO `booking`( `b_booked_time`, `b_booked_seats`, `u_id`, `b_visit_date`, `b_status`, `b_conv_charge`, `scrd_id`, `showt_id`) VALUES ('{$b_booked_time}','{$b_booked_seats}','{$u_id}','{$b_visit_date}','{$b_status}','{$b_conv_charge}','{$scrd_id}','{$showt_id}')";
+$sql="INSERT INTO `booking`( `b_booked_time`, `b_booked_seats`, `u_id`, `b_visit_date`, `b_status`, `b_conv_charge`, `scrd_id`, `showt_id`,`b_ticket_fare`) VALUES ('{$b_booked_time}','{$b_booked_seats}','{$u_id}','{$b_visit_date}','{$b_status}','{$b_conv_charge}','{$scrd_id}','{$showt_id}','{$fare}')";
 
 $result=mysqli_query($link,$sql);
 

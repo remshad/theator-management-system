@@ -60,7 +60,7 @@ echo "<option value='{$row['state_id']}' >{$row['state_name']}</option>";
         <div class="modal-body">
 
 
-          <form name="modal2_frm" class="form-horizontal" id="modal2_frm" action='bookticket.php' method='post' onsubmit="return validateForm();" >
+          <form name="modal2_frm" class="form-horizontal" id="modal2_frm" action='bookticket.php' method='post'  >
           <div class="form-group">
             
           <label class="control-label" for="date">Select Date </label>
@@ -90,9 +90,10 @@ echo "<option value='{$row['state_id']}' >{$row['state_name']}</option>";
 <input type="hidden" name="theatre" >
 <input type="hidden" name="screen" >
 <input type="hidden" name="conv_fee">
+<input type="hidden" name="ticket_fare">
 <div class="form-group">
           <label class="control-label col-sm-2" for="submit"></label>
-      <div class="col-sm-10"> <div class="form-group"><input type='submit' name="submit" value="submit" ></div></div>
+      <div class="col-sm-10"> <div class="form-group"><input type='submit' name="submit" value="submit" onClick="return validateForm();" ></div></div>
 
           </form>
          

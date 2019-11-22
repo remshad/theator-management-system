@@ -1,3 +1,2 @@
-add movie list in front page with all show time with a book button
 add movie description page with book button
-create a moview show show time with all theator and put a booking page
+add history of purcahse
