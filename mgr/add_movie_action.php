@@ -9,11 +9,18 @@ include_once('dbs.php');
       $e_date=strtotime($end_date);
       $start_date=$_POST['s_date'];
       $s_date=strtotime($start_date);
+      if($end_date < $start_date)
+      {
+        echo "<script>
+alert('final date can't be greater than starting date);
+window.location.href='add_movie.php?sc_id=$sc_id';
+</script>";
+      }
       if(count($slots)==0)
       {
         echo "<script>
 alert('please select timeslot');
-window.location.href='add_movie.php';
+window.location.href='add_movie.php?sc_id=$sc_id';
 </script>";
 
       }
@@ -21,6 +28,8 @@ window.location.href='add_movie.php';
       	
 //echo "INSERT INTO `movie_show`(`mov_id`,`movsh_start_date`,`movsh_end_date`,`showt_id`) VALUES ('$mv_id','$s_date','$e_date','$slo')";
       //echo "INSERT INTO `movie_show`(`mov_id`,`movsh_start_date`,`movsh_end_date`) VALUES ('$mv_id','$s_date','$e_date'");
+      else
+      {
   $result=mysqli_query($link,"INSERT INTO `movie_show`(`mov_id`,`movsh_start_date`,`movsh_end_date`) VALUES ('$mv_id','$s_date','$e_date')");
      	if($result)
      	{
@@ -42,6 +51,7 @@ alert('cannot add movie this time...');
 window.location.href='index.php';
 </script>";
 
+}
 }
      }
    

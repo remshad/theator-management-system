@@ -66,7 +66,7 @@ window.location.href='login.php';
     <div class="collapse navbar-collapse" id="myNavbar">
     
     <ul class="nav navbar-nav">
-      <li><a href="add_timeslot.php">Add Timeslot</a></li>
+      <!-- <li><a href="add_timeslot.php">Add Timeslot</a></li> -->
       <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Add Movie
                     <span class="caret"></span>

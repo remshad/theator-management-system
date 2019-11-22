@@ -1,6 +1,7 @@
 <?php
 require('login1.php');   
 include_once('head.php');
+$today=date("Y-m-d");
 $mgr_id=$_COOKIE["t_id"];
 $the_details=mysqli_query($link,"select * from `theatre` where `u_id`='$mgr_id'" ) ;
       $th_details=mysqli_fetch_array($the_details);
@@ -120,8 +121,8 @@ foreach($movies as $mv)
   ?>
 </select>
 </td></tr>
-<tr><td>Starting Date</td><td><input type="date" name="s_date" required="required"></td></tr>
-<tr><td>Ending Date</td><td><input type="date" name="e_date" required="required"></td></tr>
+<tr><td>Starting Date</td><td><input type="date" min="<?php echo $today?>" name="s_date" required="required"></td></tr>
+<tr><td>Ending Date</td><td><input type="date" min="<?php echo $today?>" name="e_date" required="required"></td></tr>
 <tr><td>Select Timeslots</td>
 <?php
 
