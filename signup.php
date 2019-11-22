@@ -47,7 +47,7 @@ if (isset($_POST['submit']) && $_POST['submit'] = 'submit') {
 
                                                                                         setcookie("t_user", "{$_POST['uname']}", time() + (86400 * 30), "/");
                                                                                         setcookie("t_pass", "{$password}", time() + (86400 * 30), "/");
-                                                                                        setcookie("t_id", "{$$id}", time() + (86400 * 30), "/");
+                                                                                        setcookie("t_id", "{$id}", time() + (86400 * 30), "/");
 
                                                                                         if ($type == 0) {
                                                                                                 setcookie("t_power", "0", time() + (86400 * 30), "/");
