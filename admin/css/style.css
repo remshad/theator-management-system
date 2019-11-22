@@ -9,6 +9,10 @@ padding: 25px;
 }
 
 
+body {
+    font-family: "Cairo";
+}
+
 .collapsible {
 background-color: #777;
 color: white;

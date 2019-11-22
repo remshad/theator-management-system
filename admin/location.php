@@ -231,10 +231,11 @@ include_once('head.php');
         {
            echo "<tr> <td>{$row['state_id']}</td> <td>{$row['state_name']}</td> 
                 <td><button name='location.php?state_id={$row['state_id']}&action=edit' onclick='edit(this);'>Edit</button></td>
-                <td><button name='location.php?state_id={$row['state_id']}&action=delete' onclick='deletes(this);'>Delete</button></td>
+                
                 </tr>";
         }
         echo "</table>";
+        //<td><button name='location.php?state_id={$row['state_id']}&action=delete' onclick='deletes(this);'>Delete</button></td>
 
         $sql="SELECT * FROM district NATURAL JOIN state ORDER BY state_name,district_name";
         $result = mysqli_query($link,$sql);
@@ -242,8 +243,7 @@ include_once('head.php');
         {
             die(mysqli_error($link));
         }
-        /*
-        */
+        
 
         echo "<table class='table table-hover'><tr><th>District Id</th><th>District</th><th>State</th></tr>";
         
@@ -251,10 +251,11 @@ include_once('head.php');
         {
             echo "<tr> <td>{$row['district_id']}</td> <td>{$row['district_name']}</td> <td>{$row['state_name']}</td> 
                 <td><button name='location.php?district_id={$row['district_id']}&action=dedit' onclick='edit(this);'>Edit</button></td>
-                <td><button name='location.php?district_id={$row['district_id']}&action=ddelete' onclick='deletes(this);'>Delete</button></td>
+                
                 </tr>";
         }
         echo "</table>";
+        //<td><button name='location.php?district_id={$row['district_id']}&action=ddelete' onclick='deletes(this);'>Delete</button></td>
    ?>
         
   </div>

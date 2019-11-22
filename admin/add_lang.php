@@ -144,10 +144,10 @@ include_once('head.php');
         {
            echo "<tr> <td>{$row['lang_id']}</td> <td>{$row['language']}</td> 
                 <td><button name='add_lang.php?lang_id={$row['lang_id']}&action=edit' onclick='edit(this);'>Edit</button></td>
-                <td><button name='add_lang.php?lang_id={$row['lang_id']}&action=delete' onclick='deletes(this);'>Delete</button></td>
+                
                 </tr>";
         }
-       
+        //<td><button name='add_lang.php?lang_id={$row['lang_id']}&action=delete' onclick='deletes(this);'>Delete</button></td>
        
        echo "</table>";
    ?>

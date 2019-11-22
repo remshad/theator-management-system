@@ -182,11 +182,11 @@ include_once('head.php');
         {
            echo "<tr> <td>{$row['cat_id']}</td> <td>{$row['cat_name']}</td> 
                 <td><button name='add_category.php?cat_id={$row['cat_id']}&action=edit' onclick='edit(this);'>Edit</button></td>
-                <td><button name='add_category.php?cat_id={$row['cat_id']}&action=delete' onclick='deletes(this);'>Delete</button></td>
+                
                 </tr>";
         }
        
-       
+        //<td><button name='add_category.php?cat_id={$row['cat_id']}&action=delete' onclick='deletes(this);'>Delete</button></td>
        echo "</table>";
        
 
