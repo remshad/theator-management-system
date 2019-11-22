@@ -220,7 +220,7 @@ if(!(parseInt(uid)>0))
 }
 
   var request=new XMLHttpRequest();
-  request.open("GET","./ajax/rating.php?val="+val+"&user="+uid+"&mov_id='<?php echo $mov_id ?>'");
+  request.open("GET","./ajax/rating.php?val="+val+"&user="+uid+"&mov_id=<?php echo $mov_id ?>");
   request.onreadystatechange=function(){
     if(this.readyState===4 && this.status===200)
     {
