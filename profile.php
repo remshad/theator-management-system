@@ -23,7 +23,7 @@ if(mysqli_error($link))
         die(mysqli_error($link));
 }
 
-echo "<table class='table'><tr><th>Booked Time</th><th>Show Date</th><th>Seats</th><th>Fare</th><th>Stattus</th><th colspan=2></th></tr>";
+echo "<table class='table'><tr><th>Booked Time</th><th>Show Date</th><th>Seats</th><th>Fare</th><th>Status</th><th colspan=2></th></tr>";
 while($row=mysqli_fetch_assoc($result))
 {
 
