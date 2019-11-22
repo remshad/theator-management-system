@@ -14,9 +14,10 @@
         $th_details=mysqli_fetch_array($th_details1);
         if($_COOKIE["t_status"] == 0)
         {
-          echo '<script language="javascript">';
-echo 'alert("you are waiting for the aproval of admin")';
-echo '</script>';
+           echo "<script>
+alert('you are waiting for the aproval of admin');
+window.location.href='login.php';
+</script>";
 //header("Location:../index.php");
         }
       }

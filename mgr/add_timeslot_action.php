@@ -14,6 +14,7 @@ window.location.href='add_timeslot.php';
       }
       foreach ($slots as $slo) 
       {
+        $result1=mysqli_query($link,"select * from `show_time` where scr_id=''");
       	
   $result=mysqli_query($link,"INSERT INTO `show_time`(`scr_id`,`time_id`) VALUES ('$sc_id','$slo')");
      	

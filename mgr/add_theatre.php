@@ -148,6 +148,7 @@ echo "<option value='{$row['id']}' >{$row['d_name']}</option>";
  <tr><td>Noon Show Time</td><td><input type="Time" name="noon"></td></tr>
  <tr><td>First Show Time</td><td><input type="Time" name="first"></td></tr>
  <tr><td>Second Show Time</td><td><input type="Time" name="second"></td></tr> -->
+ <tr><td>Loaction</td><td><input type="text" name="location" required="required" pattern="[A-Z a-z]+" title="characters only allowed"></td></tr>
  <tr><td>No of screens</td><td><input type="number" name="screens"></td></tr>
  <tr><td><input id="add" type="submit" name="submit" value="add"></td></tr>
   </table>
