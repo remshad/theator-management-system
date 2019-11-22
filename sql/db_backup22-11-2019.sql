@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 21, 2019 at 06:47 PM
+-- Generation Time: Nov 22, 2019 at 02:17 PM
 -- Server version: 10.4.8-MariaDB
 -- PHP Version: 7.3.10
 
@@ -37,8 +37,22 @@ CREATE TABLE `booking` (
   `b_status` int(11) NOT NULL,
   `b_conv_charge` int(11) NOT NULL,
   `scrd_id` int(11) NOT NULL,
-  `showt_id` int(11) NOT NULL
+  `showt_id` int(11) NOT NULL,
+  `b_ticket_fare` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `booking`
+--
+
+INSERT INTO `booking` (`b_id`, `b_booked_time`, `b_booked_seats`, `u_id`, `b_visit_date`, `b_status`, `b_conv_charge`, `scrd_id`, `showt_id`, `b_ticket_fare`) VALUES
+(1, 1574363610, 50, 8, 1543618800, 0, 500, 1, 5, 0),
+(2, 1574364199, 25, 8, 1544137200, 0, 250, 1, 5, 0),
+(3, 1574397167, 250, 8, 1544742000, 0, 2500, 1, 5, 25000),
+(4, 1574402944, 15, 8, 1544223600, 0, 150, 1, 5, 1500),
+(5, 1574404042, 52, 8, 1544223600, 0, 520, 1, 5, 5200),
+(6, 1574404317, 55, 8, 1544223600, 0, 1100, 2, 5, 11000),
+(7, 1574413596, 5, 8, 1544137200, 0, 100, 2, 5, 1000);
 
 -- --------------------------------------------------------
 
@@ -1085,7 +1099,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `booking`
 --
 ALTER TABLE `booking`
-  MODIFY `b_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `b_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `category`
