@@ -88,7 +88,7 @@ require_once('menu.php');
                                                 </tr>
                                                 <!-- <tr><td>Login as:</td><td><select name='loginAs' ><option value='0'>User</option><option value='1'>Manager</option><option value='2'>Admin</option></select></td></tr>  -->
                                                 <tr>
-                                                        <td colspan='2'><input type='submit' name='submit' value='submit'></td>
+                                                        <td colspan='2'><input type='submit' name='submit' value='submit'  class='btn-theme btn' ></td>
                                                 </tr>
                                         </form>
 

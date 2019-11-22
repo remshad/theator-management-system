@@ -1,2 +1,2 @@
-add movie description page with book button
-add history of purcahse
+staring
+search in detail page

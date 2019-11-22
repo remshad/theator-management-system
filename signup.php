@@ -47,7 +47,7 @@ if (isset($_POST['submit']) && $_POST['submit'] = 'submit') {
 
                                                                                         setcookie("t_user", "{$_POST['uname']}", time() + (86400 * 30), "/");
                                                                                         setcookie("t_pass", "{$password}", time() + (86400 * 30), "/");
-                                                                                        setcookie("t_uid", "{$$id}", time() + (86400 * 30), "/");
+                                                                                        setcookie("t_id", "{$$id}", time() + (86400 * 30), "/");
 
                                                                                         if ($type == 0) {
                                                                                                 setcookie("t_power", "0", time() + (86400 * 30), "/");
@@ -203,7 +203,7 @@ require_once('menu.php');
 
                                                 <!-- <tr><td>Login as:</td><td><select name='loginAs' ><option value='0'>User</option><option value='1'>Manager</option><option value='2'>Admin</option></select></td></tr>  -->
                                                 <tr>
-                                                        <td colspan='2'><input type='submit' name='submit' value='submit'></td>
+                                                        <td colspan='2'><input type='submit' name='submit' value='submit'  class='btn-theme btn'  ></td>
                                                 </tr>
                                         </form>
 

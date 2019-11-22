@@ -117,50 +117,27 @@ require_once('menu.php');
                         <div class="row form-grid">
                             <div class="col-sm-6 col-lg-3">
                                 <div class="input-view-flat input-group">
-                                    <select class="form-control" name="genre">
+                                    <select class="form-control" name="genre" onchange="{ window.location='theatre_select.php?mov_id='+this.value; }">
                                         <option selected="true">Select a movie</option>
-                                        <option>action</option>
-                                        <option>adventure</option>
-                                        <option>comedy</option>
-                                        <option>crime</option>
-                                        <option>detective</option>
-                                        <option>drama</option>
-                                        <option>fantasy</option>
-                                        <option>melodrama</option>
-                                        <option>romance</option>
-                                        <option>superhero</option>
-                                        <option>supernatural</option>
-                                        <option>thriller</option>
-                                        <option>sport</option>
-                                        <option>historical</option>
-                                        <option>horror</option>
-                                        <option>musical</option>
-                                        <option>sci-fi</option>
-                                        <option>war</option>
-                                        <option>western</option>
+                                        <?php
+
+                                        $sql = "SELECT * from movie WHERE 1 ORDER by mov_released DESC limit 100";
+                                        $result2 = mysqli_query($link, $sql);
+                                        if (mysqli_error($link)) {
+                                            die(mysqli_error($link));
+                                        }
+
+                                        while ($row5 = mysqli_fetch_assoc($result2)) {
+                                            echo "<option value='{$row5['mov_id']}' >{$row5['mov_name']}</option>";
+                                        }
+
+                                        ?>
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-sm-6 col-lg-3">
-                                <div class="input-view-flat date input-group" data-toggle="datetimepicker" data-target="#release-year-field">
-                                    <input class="datetimepicker-input form-control" id="release-year-field" name="releaseYear" type="text" placeholder="release year" data-target="#release-year-field" data-date-format="Y">
-                                    <div class="input-group-append">
-                                        <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-lg-3">
-                                <div class="input-view-flat input-group">
-                                    <input type="date" name='date' class="form-control" title="movie date" placeholder="moview date">
-                                </div>
-                            </div>
-
-                            <div class="col-sm-6 col-lg-3">
-                                <div class="input-view-flat input-group">
-                                    <input type="submit" name='date' class="form-control" value="submit" title="movie date" placeholder="moview date">
-                                </div>
-                            </div>
-                        </div>
+                            
+                            
+                             </div>
 
                     </div>
                     <div class="col-md-2 my-md-auto d-flex">

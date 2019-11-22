@@ -139,12 +139,7 @@ echo $row['mov_description'];
                                     </div>
                                 </div>
                                 <div class="col-auto">
-                                    <div class="entity-links">
-                                        <div class="entity-list-title">Tags:</div>
-                                        <a class="content-link" href="#">family</a>,&nbsp;
-                                        <a class="content-link" href="#">gaming</a>,&nbsp;
-                                        <a class="content-link" href="#">historical</a>
-                                    </div>
+                                 
                                 </div>
                             </div>
                         </div>
@@ -157,53 +152,57 @@ echo $row['mov_description'];
                     <div class="section-head">
                         <h2 class="section-title text-uppercase">Latest movies</h2>
                     </div>
-                    <div class="movie-short-line-entity">
-                        <a class="entity-preview" href="movie-info-sidebar-right.html">
-                            <span class="embed-responsive embed-responsive-16by9">
-                                <img class="embed-responsive-item" src="http://via.placeholder.com/1920x1080" alt="">
-                            </span>
-                        </a>
-                        <div class="entity-content">
-                            <h4 class="entity-title">
-                                <a class="content-link" href="movie-info-sidebar-right.html">Deadman skull</a>
-                            </h4>
-                            <p class="entity-subtext">11 nov 2018</p>
-                        </div>
-                    </div>
-                    <div class="movie-short-line-entity">
-                        <a class="entity-preview" href="movie-info-sidebar-right.html">
-                            <span class="embed-responsive embed-responsive-16by9">
-                                <img class="embed-responsive-item" src="http://via.placeholder.com/1920x1080" alt="">
-                            </span>
-                        </a>
-                        <div class="entity-content">
-                            <h4 class="entity-title">
-                                <a class="content-link" href="movie-info-sidebar-right.html">Dream forest</a>
-                            </h4>
-                            <p class="entity-subtext">29 oct 2018</p>
-                        </div>
-                    </div>
-                    <div class="movie-short-line-entity">
-                        <a class="entity-preview" href="movie-info-sidebar-right.html">
-                            <span class="embed-responsive embed-responsive-16by9">
-                                <img class="embed-responsive-item" src="http://via.placeholder.com/1920x1080" alt="">
-                            </span>
-                        </a>
-                        <div class="entity-content">
-                            <h4 class="entity-title">
-                                <a class="content-link" href="movie-info-sidebar-right.html">Fall</a>
-                            </h4>
-                            <p class="entity-subtext">29 oct 2018</p>
-                        </div>
-                    </div>
-                </section>
+
+
+                    <?php
+$sql="SELECT * from movie WHERE 1 ORDER by `mov_released` DESC limit 5";
+$ressult=mysqli_query($link,$sql);
+if(mysqli_errno($link))
+{
+    die(mysqli_errno($link));
+}
+
+while($row3=mysqli_fetch_assoc($ressult))
+{
+
+echo "<div class='movie-short-line-entity'>
+<a class='entity-preview' href='movie-info-sidebar-right.html'>
+    <span class='embed-responsive embed-responsive-16by9'>
+        <img class='embed-responsive-item' src='{$row3['mov_img_path']}' alt='' style='height:auto;'>
+    </span>
+</a>
+<div class='entity-content'>
+    <h4 class='entity-title'>
+        <a class='content-link' href='movie-info-sidebar-right.html'>{$row3['mov_name']}</a>
+    </h4>
+    <p class='entity-subtext'>".date('d F Y',$row3['mov_released'])."</p>
+</div>
+</div>";
+
+}
+
+
+?>
+                  </section>
               
                 <section class="section-sidebar">
                     <a class="d-block" href="#">
-                        <img class="w-100" src="http://via.placeholder.com/350x197" alt="">
+                       <a href="theatre_select.php?mov_id=<?php echo $mov_id; ?>"><button type='button' class="btn-theme btn" >Book Movie</button></a>
                     </a>
                 </section>
             </div>
         </div>
 
     </div></section>
+
+
+
+
+<?php
+
+require_once('foot.php');
+
+require_once('model.php');
+?>
+
+</html>
