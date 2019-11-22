@@ -10,37 +10,7 @@ require_once('menu.php');
     <div class="container">
     
 
-    <div class="section-head" style="background-image: none;">
-        <form autocomplete="off">
-            <div class="row form-grid">
-                <div class="col-sm-6 col-lg-3">
-                    <div class="input-view-flat input-group">
-
-                    <input class='form-control' type="text" name="mov_name" placeholder="Movie Name" >
-                        
-                    </div>
-                </div>
-                <div class="col-sm-6 col-lg-3">
-                    <div class="input-view-flat date input-group" data-toggle="datetimepicker" data-target="#release-year-field">
-                        <input class="datetimepicker-input form-control" id="release-year-field" name="releaseYear" type="text" placeholder="release year" data-target="#release-year-field" data-date-format="Y">
-                        <div class="input-group-append">
-                            <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-lg-3">
-                    <div class="input-view-flat input-group">
-                        <select class="form-control" name="sortBy">
-                            <option selected="true">Language</option>
-<?php $sql="SELECT * FROM `language` WHERE 1";  ?>
-        
-                        </select>
-                    </div>
-                </div>
-            </div>
-        </form>
-
-    </div>
+    
 
         <div class="section-head">
             <h2 class="section-title text-uppercase">Now in play</h2>
