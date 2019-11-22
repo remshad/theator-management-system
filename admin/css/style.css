@@ -29,7 +29,7 @@ margin-left: 10px;
     }
 
     .content {
-    padding: 0 18px;
+    padding: 10px 18px;
     margin: 0 10%;
     display: none;
     overflow: hidden;
@@ -40,7 +40,7 @@ margin-left: 10px;
 
     .content input[type=text],.content input[type=date],.content input[type=time],.content select,.content textarea {
     width: 100%;
-    padding: 12px 20px;
+    padding: 14px 20px;
     margin: 4px 0;
     display: inline-block;
     border: 1px solid #ccc;
@@ -53,8 +53,9 @@ margin-left: 10px;
     background-color: rgb(243, 243, 243);
     }
 
-    .content input[type=submit] {
-    width: 80%;
+    .content input[type=submit],.submitb {
+    width: fit-content;
+    max-width: 80%;
     background-color: #4CAF50;
     color: white;
     padding: 14px 20px;
@@ -63,6 +64,7 @@ margin-left: 10px;
     border-radius: 4px;
     cursor: pointer;
     }
+    
     .content input:focus, select:focus {
     background-color: rgb(243, 243, 243);
     }
@@ -97,6 +99,15 @@ margin-left: 10px;
     display: grid;
     grid-template-rows: 80% 20%;
     }
-    .movgrid-itemdesc input[type=button]{
+    .movgrid-itemdesc input[type=submit]{
     padding: 5px;
     }
+
+    .changer {
+        display: grid;
+        grid-template-columns: 85% auto;
+    }
+
+    .changer div{
+        padding: 2px;
+        }

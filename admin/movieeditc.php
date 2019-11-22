@@ -11,7 +11,7 @@ require('login1.php');
   
     
     
-    if(isset($_POST['submitadd']))
+    if(isset($_POST['submiteditc']))
     {
         
     /*
@@ -78,6 +78,7 @@ require('login1.php');
         for ($i=0;$i<count($_POST["new_movcat"]);$i++){
             echo $_POST["new_movcat"][$i];
         }
+        $movid = $_POST["new_movid"];
         $movname = $_POST["new_movname"];
         $movlang = $_POST["new_lang"];
         $movimg = $_POST["new_imgsrc"];
@@ -90,25 +91,31 @@ require('login1.php');
         $movcast = $_POST["new_movcast"];
         $movprod = $_POST["new_movprod"];
         $movdesc = $_POST["new_movdesc"];
-        
-        $sql='INSERT INTO movie (mov_name, lang_id, mov_img_path, mov_duration, mov_description, mov_youtube_link, mov_released, mov_direction, mov_starring, mov_production) VALUES ("'.$movname.'", '.$movlang.', "'.$movimg.'", '.$movdur.', "'.$movdesc.'", "'.$movvid.'", '.$movreld.', "'.$movdir.'", "'.$movcast.'", "'.$movprod.'")';
-        
 
-        $result = mysqli_query($link,$sql);
+
+        $sql='UPDATE movie SET 
+                mov_name="'.$movname.'",
+                lang_id="'.$movlang.'",
+                mov_img_path="'.$movimg.'",
+                mov_duration="'.$movdur.'",
+                mov_description="'.$movdesc.'",
+                mov_youtube_link="'.$movvid.'",
+                mov_released="'.$movreld.'",
+                mov_direction="'.$movdir.'",
+                mov_starring="'.$movcast.'",
+                mov_production="'.$movprod.'" 
+                WHERE 
+                mov_id='.$movid;
+        //echo "<br><br>".$sql;
+
+
+        $result=mysqli_query($link,$sql);
+
         if(mysqli_error($link))
         {
             die(mysqli_error($link));
         } else {
-            $sql="SELECT MAX(mov_id) FROM movie";
-
-            $result = mysqli_query($link,$sql);
-            if(mysqli_error($link))
-            {
-                die(mysqli_error($link));
-            } else {
-                $row=mysqli_fetch_assoc($result);
-                $movid = $row['MAX(mov_id)'];
-            }
+            /*
 
             for ($i=0;$i<count($_POST["new_movcat"]);$i++){
                 $sql="INSERT INTO movie_category (mov_id, cat_id) VALUES ($movid, {$_POST['new_movcat'][$i]})";
@@ -120,10 +127,11 @@ require('login1.php');
                     die(mysqli_error($link));
                     break;
                 }
-            }
+            } */
             echo "<H1>SUCCESS</H1>";
-            header( "refresh:2;url=movie.php" ); 
-        } 
+            header( "refresh:2;url=movieedit.php?movid=".$movid); 
+        }
+        
     }       
 ?>
         
