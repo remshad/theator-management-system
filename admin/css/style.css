@@ -143,9 +143,32 @@ align-content: stretch;
 }
 
 .csb-item {
-    display: block;
-    border-radius: 4px;
-    margin: 2%;
-    max-width: 96%;
-    font-size: 18px;
-    }
+display: block;
+border-radius: 4px;
+margin: 2%;
+max-width: 96%;
+font-size: 18px;
+}
+
+.contentsortbarb {
+display: grid;
+grid-template-columns: 75% 25%;
+align-items: center;
+
+background-color: #ffebc2;
+height: 50px;
+align-content: stretch;
+}
+
+.csb-itemb {
+display: block;
+border-radius: 4px;
+margin: 2%;
+max-width: 96%;
+font-size: 18px;
+}
+
+.csb-itemb input[type=text]{
+width: 75%;
+display: inline-block;
+}

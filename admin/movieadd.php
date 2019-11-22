@@ -43,9 +43,9 @@ function testtexta($text){
         $movreld = $_POST["new_movreldate"];
             $movreld = strtotime($movreld);
         $movdir = $_POST["new_movdir"];
-        $movcast = $_POST["new_movcast"];
+        $movcast = trim($_POST["new_movcast"], '\'');
         $movprod = $_POST["new_movprod"];
-        $movdesc = $_POST["new_movdesc"];
+        $movdesc = trim($_POST["new_movdesc"], '\'');
         
 
         if (testtexta($movname) && testtexta($movdir) && testtext($movcast) && testtext($movprod) && testtext($movdesc)){    

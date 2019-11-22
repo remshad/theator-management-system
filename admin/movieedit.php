@@ -9,23 +9,7 @@ include_once('head.php');
 
 <?php
 
-function testtext($text){
-    if((!preg_match("/^[a-zA-Z0-9\W ]+$/",$text))||(preg_match("/^[ ]+$/",$text)))  
-    {
-        return false;     
-    } else {
-        return true;
-    }
-}
 
-function testtexta($text){
-    if((!preg_match("/^[a-zA-Z ]+$/",$text))||(preg_match("/^[ ]+$/",$text)))  
-    {
-        return false;     
-    } else {
-        return true;
-    }
-}
   
 
     
