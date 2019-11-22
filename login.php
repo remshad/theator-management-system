@@ -21,18 +21,25 @@ if (isset($_POST['submit']) && $_POST['submit'] = 'submit') {
                         if (mysqli_num_rows($result) > 0) {
                                 $row = mysqli_fetch_assoc($result);
 
+                                setcookie("t_user", "{$row['u_name']}", time() + (86400 * 30), "/");
+                                setcookie("t_pass", "{$row['u_password']}", time() + (86400 * 30), "/");
+                                setcookie("t_id",  "{$row['u_id']}", time() + (86400 * 30), "/");
+                                setcookie("t_power", "{$row['u_type']}", time() + (86400 * 30), "/");
+
+
+
                                 if ($row['u_type'] == 0) {
                                         //header('Location:'profile.php');
-                                        setcookie("t_user", "{$row['u_name']}", time() + (86400 * 30), "/");
-                                        setcookie("t_pass", "{$row['u_password']}", time() + (86400 * 30), "/");
-                                        setcookie("t_power", "0", time() + (86400 * 30), "/");
-                                        setcookie("t_id",  "{$row['u_id']}", time() + (86400 * 30), "/");
-                                        echo "<script>window.location.href='profile.php'</script>";   
+                                        
+                                        echo "<script>window.location.href='./profile.php'</script>";   
 
-                                } else if ($row['type'] == 1) {
-                                        echo "<script>window.location='mgr/index.php</script>'";
-                                } else if ($row['type'] == 2) {
-                                        echo "<script>window.location.href='admin/index.php'</script>";
+                                } else if ($row['u_type'] == 1) {
+                                        echo "<script>window.location.href='./mgr/index.php'</script>";   
+                                        
+                                } else if ($row['u_type'] == 2) {
+
+                                        echo "<script>window.location.href='./admin/index.php'</script>";   
+
                                 } else {
                                         $error[] = "unknown error";
                                 }
