@@ -14,66 +14,6 @@ require('login1.php');
     if(isset($_POST['submitadd']))
     {
         
-    /*
-        if(isset($_POST['new_cat']) && strlen($_POST['new_cat'])>2)
-        {
-            //echo '<script>alert("'.$_GET['nvalue'].'")</script>';
-            
-            $_POST['new_cat']=mysqli_real_escape_string($link,$_POST['new_cat']);
-            $sql="SELECT * FROM category WHERE cat_name='{$_POST['new_cat']}'";
-
-            
-            $result = mysqli_query($link,$sql);
-            if(mysqli_error($link))
-            {
-                die(mysqli_error($link));
-            }
-            
-            if(mysqli_num_rows($result)>0)
-            {
-                echo '<script>alert("Duplicate Entry Not Allowed")</script>';
-            } else {
-
-                $sql="INSERT INTO category (cat_name) VALUES ('{$_POST['new_cat']}')";
-                //echo $sql;
-                
-                $result = mysqli_query($link,$sql);
-                if(mysqli_error($link))
-                {
-                    die(mysqli_error($link));
-                }
-            }    
-        }
-
-
-        array(12) { 
-            ["new_movname"]=> string(7) "movname" 
-            ["new_lang"]=> string(1) "1" 
-            ["new_movcat"]=> array(2) { 
-                [0]=> string(1) "4" 
-                [1]=> string(1) "5" 
-            } 
-            ["new_imgsrc"]=> string(7) "pic.jpg" 
-            ["new_movdur"]=> string(5) "02:20" 
-            ["new_vidsrc"]=> string(11) "vid.com/vid" 
-            ["new_movreldate"]=> string(10) "2019-11-13" 
-            ["new_movdir"]=> string(3) "Abc" 
-            ["new_movcast"]=> string(8) "Mno, Xyz" 
-            ["new_movprod"]=> string(9) "Universal" 
-            ["new_movdesc"]=> string(18) "Happily Ever After" 
-            ["submitadd"]=> string(3) "Add" 
-        }
-
-        array(2) { 
-            [0]=> string(1) "4" 
-            [1]=> string(1) "5" 
-        }
-
-
-        */
-        //var_dump($_POST);
-        //echo "<br><br>";
-        //var_dump($_POST['new_movcat']);
 
         for ($i=0;$i<count($_POST["new_movcat"]);$i++){
             echo $_POST["new_movcat"][$i];
@@ -112,8 +52,7 @@ require('login1.php');
 
             for ($i=0;$i<count($_POST["new_movcat"]);$i++){
                 $sql="INSERT INTO movie_category (mov_id, cat_id) VALUES ($movid, {$_POST['new_movcat'][$i]})";
-                //echo $sql;
-
+                
                 $result = mysqli_query($link,$sql);
                 if(mysqli_error($link))
                 {
@@ -122,7 +61,7 @@ require('login1.php');
                 }
             }
             echo "<H1>SUCCESS</H1>";
-            header( "refresh:2;url=movie.php" ); 
+            header( "refresh:1;url=movie.php" ); 
         } 
     }       
 ?>
