@@ -17,17 +17,23 @@ window.location.href='add_movie.php';
 </script>";
 
       }
-      foreach ($slots as $slo) 
-      {
+      
       	
 //echo "INSERT INTO `movie_show`(`mov_id`,`movsh_start_date`,`movsh_end_date`,`showt_id`) VALUES ('$mv_id','$s_date','$e_date','$slo')";
-  $result=mysqli_query($link,"INSERT INTO `movie_show`(`mov_id`,`movsh_start_date`,`movsh_end_date`,`showt_id`) VALUES ('$mv_id','$s_date','$e_date','$slo')");
+      //echo "INSERT INTO `movie_show`(`mov_id`,`movsh_start_date`,`movsh_end_date`) VALUES ('$mv_id','$s_date','$e_date'");
+  $result=mysqli_query($link,"INSERT INTO `movie_show`(`mov_id`,`movsh_start_date`,`movsh_end_date`) VALUES ('$mv_id','$s_date','$e_date')");
      	if($result)
      	{
-     		 echo "<script>
-alert('movie show added successfully...');
-window.location.href='index.php';
-</script>";
+        $last_id=mysqli_insert_id($link);
+        foreach ($slots as $slo) 
+      {
+        $result1=mysqli_query($link,"INSERT INTO `show_time`(`scr_id`,`time_id`,`movsh_id`) VALUES ('$sc_id','$slo','$last_id')");
+
+      }
+       		 echo "<script>
+  alert('movie show added successfully...');
+  window.location.href='index.php';
+  </script>";
      	}
       else
 {
@@ -38,7 +44,7 @@ window.location.href='index.php';
 
 }
      }
-   }
+   
     
       // $result= mysqli_query($link,"INSERT INTO `theatre`(`theatrename`,`district_id`,`mgr_id`) VALUES ('$theatre','$district','$mgr_id')");
       // if($result)

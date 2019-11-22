@@ -12,7 +12,7 @@ $the_details=mysqli_query($link,"select * from `theatre` where `u_id`='$mgr_id'"
 			$movies[]=$myrow;
 		}
     $sc_id=$_GET['sc_id'];
-    $sql="SELECT * FROM `show_time` WHERE `scr_id`='{$sc_id}' ";
+    $sql="SELECT * FROM `time_slots`";
 $result=mysqli_query($link,$sql);
 $show_times=array();
 while ($myrow =mysqli_fetch_array($result))
