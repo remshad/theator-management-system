@@ -67,7 +67,7 @@ echo implode(",",$links);
                                 <div class="entity-info">
                                     <div class="info-lines">
                                         <div class="info info-short">
-                                            <span class="text-theme info-icon"><i class="fas fa-star" onclick='rating(this)'></i></span>
+                                            <span class="text-theme info-icon"><i class="fas fa-star" onclick='rating(this,<?php echo $mov_id; ?>)'></i></span>
 <span class="info-text"><?php   $sql1="SELECT sum(rat_rating)/COUNT(*) as rating FROM rating NATURAL JOIN movie WHERE mov_id={$mov_id}";
 $result1=mysqli_query($link,$sql1);
 $row1=mysqli_fetch_assoc($result1);

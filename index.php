@@ -72,7 +72,7 @@ require_once('menu.php');
         <div class='entity-info'>
             <div class='info-lines'>
                 <div class='info info-short'>
-                    <span class='text-theme info-icon'><i class='fas fa-star' onclick='rating(this);'></i></span>
+                    <span class='text-theme info-icon'><i class='fas fa-star' onclick='rating(this,{$row['mov_id']});'></i></span>
                     <span class='info-text'>";
 
             $sql1 = "SELECT sum(rat_rating)/COUNT(*) as rating FROM rating NATURAL JOIN movie WHERE mov_id={$row['mov_id']}";

@@ -194,7 +194,7 @@ request.send();
 }
 
 
-function rating(dat)
+function rating(dat,mov_id)
   {
      
     val=prompt("Please enter your rating from 1 to 10","8");
@@ -205,13 +205,13 @@ if(parseInt(val)>10)
     alert("Sorry.. please enter in betwwen 1 and 10");
 }else
 {
-    sens(val);   
+    sens(val,mov_id);   
 }
     
 }
 
   }
-  function sens(val){
+  function sens(val,mov_id){
     uid=getCookie("t_id");
 if(!(parseInt(uid)>0))
 {
@@ -220,7 +220,7 @@ if(!(parseInt(uid)>0))
 }
 
   var request=new XMLHttpRequest();
-  request.open("GET","./ajax/rating.php?val="+val+"&user="+uid+"&mov_id=<?php echo $mov_id ?>");
+  request.open("GET","./ajax/rating.php?val="+val+"&user="+uid+"&mov_id="+mov_id);
   request.onreadystatechange=function(){
     if(this.readyState===4 && this.status===200)
     {
