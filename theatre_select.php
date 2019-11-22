@@ -265,7 +265,7 @@ require_once('menu.php');
 
       while ($row1 = mysqli_fetch_assoc($result1)) {
           $timestr = date('H:i', mktime(0, $row1['time_showtime']));
-          echo "<div class='showtime-item'>
+          echo "<div class='showtime-item' style='margin-bottom: 5px;'>
 <i class='btn-time btn' aria-disabled='false'>{$timestr}</i>
 </div>";
       }
