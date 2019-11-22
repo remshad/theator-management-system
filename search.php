@@ -107,7 +107,7 @@ if(isset($_POST['mov_name']) && strlen($_POST['mov_name'])>0)
 $part[]=" `mov_name` like '%{$_POST['mov_name']}%' ";
 }
 
-if(isset($_POST['releaseYear']) && intval($_POST['releaseYear'])>0)
+if(isset($_POST['releaseYear']) && intval($_POST['releaseYear'])>1800 && intval($_POST['releaseYear'])<3000)
 {
 
 $start = mktime(0, 0, 0, 1, 1, intval($_POST['releaseYear']));
