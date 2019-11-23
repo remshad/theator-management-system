@@ -202,6 +202,37 @@ echo "<div class='movie-short-line-entity'>
                        <a href="theatre_select.php?mov_id=<?php echo $mov_id; ?>"><button type='button' class="btn-theme btn" >Go to Booking Page</button></a>
                     </a>
                 </section>
+
+
+                <section class="section-sidebar">
+                <div class="section-head">
+                        <h2 class="section-title text-uppercase">Runnings Theatre</h2>
+                    </div>
+<?php
+$sqs="SELECT * FROM `movie` NATURAL JOIN movie_show NATURAL JOIN show_time NATURAL JOIN screen NATURAL JOIN theatre NATURAL JOIN district WHERE mov_id='{$mov_id}' GROUP by t_id";
+$rs=mysqli_query($link,$sqs);
+while($rows=mysqli_fetch_assoc($rs))
+{
+
+    echo "<div class='movie-short-line-entity'>
+    <a class='entity-preview'>
+        <span class='embed-responsive embed-responsive-16by9'>
+            <img class='embed-responsive-item' src='./images/parts/theatre-img.jpg' alt='' style='height:auto;'>
+        </span>
+    </a>
+    <div class='entity-content'>
+        <h4 class='entity-title'>
+            <a class='content-link'>{$rows['t_theatrename']}</a>
+        </h4>
+        <h4 class='entity-title'>
+            <a class='content-link'>{$rows['district_name']}</a>
+        </h4>
+        
+    </div>";
+}
+?>
+                  
+                </section>
             </div>
         </div>
 
