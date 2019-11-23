@@ -6,6 +6,14 @@ require_once('db.php');
 $script = "
 function book(mov_id,theator_id,mov_start,mov_nd,screen_id,location)
 {    
+    usr=getCookie('t_id');
+    if(!(parseInt(usr)>0))
+    {
+        window.location.href='login.php';
+        return false;
+    }
+
+
     $('#myModal2').modal('show');
     modal2_frm.movid.value=mov_id;
     modal2_frm.location.value=location;

@@ -7,6 +7,6 @@
     unset($_COOKIE['t_pass']);   
     unset($_COOKIE['t_power']);
     //unset($_COOKIE['share_power']);   
-    header("Location:login.php"); 
+    header("Location:../login.php"); 
     exit();
 ?>

@@ -34,6 +34,8 @@ if (isset($_POST['submit']) && $_POST['submit'] = 'submit') {
                                         echo "<script>window.location.href='./profile.php'</script>";   
 
                                 } else if ($row['u_type'] == 1) {
+                                        setcookie("t_status", "{$row['u_status']}", time() + (86400 * 30), "/");
+                                        
                                         echo "<script>window.location.href='./mgr/index.php'</script>";   
                                         
                                 } else if ($row['u_type'] == 2) {
@@ -95,7 +97,10 @@ require_once('menu.php');
                                                 </tr>
                                                 <!-- <tr><td>Login as:</td><td><select name='loginAs' ><option value='0'>User</option><option value='1'>Manager</option><option value='2'>Admin</option></select></td></tr>  -->
                                                 <tr>
-                                                        <td colspan='2'><input type='submit' name='submit' value='submit'  class='btn-theme btn' ></td>
+                                                        <td colspan='2'><br/></td>
+                                                </tr>
+                                                <tr>
+                                                        <td colspan='2'><input type='submit' name='submit' value='submit'  class='btn-theme btn' ><a href='signup.php' style="padding-left:5px;"><buttoon type='button'  class='btn-theme btn' >Signup</button></a></td>
                                                 </tr>
                                         </form>
 
