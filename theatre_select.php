@@ -248,10 +248,24 @@ require_once('menu.php');
         <?php
         $movid = intval($_GET['mov_id']);
         $location = intval($_COOKIE['location']);
-        $sql = "SELECT * FROM theatre NATURAL JOIN screen NATURAL JOIN show_time NATURAL JOIN movie_show NATURAL JOIN movie WHERE `mov_id`='{$movid}' group by scr_id ORDER by `movsh_end_date` DESC ";
+        if(isset($_COOKIE['location']))
+        {
+            $location=$_COOKIE['location'];
+      $someCode=" and district_id='{$location}' ";
+        }else
+        {
+            $someCode="";
+            
+            echo "<script>alert('You are not selected a location'); </script>";
+        }
+
+
+        $sql = "SELECT * FROM theatre NATURAL JOIN screen NATURAL JOIN show_time NATURAL JOIN movie_show NATURAL JOIN movie WHERE `mov_id`='{$movid}' {$someCode} group by scr_id ORDER by `movsh_end_date` DESC ";
 
         $result = mysqli_query($link, $sql);
 
+        if(mysqli_num_rows($result)>0)
+        {
         while ($row = mysqli_fetch_assoc($result)) {
             $mov_start = date('Y-m-d', $row['movsh_start_date']);
             $mov_end = date('Y-m-d', $row['movsh_end_date']);
@@ -300,6 +314,10 @@ require_once('menu.php');
     </div>
   
 </article>";
+        }}else
+        {
+
+            echo "<script>alert('Your location theatres does\'nt have running this movie , Change your location');</script>";
         }
 
         ?>

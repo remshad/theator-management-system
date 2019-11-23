@@ -147,6 +147,8 @@ if (parseInt(x)>0) {
 //alert(district.value);
 setCookie('location',district.value,360000);
 $('#myModal').modal('hide'); 
+location.reload();
+
   }
   
   
