@@ -1,7 +1,15 @@
 
 <?php require_once('dbs.php');  ?>
 
+<head>
 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link href='https://fonts.googleapis.com/css?family=Cairo' rel='stylesheet'>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link href="css/style.css?key=<?php echo time(); ?>" rel="stylesheet" type="text/css" />
+
+</head>
+<body>
 <?php
 
 
@@ -96,3 +104,5 @@ if (isset($_POST['submit']) && $_POST['submit'] = 'submit') {
 
         </div>
 </section>
+
+</body>
